@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 import matplotlib as mpl
 mpl.rcParams.update({
-	'font.size': 24,  
+	'font.size': 20,  
 	'figure.figsize': [13, 8],  
 	'figure.autolayout': True, 
 	'font.family': 'serif', 
@@ -35,12 +35,18 @@ class Noiser(functor):
 	
 
 def ejer15():
-	noiser= Noiser(-0.1,0.1)
+	minV=-0.2
+	maxV=0.2
+	noiser= Noiser(minV,maxV)
 	make_noise=np.vectorize(noiser)
 
-	x = np.linspace(-4, 4, 100)
+	x = np.linspace(0, 10, 100)
 
-	plt.plot(x,make_noise(np.sin(x)))
+	plt.xlabel("Tiempo [u.a.]")
+	plt.ylabel(u"Señal [u.a.]")
+	plt.plot(x,np.sin(x), color='black', ls='--', alpha=0.7, label="Señal")
+	plt.plot(x,make_noise(np.sin(x)), lw=2, color='red', alpha=0.8, label="Señal + Noiser[{:.2},{:.2}]".format(minV, maxV))
+	plt.legend(loc=0)
 	plt.show()
 	
 

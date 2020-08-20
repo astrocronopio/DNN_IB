@@ -19,7 +19,9 @@ def ejer2():
 	stddev= np.std(data)
 	plt.ylabel("Cuentas")
 	plt.xlabel("x")
-	plt.hist(data, bins=30, color='red', alpha=0.6,	label="Media={:.3}, $\\sigma$={:.3}".format(mean, stddev))
+	plt.axvline(mean, color='black', ls='--', label="$\\bar x$={:.3}".format(mean))
+	plt.hist(data, bins=30, color='red', alpha=0.6,	label="$\\sigma$={:.3}".format(stddev), rwidth=0.95)
+
 
 	plt.legend(loc=0)
 	plt.show()

@@ -50,7 +50,7 @@ def ejer3():
 	solucion = cuadratica(a, b, c)
 	
 	try:
-		if  solucion == 'NoneType':
+		if  solucion == None:
 			exit()
 	except ValueError:
 		print("Soluciones de ({})x^2 + ({})x + ({}) = 0:".format(a,b,c))

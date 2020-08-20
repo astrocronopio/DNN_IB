@@ -34,23 +34,31 @@ from ejer.ejer11 import ejer11
 ############################################################
 from ejer.ejer12 import ejer12
 ############################################################
+from ejer.ejer13 import ejer13
+###############################################################
+from ejer.ejer14 import ejer14
+###############################################################
+from ejer.ejer15 import ejer15
 
 
 
 def main():
-	pract_0={	1 : ejer1,	2 : ejer2,
-				3 : ejer3,	4 : ejer4,
-				5 : ejer5,	6 : ejer6,
-				7 : ejer7,  8 : ejer8,
-				9 : ejer9,	10: ejer10,
-				11: ejer11, 12: ejer12
-			}
-
-	n = int(input(u"Ingrese el número de ejercicio que quiere ejecutar: "))
-
+	pract_0={	1 : ejer1,	2 : ejer2,	3 : ejer3,	4 : ejer4,
+				5 : ejer5,	6 : ejer6,	7 : ejer7,  8 : ejer8,
+				9 : ejer9,	10: ejer10,	11: ejer11, 12: ejer12,
+				13: ejer13, 14: ejer14,	15: ejer15 			}
+	
+	while True:
+		try:
+			n = int(input(u"Ingrese el número de ejercicio que quiere ejecutar: "))
+			if  n>15 or n<0: 
+				print("Ingrese un número válido menor a 15")
+				continue	
+			break
+		except ValueError:
+			print("Ingrese un número válido menor a 15")
+		
 	pract_0[n]()
-
-	pass
 
 
 if __name__== "__main__":

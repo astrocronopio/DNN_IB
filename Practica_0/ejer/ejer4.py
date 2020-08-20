@@ -13,19 +13,19 @@ mpl.rcParams.update({
 def plot_parabola(a,b,c):
 	soluciones = cuadratica(a,b,c)
 
-	x = np.linspace(-4.5, 4, 100)
+	x = np.linspace(-4.5, 4, 200)
 	y = a*x*x + b*x +c
 
 	plt.xlabel("x")
 	plt.ylabel("f(x)")
 	plt.plot(x,np.zeros(len(x)), color='black', linestyle= '--', alpha=0.5)
-	plt.plot(x,y, color='blue', alpha=0.8)
+	plt.plot(x,y, color='blue', alpha=0.8, linewidth=3)
 
 	try:
 		if soluciones==None:
 			plt.show()
 	except ValueError:
-		plt.scatter(soluciones, [0,0], color='red', alpha=0.8)
+		plt.scatter(soluciones, [0,0], color='red', alpha=1, s=120)
 
 		plt.annotate("",xy=(soluciones[0],0), xytext=(soluciones[0],a*7),
 					arrowprops=dict(arrowstyle="<->", connectionstyle="arc3"))

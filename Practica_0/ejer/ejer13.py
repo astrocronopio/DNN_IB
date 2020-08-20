@@ -103,30 +103,32 @@ class Cardumen(object):
 		pos=R2()
 
 		if boolean:
-			plt.title("Iteración {} de {} ({:.3}s/{}s), con paredes duras".format(i+1,niter, (i+1)*pause, niter*pause))
+			plt.title("Iteración {} de {} ({:.2}s/{}s), con paredes duras".format(i+1,niter, (i+1)*pause, niter*pause))
 		else:
-			plt.title("Iteración {} de {} ({:.3}s/{}s), sin paredes".format(i+1,niter, (i+1)*pause, niter*pause))
+			plt.title("Iteración {} de {} ({:.2}s/{}s), sin paredes".format(i+1,niter, (i+1)*pause, niter*pause))
 			for x in range(self.n):
 				pos = pos + self.pez[x].pos
 			pos = pos/self.n
 			if abs(pos.x)>L or abs(pos.y)>L:
 				plt.ylim(-L+pos.y, L+pos.y)
 				plt.xlim(-L+pos.x, L+pos.x)
-				plt.title("Iteración {} de {} ({:.3}s/{}s), sin paredes\nCambiamos la ventana".format(i+1,niter, (i+1)*pause, niter*pause))
+				plt.title("Iteración {} de {} ({:.2}s/{}s), sin paredes\nCambiamos la ventana".format(i+1,niter, (i+1)*pause, niter*pause))
 			
 
 		for x in range(self.n):
 			plt.quiver(self.pez[x].pos.x, self.pez[x].pos.y, self.pez[x].vel.x, self.pez[x].vel.y,  color='black', alpha=0.6, pivot='mid')
 		
 		plt.pause(0.5*pause)
+		if i==0 or i==(niter-1) or i==int(niter*0.5):
+			plt.savefig("docs/ejer_13_{}{}.png".format(i, boolean))
 		plt.clf()
 
 
 
-L, N, V , dt = 20, 25, 10, 0.05
+L, N, V , dt = 20, 25, 10, 0.1
 maxVel = 4
 maxDist= 3
-pause= 0.05
+pause= 0.08
 
 def ejer13():
 	while True:
