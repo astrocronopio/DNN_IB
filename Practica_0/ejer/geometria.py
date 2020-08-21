@@ -4,7 +4,7 @@ import ejer.rectangulo as rectang
 
 
 def ejer8():
-	print("Ejercicio 8\n")
+	print("Ejercicio 8. Archivo geometria.py\n")
 
 	a,b = 2,4
 	print(u"Área rectángulo de {}x{} es {}".format(a,b,rectang.area(a,b)))

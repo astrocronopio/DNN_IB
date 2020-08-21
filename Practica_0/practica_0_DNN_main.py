@@ -1,6 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+
+'''
+Codigo para la practica 0 de la materia de Deep Learning del Instituto Balseiro
+Escrito por Evelyn  Coronel
+Agosto 2020
+'''
+
 ###############################################################
 from ejer.ejer1 import ejer1
 ###############################################################
@@ -16,7 +23,7 @@ from ejer.ejer6 import ejer6
 ###############################################################
 from ejer.ejer7 import ejer7
 ###############################################################
-from ejer.ejer8 import ejer8
+from ejer.geometria import ejer8
 ############################################################
 import p0_lib
 from p0_lib import rectangulo

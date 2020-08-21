@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 import matplotlib as mpl
-mpl.rcParams.update({	'font.size': 18, 'figure.figsize': [13, 8], 'figure.autolayout': True, 	'font.family': 'serif', 	'font.sans-serif': ['Times']}) 
+mpl.rcParams.update({	'font.size': 18, 'figure.figsize': [10, 8], 'figure.autolayout': True, 	'font.family': 'serif', 	'font.sans-serif': ['Times']}) 
 
 
 class R2(object):
@@ -50,6 +50,7 @@ class Cardumen(object):
 			while True:	 
 				vel.ini(maxVel)
 				if(vel.mod() < maxVel): break
+			
 			self.pez.append(Pez(pos, vel))
 
 	def rule_1_2_3(self, pez, x, rc, vc):
@@ -69,7 +70,7 @@ class Cardumen(object):
 	def doStep(self, boolean):
 		rc, vc, aux, pos, vel = R2(), R2(), R2(), R2(), R2()
 		vel_vec=[]
-
+		#Calculo el rc y vc
 		for x in range(self.n):
 			pos = pos + self.pez[x].pos
 			vel = vel + self.pez[x].vel
@@ -103,9 +104,9 @@ class Cardumen(object):
 		pos=R2()
 
 		if boolean:
-			plt.title("Iteración {} de {} ({:.2}s/{}s), con paredes duras".format(i+1,niter, (i+1)*pause, niter*pause))
+			plt.title("Iteración {} de {} ({:.3}s/{}s), con paredes duras".format(i+1,niter, (i+1)*pause, niter*pause))
 		else:
-			plt.title("Iteración {} de {} ({:.2}s/{}s), sin paredes".format(i+1,niter, (i+1)*pause, niter*pause))
+			plt.title("Iteración {} de {} ({:.3}s/{}s), sin paredes".format(i+1,niter, (i+1)*pause, niter*pause))
 			for x in range(self.n):
 				pos = pos + self.pez[x].pos
 			pos = pos/self.n
@@ -120,12 +121,15 @@ class Cardumen(object):
 		
 		plt.pause(0.5*pause)
 		if i==0 or i==(niter-1) or i==int(niter*0.5):
-			plt.savefig("docs/ejer_13_{}{}.png".format(i, boolean))
+			try:
+				plt.savefig("docs/ejer_13_{}{}.pdf".format(i, boolean))
+			except FileNotFoundError:
+				plt.savefig("../docs/ejer_13_{}{}.pdf".format(i, boolean))
 		plt.clf()
 
 
 
-L, N, V , dt = 20, 25, 10, 0.1
+L, N, V , dt = 20, 16, 10, 0.1
 maxVel = 4
 maxDist= 3
 pause= 0.08
@@ -146,7 +150,8 @@ def ejer13():
 	for i in range(niter):
 		c.doStep(boolean)
 		c.print(i, niter, boolean)
-	plt.show()
+	plt.pause(0.1)
+	exit()
 
 def main():
 	ejer13()

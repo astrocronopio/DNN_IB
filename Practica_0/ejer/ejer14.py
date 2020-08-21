@@ -23,14 +23,13 @@ def feliz_cumpleannos(personas, num_personas):
 	fiesta=0
 	for grupo in personas:
 		fiesta = fiesta + hay_cumple_en_el(grupo)
-
 	return  fiesta
 
 def tabla_pers_porc(num_personas):
-	
-	personas = np.random.randint(1,365, (num_grupos,num_personas)) #366 limite sup porque randint lo excluye
+	#366 limite sup porque randint lo excluye segun los docs
+	personas = np.random.randint(1,366, (num_grupos,num_personas)) 
 	porcentaje = feliz_cumpleannos(personas, num_personas)
-	print(num_personas, porcentaje)
+	print("Número de personas:{}\t Probabilidad: {} \t".format(num_personas, 100*porcentaje/num_grupos))
 	return  100*porcentaje/num_grupos
 
 
@@ -42,18 +41,6 @@ def ejer14():
 	
 	for num_personas in num_personas_vector:
 		num_probabilidad_vec.append(tabla_pers_porc(num_personas))
-
-	# for p,pr in zip(num_personas_vector, num_probabilidad_vec) :
-	#     cell_text.append([p,pr])
-	
-	# cell_text.reverse()
-
-	# columns = ('Personas', 'Probabilidad')
-
-	# the_table = plt.table(cellText=cell_text,
- #                      colLabels=columns,
- #                      loc='right')
-	# the_table.scale(1, 1.5)
 
 	plt.ylabel("Probabilidad [%]")
 	plt.xlabel("Personas por grupo")

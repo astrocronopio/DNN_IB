@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 import matplotlib as mpl
 mpl.rcParams.update({
-	'font.size': 20,  
+	'font.size': 24,  
 	'figure.figsize': [13, 8],  
 	'figure.autolayout': True, 
 	'font.family': 'serif', 
@@ -45,7 +45,7 @@ def ejer15():
 	plt.xlabel("Tiempo [u.a.]")
 	plt.ylabel(u"Señal [u.a.]")
 	plt.plot(x,np.sin(x), color='black', ls='--', alpha=0.7, label="Señal")
-	plt.plot(x,make_noise(np.sin(x)), lw=2, color='red', alpha=0.8, label="Señal + Noiser[{:.2},{:.2}]".format(minV, maxV))
+	plt.plot(x,make_noise(np.sin(x)), lw=2, color='red', alpha=0.8, label="Señal + [{:.2},{:.2}]".format(minV, maxV))
 	plt.legend(loc=0)
 	plt.show()
 	
