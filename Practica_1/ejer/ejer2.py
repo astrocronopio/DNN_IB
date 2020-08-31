@@ -45,10 +45,11 @@ class kmean(object):
         for k in range(self.n_cluster):
             aux= cluster[self.cluster_label==k,:]
             plt.scatter(aux[:,0], aux[:,1], color=color[k])
-            plt.scatter(self.centroides[k,0], self.centroides[k,1], s=80)
-            plt.scatter(p_vect[k,0], p_vect[k,1], s=80, marker='*', color='black')
-                
+            plt.scatter(self.centroides[k,0], self.centroides[k,1], s=80, marker='s', label="Centroides")
+            plt.scatter(p_vect[k,0], p_vect[k,1], s=120, marker='*', color='black', label="Medias Gaussianas")
+        plt.legend(loc=0)        
         plt.pause(0.5)
+        plt.clf()
 
     def clasificar(self, cluster, p_vect):
         self.centroides=self.inicializar_centroides(cluster)
@@ -69,9 +70,10 @@ class kmean(object):
 def cluster_generator(p,n,N):
     p_vect = np.random.uniform(-5,5,size=(p,n))
     cluster=np.zeros((p*N,n))
+    sigma_p= np.random.uniform(0.3, 1.3, size=p)
 
     for index in range(p):         
-        cluster[index*N: index*N + N] = np.random.normal(p_vect[index], 0.5, size=(N,n))
+        cluster[index*N: index*N + N] = np.random.normal(p_vect[index], sigma_p[index], size=(N,n))
 
     return cluster, p_vect 
 
@@ -94,5 +96,5 @@ def main():
 
 if __name__ == "__main__":
     main()
-    plt.pause(10)
+    plt.show()
     pass
