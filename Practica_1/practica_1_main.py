@@ -20,7 +20,7 @@ from ejer.ejer3 import ejer3
 #from ejer.ejer5 import ejer5
 ###############################################################
 def main():
-	pract_0={	1 : ejer1,	2 : ejer2,	3 : ejer3}#,	4 : ejer4, 5 : ejer5}
+	pract_0={	1 : ejer1,	2 : ejer2,	3 : ejer3,	4 : ejer4, 5 : ejer5}
 	
 	while True:
 		try:
