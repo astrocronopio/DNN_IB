@@ -7,7 +7,7 @@ mpl.rcParams.update({
 	'figure.figsize': [12, 8],
 	'figure.autolayout': True,
 	'font.family': 'serif',
-	'font.sans-serif': ['Times']})
+	'font.sans-serif': ['Palatino']})
 
 
 
@@ -42,17 +42,16 @@ class kmean(object):
         return  distancia
 
     def print_cluster_label(self,cluster, p_vect):
-        plt.clf()
         plt.xticks([])
         plt.yticks([])
-        plt.title("Clasificando...")
-        plt.scatter(self.centroides[:,0], self.centroides[:,1], s=100, marker='^', color='black', label="Centroides")
-        plt.scatter(p_vect[:,0], p_vect[:,1], s=300, marker='*', color='black', alpha=0.6, label="Medias Gaussianas")
+        cmap = plt.get_cmap('rainbow',self.n_cluster)
 
         for k in range(self.n_cluster):
             aux= cluster[self.cluster_label==k,:]
-            plt.scatter(aux[:,0], aux[:,1])
-            
+            plt.scatter(aux[:,0], aux[:,1], color=cmap(k))
+
+        plt.scatter(self.centroides[:,0], self.centroides[:,1], s=200, marker='^', color='black', label="Centroides")
+        plt.scatter(p_vect[:,0], p_vect[:,1], s=350, marker='*', color='black', alpha=0.6, label="Medias Gaussianas")
         plt.legend(loc=0)        
         plt.pause(0.5)
         
@@ -67,28 +66,29 @@ class kmean(object):
             self.cluster_label  = self.encontrar_cluster(distancia)
             self.centroides     = self.encontrar_centroides(cluster)
 
-            self.print_cluster_label(cluster, p_vect)  
+            if(boolean==True):
+                plt.clf() 
+                self.print_cluster_label(cluster, p_vect)  
 
             if np.all(old_centroides == self.centroides): #aca se sale porque coverge
-                plt.title(u"La clasificación convergió")
-                plt.show()
                 if (boolean == True): 
+                    plt.title(u"La clasificación convergió")
+                    plt.show()
                     exit() 
                 else: break
 ###################################################################
-#p_vect=np.random.uniform(-5,5,size=(p,n))
+
 def cluster_generator(p,n,N):
-    p_vect = np.random.uniform(-4,4,size=(p,n))
+    p_vect = np.random.uniform(-3,3,size=(p,n))
     cluster=np.zeros((p*N,n))
     sigma_p= np.random.uniform(0.3, 1.3, size=p)
 
     for index in range(p):         
         cluster[index*N: index*N + N] = np.random.normal(p_vect[index], sigma_p[index], size=(N,n))
 
-
     return cluster, p_vect 
 
-def kmeans_core(p=4, n=2, N=70):
+def kmeans_core(p=4, n=5, N=70):
     n_clusters=4
     if (n_clusters>p):
         print("Estás intentando sobre-clasificar el cluster ")
@@ -97,7 +97,7 @@ def kmeans_core(p=4, n=2, N=70):
     plt.yticks([])
     plt.title("Los puntos a clasificar")
     
-    plt.scatter(cluster[:,0], cluster[:,1])
+    plt.scatter(cluster[:,0], cluster[:,1], c='red', alpha=0.7)
     plt.pause(2)
     tkm = kmean(100, n_clusters)
     tkm.clasificar(cluster, p_vect, True)
@@ -109,7 +109,6 @@ def ejer2():
 def main():
     ejer2()
     pass
-
 
 if __name__ == "__main__":
     main()

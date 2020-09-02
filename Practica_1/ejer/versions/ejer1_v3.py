@@ -1,7 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -11,9 +7,8 @@ mpl.rcParams.update({
 	'figure.figsize': [12, 8],
 	'figure.autolayout': True,
 	'font.family': 'serif',
-	'font.sans-serif': ['Computer Modern Roman']})
+	'font.sans-serif': ['Times']})
 
-cmap = plt.get_cmap('rainbow',6)
 
 def solucion_exacta(conjunto_x, conjunto_y):
     aux        =  np.matmul(np.transpose(conjunto_x),conjunto_x)
@@ -41,7 +36,6 @@ def ejemplos(n,N):
     return conjunto_x, y, a
 
 def regresion_lineal_numpy(n, N):
-    """ n= dimension, N= Cantidad de elementos de entrenamiento """
     promediar=10
     error=0
     error2=0
@@ -66,20 +60,13 @@ def regresion_lineal_numpy(n, N):
     return error/promediar, error2/promediar
 
 
-def plot_me(n, dimensiones, e1, title, label, save_file, i):
-    plt.figure(n)
-    plt.title(title)
-    plt.plot(dimensiones[0:len(e1)], e1, label=label, c=cmap(i))
-    plt.legend(loc=0, ncol=2)
-    plt.yscale('log')
-    #plt.savefig(save_file)
-
 def ejer1():
     dimensiones = np.arange(6,150,1)
+
     porcentaje_vector = [1, 1.1, 1.5, 2, 2.5, 3]
-    i=-1
+    plt.yscale('log')
+
     for porcentaje in porcentaje_vector:
-        i+=1
         e1, e2= [], []
         aux1, aux2= 0,0
         for dimension in dimensiones:
@@ -87,32 +74,44 @@ def ejer1():
             e1.append(aux1)
             e2.append(aux2)
         
-        plot_me(1, dimensiones, e1, "MSE entre $y_{exacto}$ e $y_{esperado}$", 
-                "{}".format(porcentaje), "ejer_1_mse_y_porcentaje.pdf",i)
+        plt.figure(1)
+        plt.title("MSE entre $y_{exacto}$ y $y_{esperado}$")
+        plt.plot(dimensiones, e1, label="{}".format(porcentaje))
+        plt.legend(loc=0, ncol=2)
+        plt.yscale('log')
 
-        plot_me(2, dimensiones, e2, "MSE entre $a_{i,exacto}$ y $a_{i}$", 
-                "{}".format(porcentaje),"ejer_1_mse_a_porcentaje.pdf",i)        
-
-    ejemplos_vector = [20,40,60,80,100,120]
-    i=-1
-    for ejemplos in ejemplos_vector:
-        i+=1
-        e1, e2= [], []
-        aux1, aux2= 0,0
-        for index in range(len(dimensiones)):
-            if dimensiones[index]> ejemplos: break
-            aux1, aux2 = regresion_lineal_numpy(dimensiones[index], ejemplos)
-            e1.append(aux1)
-            e2.append(aux2)
-        
-        plot_me(3, dimensiones, e1, "MSE entre $y_{exacto}$ e $y_{esperado}$", 
-                "{}".format(ejemplos), "ejer_1_mse_y_ejemplos.pdf", i)
-
-        plot_me(4, dimensiones, e2, "MSE entre $a_{i,exacto}$ y $a_{i}$", 
-                "{}".format(ejemplos),"ejer_1_mse_a_ejemplos.pdf", i)   
+        plt.figure(2)
+        plt.title("MSE entre $a_{i,exacto}$ y $a_{i}$")
+        plt.plot(dimensiones, e2, label="{}".format(porcentaje))
+        plt.legend(loc=0, ncol=2)
+        plt.yscale('log')
 
     plt.show()
+    """ dimensiones = np.arange(5,150,1)
 
+    for dimen in dimensiones:
+        aux1, aux2= 0,0
+        e3, e33=[], []
+        aux1, aux2 = regresion_lineal_numpy(dimen, 100)
+        if(aux1!=np.nan): e3.append(aux1)
+        if(aux2!=np.nan): e33.append(aux2)
+
+    print(e33)
+    exit()
+
+    plt.figure(3)
+    plt.title("MSE entre $y_{exacto}$ y $y_{esperado}$")
+    plt.plot(dimensiones, e3, label="100 ejemplos")
+    plt.legend(loc=0, ncol=2)
+    
+    plt.figure(4)
+    plt.title("MSE entre $a_{i,exacto}$ y $a_{i}$")
+    plt.plot(dimensiones, e33, label="100 ejemplos")
+    plt.legend(loc=0, ncol=2)
+  
+    plt.show()
+
+ """
 def main( ):
     ejer1()
     pass
