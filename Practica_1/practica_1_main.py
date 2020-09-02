@@ -15,9 +15,9 @@ from ejer.ejer2 import ejer2
 ###############################################################
 from ejer.ejer3 import ejer3
 ###############################################################
-#from ejer.ejer4 import ejer4
+from ejer.ejer4 import ejer4
 ###############################################################
-#from ejer.ejer5 import ejer5
+from ejer.ejer5 import ejer5
 ###############################################################
 def main():
 	pract_0={	1 : ejer1,	2 : ejer2,	3 : ejer3,	4 : ejer4, 5 : ejer5}

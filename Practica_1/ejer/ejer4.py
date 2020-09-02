@@ -28,7 +28,7 @@ def knn_custom_cluster(n_cluster=5, k=1):
     data=(x_train, y_train), (x_test, y_test)
     model_knn = knn_implementacion(data,len(y_test),k)
     
-
+    """ Codigo que estaba en el slack de la materia """
     steps=200
     xmin, xmax = cluster[:,0].min() - 1, cluster[:,0].max() + 1
     ymin, ymax = cluster[:,1].min() - 1, cluster[:,1].max() + 1
@@ -41,8 +41,9 @@ def knn_custom_cluster(n_cluster=5, k=1):
     z = labels.reshape(xx.shape)
     plt.contourf(xx,yy,z, cmap='rainbow', alpha=0.2)
     #plt.contour(xx, yy, z , 2, colors='black')
+    """ ---------------------------------------------  """
 
-    knn.print_cluster_label(cluster, p_vect)
+    knn.plot_cluster(cluster, p_vect)
     plt.title("Número de vecinos k={}".format(k))
 
     plt.show()

@@ -41,7 +41,7 @@ class kmean(object):
             distancia[:,k] = np.square(np.linalg.norm( cluster - centroids[k], axis=1)) 
         return  distancia
 
-    def print_cluster_label(self,cluster, p_vect):
+    def plot_cluster(self,cluster, p_vect):
         plt.xticks([])
         plt.yticks([])
         cmap = plt.get_cmap('rainbow',self.n_cluster)
@@ -66,16 +66,16 @@ class kmean(object):
             self.cluster_label  = self.encontrar_cluster(distancia)
             self.centroides     = self.encontrar_centroides(cluster)
 
-            if(boolean==True):
+            if(boolean==True): #El bool  es para imprimir o no
                 plt.clf() 
-                self.print_cluster_label(cluster, p_vect)  
+                self.plot_cluster(cluster, p_vect)  
 
             if np.all(old_centroides == self.centroides): #aca se sale porque coverge
                 if (boolean == True): 
                     plt.title(u"La clasificación convergió")
                     plt.show()
-                    exit() 
-                else: break
+                    exit()  #Si ploteo, cuando converge sale del programa
+                else: break #Si no ploteo, sale a la funcion que lo llama
 ###################################################################
 
 def cluster_generator(p,n,N):
