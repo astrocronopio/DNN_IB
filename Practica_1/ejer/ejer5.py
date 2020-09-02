@@ -1,77 +1,18 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import numpy as np 
 import tensorflow.keras.datasets  as datasets
+from classifier import LinearClassifier, VSM, SMC
 
-def activacion(W,x,b, y=[]):
-    return np.matmul(W,x)+b
+import matplotlib.pyplot as plt
 
-def VSMclassifier(W,x,b,y):
-    yp=activacion(W,x,b)
-    return np.heaviside(yp - y)
-    pass
-
-def softmaxclassifier(W,x,b,y):
-    yp=activacion(x,W,0)
-    yp -= np.max(f)
-    return -yp + np.log(np.sum(y)) 
-
-
-class LinearClassifier(object):
-    def __init__(self):
-        self.x=None
-        self.y=None
-        self.loss_func=None#activacion
-
-    def loss_gradient(self, data):
-        pass
-    
-    def predict(self, x):
-        pass
-    
-    def fit(self, x, y, eta=0.01, tolerance=1e-3, epochs=100, use_bias=False):
-        self.im_shape =x.shape[1:]
-        self.x = np.reshape(x, (x.shape[0], np.prod(self.im_shape)))
-        
-        if (use_bias==True):
-            np.append(self.x, 1)
-        
-        self.W = np.random.uniform(-1,1,size=(x.shape[1],y.shape[1])) 
-        self.y = y
-
-        self.eta=eta
-        self.tolerance=tolerance
-        
-        error=np.zeros(epochs)
-        for e in error:
-            e=bdg()
-        return error
-
-    def sample_data(self, batch_size):
-        
-
-
-    def bgd(batch_size=8):
-        error=[]
-        delta= np.inf
-        while delta>tol:
-            x_batch, y_batch = sample_data(batch_size)
-            old=self.loss_fun(self.W,x_batch,self.b, y_batch )
-            w_grads = loss_gradient(x_batch, y_batch)
-            self.W+= -self.eta*w_grads
-            delta = np.abs(old - loss_fun(self.W,x_batch, self.b, y_batch))
-            error.append(delta)
-
-class SMC(LinearClassifier):
-    def __init__(self):
-        super(SMC, self).__init__()
-        self.loss_func=softmaxclassifier
-
-
-class VSM(LinearClassifier):
-    def __init__(self, *args):
-        super(VSM, self).__init__()
-        self.loss_func=VSMclassifier
-        
-        
+import matplotlib as mpl
+mpl.rcParams.update({
+	'font.size': 20,
+	'figure.figsize': [12, 8],
+	'figure.autolayout': True,
+	'font.family': 'serif',
+	'font.sans-serif': ['Palatino']})
 
 def ejer5():
     (x_train, y_train), (x_test, y_test) = datasets.mnist.load_data()
@@ -80,10 +21,35 @@ def ejer5():
     print(x_train.shape[0], 'ejemplos de entrenamiento')
     print(x_test.shape[0], 'ejemplos para probar')
     
-    model_smc = SMC()
-    model_vsm = VSM() 
-    pass
+    model_SVM = SVM(eta=50, epochs = 100, batch_size=100, use_bias=True)
+    error_loss_1, error_acc_1= model_SVM.fit(x_train, y_train)   
 
+    plt.figure(1)
+    plt.title('loss')
+    plt.plot(error_loss_1)
+    
+    plt.figure(2)
+    plt.title('acc')
+    plt.plot(error_acc_1)
+    #plt.plot(error_loss_2)  
+    plt.show()
+
+""" 
+    model_SMC = SMC(eta=0.1, epochs = 100)
+    error_loss_2, error_acc_2= model_SMC.fit(x_train[:5], y_train[:5])  
+
+    plt.figure(1)
+    plt.title('loss')
+    plt.plot(error_loss_1)
+    plt.plot(error_loss_2)
+
+    plt.figure(2)
+    plt.title('acc')
+    plt.plot(error_acc_1)
+    plt.plot(error_acc_2)
+
+    plt.show() """
+    
 def main():
     ejer5()
     pass
