@@ -1,0 +1,134 @@
+\input{Preamblev2.sty}
+
+
+   %\usepackage[caption=false]{subcaption}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Título%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Práctica 1: Redes Neuronales y Aprendizaje Profundo para Visión Artificial}
+\author{Evelyn~G.~Coronel}
+
+\affiliation{
+Aprendizaje Profundo y Redes Neuronales Artificiales\\ Instituto Balseiro\\}
+
+\date[]{\lowercase{\today}} %%lw para lw, [] sin date
+
+
+\maketitle
+%\onecolumngrid
+
+
+\section*{Ejercicio 1}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.49\textwidth]{ejer_1_mse_a_ejemplos.pdf}
+        \caption{ejemplos}
+        \label{fig:ejer1_a_ejemplos}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{ejer_1_mse_a_porcentaje.pdf}
+        \caption{ejemplos}
+        \label{fig:ejer1_a_porcentaje}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{ejer_1_mse_y_ejemplos.pdf}
+        \caption{ejemplos}
+        \label{fig:ejer1_y_ejemplos}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{ejer_1_mse_y_porcentaje.pdf}
+        \caption{ejemplos}
+        \label{fig:ejer1_y_porcentaje}
+    \end{figure}
+
+
+    \section*{Ejercicio 2}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{ejer_2_clasificando_a_conv.pdf}
+        \includegraphics[width=0.5\textwidth]{ejer_2_si_converge.pdf}
+        \caption{ejemplos}
+        \label{fig:ejer2_converge}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{ejer_2_clasificando.pdf}
+        \includegraphics[width=0.5\textwidth]{ejer_2_no_converge.pdf}
+        \caption{ejemplos}
+        \label{fig:ejer2_no_converge}
+    \end{figure}
+
+    \section*{Ejercicio 4}
+
+
+
+k=1
+Dimensiones del set de entrenamiento  (375, 2)
+375 ejemplos de entrenamiento
+125 ejemplos para probar
+
+36.0\% probando con 125 ejemplos
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{ejer_4_K-1_no_coverge.pdf}
+    \caption{K=1 malo}
+    \label{fig:ejer4_k_1_malo}
+\end{figure} 
+
+k=1
+Dimensiones del set de entrenamiento  (375, 2)
+375 ejemplos de entrenamiento
+125 ejemplos para probar
+
+99.2\% probando con 125 ejemplos
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{ejer_4_K-1_si_converge.pdf}
+    \caption{K=1 malo}
+    \label{fig:ejer4_k_1}
+\end{figure} 
+
+
+k=3
+Dimensiones del set de entrenamiento  (375, 2)
+375 ejemplos de entrenamiento
+125 ejemplos para probar
+
+94.4%% probando con 125 ejemplos
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{ejer_4_K-3_si_converge.pdf}
+    \caption{K=3 }
+    \label{fig:ejer4_k_3}
+\end{figure} 
+
+k=7
+Dimensiones del set de entrenamiento  (375, 2)
+375 ejemplos de entrenamiento
+125 ejemplos para probar
+
+72.0\% probando con 125 ejemplos
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{ejer_4_K-7_si_converge.pdf}
+    \caption{K=7 }
+    \label{fig:ejer4_k_7}
+\end{figure} 
+
+
+
+\end{document}

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import numpy as np 
 import tensorflow.keras.datasets  as datasets
-from classifier import LinearClassifier, VSM, SMC
+from classifier import LinearClassifier, SVM, SMC
 
 import matplotlib.pyplot as plt
 
@@ -21,7 +21,7 @@ def ejer5():
     print(x_train.shape[0], 'ejemplos de entrenamiento')
     print(x_test.shape[0], 'ejemplos para probar')
     
-    model_SVM = SVM(eta=50, epochs = 100, batch_size=100, use_bias=True)
+    model_SVM = SVM(eta=5, epochs = 100, batch_size=100, use_bias=True)
     error_loss_1, error_acc_1= model_SVM.fit(x_train, y_train)   
 
     plt.figure(1)

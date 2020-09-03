@@ -19,11 +19,14 @@ class LinearClassifier(object):
         n_clasifi=10
 
         self.im_shape =x.shape[1:]
-        self.x = np.reshape(x, (x.shape[0], np.prod(self.im_shape))) #a la imagen la hago un vector
+        # transformo a la imagen a un vector unidimensional
+        self.x = np.reshape(x, (x.shape[0], np.prod(self.im_shape)))/255
         
-        if (self.use_bias==True): np.append(self.x, 1) #Si hay bias, agrego un 1 al final del vector
+        #Si hay bias, agrego un 1 al final del vector
+        if (self.use_bias==True): np.append(self.x, 1) 
         
-        self.W = np.random.uniform(-0.15,0.0015,size=(n_clasifi, self.x.shape[1])) #Inicializa pesos
+        #Inicializa pesos
+        self.W = np.random.uniform(-0.01,0.015,size=(n_clasifi, self.x.shape[1])) 
         self.y = y
 
         error_loss=np.zeros(self.epochs)
@@ -56,7 +59,7 @@ class SVM(LinearClassifier): #Support Vector Machine
 
     def loss_gradient(self, W,x,y):
         self.delta=-1
-        self.lambda_L2 = 0.05
+        self.lambda_L2 = 0.005
         yp=self.activacion(x)
 
         #print(yp)
@@ -65,11 +68,12 @@ class SVM(LinearClassifier): #Support Vector Machine
         diff = diff*np.heaviside(diff,0)
         L2= np.mean(self.W*self.W)
         
-        # y tiene las posiciones de la solucion
-        diff[np.arange(x.shape[0]), y]=0 
+        # 'y' tiene las posiciones de la solucion
         # es genial porque las puedo usar para forzar el 0 donde debe ir
+        diff[np.arange(x.shape[0]), y]=0 
         
-        L=diff.sum(axis=-1) #sumo intra-vector, ahora tengo un [batchsize,(1)]  
+        #sumo intra-vector, ahora tengo un [batchsize,(1)]  
+        L=diff.sum(axis=-1) 
         loss=np.mean(L) + 0.5*self.lambda_L2*L2
 
         diff_solucion = np.zeros_like(self.W)

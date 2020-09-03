@@ -51,12 +51,12 @@ def knn_custom_cluster(n_cluster=5, k=1):
 
 def ejer4():
     print("k=1")
-    knn_custom_cluster(5,1)
-    exit()
+    
+    #knn_custom_cluster(5,1)
     print("k=3")
     knn_custom_cluster(5,3)
     print("k=7")
-    knn_custom_cluster(5,7)
+    #knn_custom_cluster(5,7)
 
 def main():
     ejer4()
