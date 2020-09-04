@@ -2,18 +2,30 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np 
-np.random.seed(10)
+#np.random.seed(40)
+
+import matplotlib.pyplot as plt
+
+import matplotlib as mpl
+mpl.rcParams.update({
+	'font.size': 20,
+	'figure.figsize': [12, 8],
+	'figure.autolayout': True,
+	'font.family': 'serif',
+	'font.sans-serif': ['Palatino']})
 
 class LinearClassifier(object):
     def __init__(self, eta=0.01, 
                  tolerance=9e-1, 
-                 epochs=10, use_bias=False, batch_size=2):
+                 epochs=10, use_bias=False,
+                 batch_size=2, lambda_L2 = 0.5):
 
         self.eta=eta
         self.tolerance=tolerance
         self.epochs=epochs
         self.batch_size=batch_size
         self.use_bias=use_bias
+        self.lambda_L2 = 0.5
 
     def predict(self, x):
         return np.argmax(self.activacion(x), axis=0)
@@ -38,22 +50,23 @@ class LinearClassifier(object):
         self.W = np.random.uniform(-1,1,size=(n_clasifi, self.x.shape[1])) 
         self.y = y
 
-        error_loss=np.zeros(self.epochs)
-        error_acc =np.zeros(self.epochs)
+        self.error_loss=np.zeros(self.epochs)
+        self.error_acc =np.zeros(self.epochs)
         
         for it in range(self.epochs):
-            index   =   np.random.randint(0,x.shape[0],size=self.batch_size)
-            x_batch =   self.x[index]#: index + self.batch_size]#self.x[index:final]
-            y_batch =   self.y[index]#: index + self.batch_size]
+            index   =   np.random.randint(0,x.shape[0])#,size=self.batch_size)
+            x_batch =   self.x[index: index + self.batch_size]#self.x[index:final]
+            y_batch =   self.y[index: index + self.batch_size]
             L_loss  =   self.bgd(x_batch, y_batch)
-            error_acc[it] += np.mean((self.predict(x_batch) == y_batch))
-            error_loss[it] = L_loss
-        return error_loss, 100*error_acc
+            self.error_acc[it] += 100*np.mean((self.predict(x_batch) == y_batch))
+            self.error_loss[it] = L_loss
+        #return self.error_loss, 100*self.error_acc
 
     def bgd(self,x_batch, y_batch):
         loss , dW = self.loss_gradient(x_batch , y_batch)
         self.W+= -self.eta*dW
         return loss
+
 
 class SVM(LinearClassifier): #Support Vector Machine
     def activacion(self,x):
@@ -101,14 +114,18 @@ class SMC(LinearClassifier): #SoftMax Classifier
     def loss_gradient(self,x,y):
         super()
         ind= np.arange(x.shape[0], dtype=np.int)
+        L2= np.sum(self.W*self.W)
 
         yp=self.activacion(x)
         print(yp)
         sf = self.SoftMax(yp[y,ind], yp)
         L = np.log(sf)
         print(sf.shape)
+
         
-        #diff = 
+        diff = np.zeros_like(self.W)
+        diff[y,ind] = 1 
+        diff = np.sum
 
         loss=np.mean(L)
         

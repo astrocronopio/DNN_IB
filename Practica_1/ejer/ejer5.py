@@ -20,19 +20,29 @@ def ejer5():
     print('Dimensiones del set de entrenamiento ', x_train.shape)
     print(x_train.shape[0], 'ejemplos de entrenamiento')
     print(x_test.shape[0], 'ejemplos para probar')
-    
-    model_SMC = SMC(eta=0.01, epochs = 1, batch_size=2, use_bias=True)
-    error_loss_1, error_acc_1= model_SMC.fit(x_train, y_train)   
+
+    model_SVM = SVM(eta=0.01, epochs = 1000, batch_size=100, use_bias=True)
+    model_SVM.fit(x_train, y_train) 
+
+    #model_SMC = SMC(eta=0.01, epochs = 1, batch_size=2, use_bias=True)
+    #model_SMC.fit(x_train, y_train)   
+
+   
 
     plt.figure(1)
-    plt.title('loss')
-    plt.plot(error_loss_1)
+    plt.ylabel('loss')
+    plt.xlabel("Épocas")
+    plt.yscale('log')
+    plt.plot(model_SVM.error_loss)
     
     plt.figure(2)
-    plt.title('acc')
-    plt.plot(error_acc_1)
-    #plt.plot(error_loss_2)  
+    plt.xlabel("Épocas")
+    plt.ylabel('acc')
+    plt.plot(100*np.ones_like(model_SVM.error_acc))
+    plt.plot(model_SVM.error_acc)
     plt.show()
+ 
+    
 
 """ 
     model_SMC = SMC(eta=0.1, epochs = 100)
