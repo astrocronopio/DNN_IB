@@ -103,31 +103,45 @@ class SMC(LinearClassifier): #SoftMax Classifier
         super()
         return np.dot(self.W, x.T)
 
+    def SoftMax(self, y, yp):
+        max_val =   np.max(yp,axis=0)
+        yp-= max_val
+        y-=max_val
+        ind= np.arange(y.shape[0], dtype=np.int)
+        expos   =   np.exp(yp)
+        #print(expos.shape)
+        expo    =   np.exp(y)
+        #print(expos.shape)
+
+        sf = expo[ind]/np.sum(expos[ind]) 
+        print(sf.shape)
+        return sf        
+
     def loss_gradient(self,x,y):
         super()
-        L2= np.sum(self.W*self.W)
         y=y.reshape(x.shape[0]) 
-        
-        yp = self.activacion(x)
-        yp-= np.max(yp,axis=0)
         ind= np.arange(x.shape[0], dtype=np.int)
+        L2= np.sum(self.W*self.W)
+        yp= self.activacion(x)
         
-        #
-        expo_sum=   np.sum(np.exp(yp),axis=0)
-        expo    =   np.exp(yp)
-        sum_inv =   1/expo_sum
-        
-        #print(expo)
-        #print(expo_sum)
-        #
-        diff    =   expo*sum_inv
-        #
-        #print(diff)
-        L = -yp[y,ind] + np.log(expo_sum)    
-        diff[y,ind] += -1 
+        diff = 0.0*yp[:]
 
-        dW = np.dot(diff, x)/x.shape[0] + self.lambda_L2*self.W 
-        loss= np.mean(L)  + 0.5*self.lambda_L2*L2
-        #print(L)
+        sf= self.SoftMax(yp[y,ind], yp)
+
+        L = np.log(sf)
+        
+        X = np.dot(np.diag(L), x)
+
+        #dW = np.zeros_like(self.W)
+        diff[y,ind] = -1 
+
+        #X= np.sum(x, axis=0)
+        #print(x.shape)
+        #print(L.shape)  
+        #diff = np.dot(L,x) 
+        #print(diff.shape)
+        #dW += pepe#np.dot(dW, X.T) 
+        dW = np.dot(diff, X) + self.lambda_L2*self.W 
+        loss=np.mean(L)  + 0.5*self.lambda_L2*L2
         
         return loss, dW
