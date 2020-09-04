@@ -45,18 +45,18 @@ def knn_custom_cluster(n_cluster=5, k=1):
 
     knn.plot_cluster(cluster, p_vect)
     plt.title("Número de vecinos k={}".format(k))
-
-    plt.show()
     pass
 
 def ejer4():
     print("k=1")
-    
-    #knn_custom_cluster(5,1)
+    plt.figure(1)
+    knn_custom_cluster(5,1)
     print("k=3")
+    plt.figure(3)
     knn_custom_cluster(5,3)
     print("k=7")
-    #knn_custom_cluster(5,7)
+    plt.figure(7)
+    knn_custom_cluster(5,7)
 
 def main():
     ejer4()

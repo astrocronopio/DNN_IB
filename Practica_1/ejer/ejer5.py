@@ -21,8 +21,8 @@ def ejer5():
     print(x_train.shape[0], 'ejemplos de entrenamiento')
     print(x_test.shape[0], 'ejemplos para probar')
     
-    model_SVM = SVM(eta=5, epochs = 100, batch_size=100, use_bias=True)
-    error_loss_1, error_acc_1= model_SVM.fit(x_train, y_train)   
+    model_SMC = SMC(eta=0.01, epochs = 1, batch_size=2, use_bias=True)
+    error_loss_1, error_acc_1= model_SMC.fit(x_train, y_train)   
 
     plt.figure(1)
     plt.title('loss')

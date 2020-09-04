@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np 
-np.random.seed(10)
 
 class LinearClassifier(object):
     def __init__(self, eta=0.01, 
@@ -16,17 +15,17 @@ class LinearClassifier(object):
         self.use_bias=use_bias
 
     def predict(self, x):
-        return np.argmax(self.activacion(x), axis=0)
+        return np.argmax(self.activacion(x), axis=-1)
     
     def activacion(self,x):
         pass
-    def loss_gradient(self,x,y):
+    def loss_gradient(self, W,x,y):
         pass
     
     def fit(self, x, y):
         n_clasifi=10
-        self.im_shape =x.shape[1:]
 
+        self.im_shape =x.shape[1:]
         # transformo a la imagen a un vector unidimensional
         self.x = np.reshape(x, (x.shape[0], np.prod(self.im_shape)))
         self.x/=255 #Porque las imagenes del cifar10 y mnist varian hasta 255
@@ -35,23 +34,28 @@ class LinearClassifier(object):
         if (self.use_bias==True): np.append(self.x, 1) 
         
         #Inicializa pesos
-        self.W = np.random.uniform(-1,1,size=(n_clasifi, self.x.shape[1])) 
+        self.W = np.random.uniform(-0.1,0.15,size=(n_clasifi, self.x.shape[1])) 
         self.y = y
 
         error_loss=np.zeros(self.epochs)
         error_acc =np.zeros(self.epochs)
         
-        for it in range(self.epochs):
+        for iteracion in range(self.epochs):
             index   =   np.random.randint(0,x.shape[0],size=self.batch_size)
-            x_batch =   self.x[index]#: index + self.batch_size]#self.x[index:final]
-            y_batch =   self.y[index]#: index + self.batch_size]
+            x_batch =   self.x[index]#self.x[index:final]
+            y_batch =   self.y[index]
+
             L_loss  =   self.bgd(x_batch, y_batch)
-            error_acc[it] += np.mean((self.predict(x_batch) == y_batch))
-            error_loss[it] = L_loss
-        return error_loss, 100*error_acc
+            yp      =   self.predict(x_batch)
+
+            error_acc[iteracion] += (yp==y_batch).mean()
+            error_loss[iteracion] = L_loss
+
+
+        return error_loss, 100*error_acc/self.batch_size
 
     def bgd(self,x_batch, y_batch):
-        loss , dW = self.loss_gradient(x_batch , y_batch)
+        loss , dW= self.loss_gradient(self.W, x_batch , y_batch)
         self.W+= -self.eta*dW
         return loss
 
@@ -60,56 +64,62 @@ class SVM(LinearClassifier): #Support Vector Machine
         super()
         return np.dot(self.W, x.T)+ self.delta
 
-    def loss_gradient(self,x,y):
+    def loss_gradient(self, W,x,y):
         super()
-        self.delta=1#-1
-        self.lambda_L2 = 0.5
-        L2= np.sum(self.W*self.W)
-
-        id= np.arange(x.shape[0], dtype=np.int)
+        self.delta=1
+        self.lambda_L2 = 0.005
+        
         yp=self.activacion(x)
-        y=y.reshape(x.shape[0]) #por sino es como yo quiero
+        y=y.reshape(x.shape[0]) #por si no es como yo quiero
 
-        diff = yp - yp[y,id] + self.delta
-        diff = np.maximum(diff, 0)
-        diff[y, np.arange(x.shape[0])]=0 
+        diff = yp - y[np.newaxis,:] + self.delta
+        diff = diff*np.heaviside(diff,0)
+        L2= np.mean(self.W*self.W)
 
         #sumo intra-vector, ahora tengo un [batchsize,(1)]  
-        L=diff.sum(axis=0)
+        L=diff.sum(axis=-1) 
         loss = np.mean(L) + 0.5*self.lambda_L2*L2
 
-        # 'y' tiene las posiciones de la solucion 
+        # 'y' tiene las posiciones de la solucion
         # es genial porque las puedo usar para forzar el 0 donde debe ir
-        diff=np.heaviside(diff,0)
-        diff[y, id] -= diff.sum(axis=0)[id]
+        diff[y, np.arange(x.shape[0])]=0 
+        diff[diff>0]=1
 
-        dW = np.dot(diff, x)/x.shape[0] + self.lambda_L2*self.W
+        id= np.arange(x.shape[0], dtype=np.int)
+        diff[y,id ] -= diff.sum(axis=0)[id]
+        print(diff)
+        #binary = np.zeros_like(self.W)
+        #diff_ = np.zeros_like(self.W)
+        dW = np.dot(diff, x)/len(id) + self.lambda_L2*self.W
+        print(dW.shape)
+        #diff_solucion[y[i]:]+= -np.sum(diff[i])*x[i]
+        
+        #binary = diff_solucion + diff_
+        #binary /=x.shape[0]
+        #binary += self.lambda_L2*self.W
+
+
         return loss, dW
 
 class SMC(LinearClassifier): #SoftMax Classifier
     def activacion(self,x):
         super()
-        return np.dot(self.W, x.T)
+        return np.dot(x,self.W.T)
 
-    def SoftMax(self, y, yp):
-        max_val =   np.max(yp, axis=0)
-        yp-= max_val
-        expos   =   np.exp(yp)
-        expo    =   np.exp(y-max_val)
-        return expo/np.sum(expos)         
-
-    def loss_gradient(self,x,y):
-        super()
-        ind= np.arange(x.shape[0], dtype=np.int)
-
+    def loss_gradient(self, W,x,y):
         yp=self.activacion(x)
-        print(yp)
-        sf = self.SoftMax(yp[y,ind], yp)
-        L = np.log(sf)
-        print(sf.shape)
         
-        #diff = 
+        max = np.max(yp)
+        yp-+max
+        expos= np.exp(yp)
+        expo=np.exp(y)
+        L = expo/np.sum(expos)
 
+        dW = L*()
+        
+        
         loss=np.mean(L)
+        
+        
         
         return loss, dW
