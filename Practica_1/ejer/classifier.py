@@ -28,45 +28,60 @@ class LinearClassifier(object):
         self.lambda_L2 = 0.05
 
     def predict(self, x):
-        return np.argmax(self.activacion(x), axis=0)
-    
+        X = np.copy(x) 
+        X = np.reshape(X, (X.shape[0], np.prod(X.shape[1:])))
+        return np.argmax(self.activacion(X), axis=0)
+
     def activacion(self,x):
         pass
     def loss_gradient(self,x,y):
         pass
     
-    def fit(self, x, y):
+    def fit(self, x, y, x_test, y_test):
         n_clasifi=10
-        self.im_shape =x.shape[1:]
 
         # transformo a la imagen a un vector unidimensional
-        self.x = np.reshape(x, (x.shape[0], np.prod(self.im_shape)))
+        self.x = np.copy(x) 
+        self.x = np.reshape(self.x, (self.x.shape[0], np.prod(x.shape[1:])))
         self.x/=255 #Porque las imagenes del cifar10 y mnist varian hasta 255
-        
+
+        self.x_test=np.copy(x_test) 
+        self.x_test= np.reshape(self.x_test, (self.x_test.shape[0], np.prod(x_test.shape[1:])))
+        self.x_test=self.x_test/255
+
         #Si hay bias, agrego un 1 al final del vector
-        if (self.use_bias==True): np.append(self.x, 1) 
+        if (self.use_bias==True):
+            self.x= np.hstack(( (np.ones((len(x),1) )), self.x)) 
+            self.x_test=np.hstack(( (np.ones((len(x_test),1) )), self.x_test))  #np.append(self.x_test, 1)
         
         #Inicializa pesos
-        self.W = np.random.uniform(-1,1,size=(n_clasifi, self.x.shape[1])) 
+        self.W = np.random.uniform(-10,10,size=(n_clasifi, self.x.shape[1])) 
         self.y = y
+        self.y_test = y_test
 
         self.error_loss=np.zeros(self.epochs)
         self.error_acc =np.zeros(self.epochs)
         
+        iter_batch= int(self.x.shape[0]/self.batch_size)
+
         for it in range(self.epochs):
-            index   =   np.random.randint(0,x.shape[0],size=self.batch_size)
-            x_batch =   self.x[index]#: index + self.batch_size]#self.x[index:final]
-            y_batch =   self.y[index]#: index + self.batch_size]
-            L_loss  =   self.bgd(x_batch, y_batch)
-            self.error_acc[it] += 100*np.mean((self.predict(x_batch) == y_batch))
-            self.error_loss[it] = L_loss
-        #return self.error_loss, 100*self.error_acc
+            for it_ba in range(iter_batch): #WHYYYYYYYYYYYYYYY uwuwuuwuwuw
+                x_batch =   self.x[it_ba*self.batch_size: (it_ba+1)*self.batch_size]#: index + self.batch_size]#self.x[index:final]
+                y_batch =   self.y[it_ba*self.batch_size: (it_ba+1)*self.batch_size]#: index + self.batch_size]
+                L_loss  =   self.bgd(x_batch, y_batch)
+                
+                self.error_acc[it]  += 100*np.mean((self.predict(x_batch) == y_batch))
+                self.error_loss[it] += L_loss/self.batch_size
+
+        self.error_acc/=iter_batch 
+        self.error_loss/=iter_batch
+        
+        self.error_pres=100*np.mean((self.predict(self.x_test) == y_test))
 
     def bgd(self,x_batch, y_batch):
         loss , dW = self.loss_gradient(x_batch , y_batch)
         self.W+= -self.eta*dW
         return loss
-
 
 class SVM(LinearClassifier): #Support Vector Machine
     def activacion(self,x):
@@ -84,7 +99,7 @@ class SVM(LinearClassifier): #Support Vector Machine
 
         diff = yp - yp[y,id] + self.delta
         diff = np.maximum(diff, 0)
-        diff[y, np.arange(x.shape[0])]=0 
+        diff[y, id]=0 
 
         #sumo intra-vector, ahora tengo un [batchsize,(1)]  
         L=diff.sum(axis=0)
@@ -95,7 +110,7 @@ class SVM(LinearClassifier): #Support Vector Machine
         diff=np.heaviside(diff,0)
         diff[y, id] -= diff.sum(axis=0)[id]
 
-        dW = np.dot(diff, x)/x.shape[0] + self.lambda_L2*self.W
+        dW = np.dot(diff, x)/self.batch_size + self.lambda_L2*self.W
         return loss, dW
 
 class SMC(LinearClassifier): #SoftMax Classifier
@@ -110,24 +125,16 @@ class SMC(LinearClassifier): #SoftMax Classifier
         
         yp = self.activacion(x)
         yp-= np.max(yp,axis=0)
-        ind= np.arange(x.shape[0], dtype=np.int)
-        
-        #
-        expo_sum=   np.sum(np.exp(yp),axis=0)
+        ind= np.arange(self.batch_size, dtype=np.int)
+
         expo    =   np.exp(yp)
-        sum_inv =   1/expo_sum
+        expo_sum=   np.sum(expo, axis=0)
         
-        #print(expo)
-        #print(expo_sum)
-        #
-        diff    =   expo*sum_inv
-        #
-        #print(diff)
+        diff    =   expo/expo_sum
+
         L = -yp[y,ind] + np.log(expo_sum)    
         diff[y,ind] += -1 
 
-        dW = np.dot(diff, x)/x.shape[0] + self.lambda_L2*self.W 
+        dW = np.dot(diff, x)/self.batch_size + self.lambda_L2*self.W 
         loss= np.mean(L)  + 0.5*self.lambda_L2*L2
-        #print(L)
-        
         return loss, dW
