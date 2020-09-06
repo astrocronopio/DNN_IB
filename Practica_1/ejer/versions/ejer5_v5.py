@@ -61,7 +61,7 @@ def ejer_data(data,eta=0.05):
     plt.show()
 
 def ejer5():
-    ejer_data(datasets.cifar10, eta=0.001)
+    ejer_data(datasets.mnist, eta=0.001)
     #ejer_data(datasets.mnist)
 
 def main():

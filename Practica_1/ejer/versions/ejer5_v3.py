@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import numpy as np 
 import tensorflow.keras.datasets  as datasets
-from classifier import LinearClassifier, SVM, SMC
+from classifier_v3 import LinearClassifier, SVM, SMC
 
 import matplotlib.pyplot as plt
 
@@ -26,7 +26,7 @@ def ejer5():
     model_SMC.fit(x_train, y_train)   
 
     #np.random.seed(40)
-    wmodel_SVM = SVM(eta=0.1, epochs = 2000, batch_size=60, use_bias=True, lambda_L2=0.5)
+    model_SVM = SVM(eta=0.1, epochs = 2000, batch_size=60, use_bias=True, lambda_L2=0.5)
     model_SVM.fit(x_train, y_train) 
 
 

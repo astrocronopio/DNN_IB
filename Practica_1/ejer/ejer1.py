@@ -7,13 +7,13 @@ import matplotlib.pyplot as plt
 
 import matplotlib as mpl
 mpl.rcParams.update({
-	'font.size': 20,
+	'font.size': 19,
 	'figure.figsize': [12, 8],
 	'figure.autolayout': True,
 	'font.family': 'serif',
 	'font.sans-serif': ['Computer Modern Roman']})
 
-cmap = plt.get_cmap('rainbow',6)
+cmap = plt.get_cmap('jet',15)
 
 def solucion_exacta(conjunto_x, conjunto_y):
     aux        =  np.matmul(np.transpose(conjunto_x),conjunto_x)
@@ -66,50 +66,82 @@ def regresion_lineal_numpy(n, N):
     return error/promediar, error2/promediar
 
 
-def plot_me(n, dimensiones, e1, title, label, save_file, i):
-    plt.figure(n)
-    plt.title(title)
-    plt.plot(dimensiones[0:len(e1)], e1, label=label, c=cmap(i))
-    plt.legend(loc=0, ncol=2)
-    plt.yscale('log')
-    #plt.savefig(save_file)
-
 def ejer1():
-    dimensiones = np.arange(6,150,1)
-    porcentaje_vector = [1, 1.1, 1.5, 2, 2.5, 3]
-    i=-1
-    for porcentaje in porcentaje_vector:
-        i+=1
-        e1, e2= [], []
-        aux1, aux2= 0,0
-        for dimension in dimensiones:
-            aux1, aux2 = regresion_lineal_numpy(dimension, int(porcentaje*dimension))
-            e1.append(aux1)
-            e2.append(aux2)
-        
-        plot_me(1, dimensiones, e1, "MSE entre $y_{exacto}$ e $y_{esperado}$", 
-                "{}".format(porcentaje), "ejer_1_mse_y_porcentaje.pdf",i)
+    ejemplos      = np.arange(100,550,1)
+    dimensiones   = np.array([50,100,150,200,250,300])
 
-        plot_me(2, dimensiones, e2, "MSE entre $a_{i,exacto}$ y $a_{i}$", 
-                "{}".format(porcentaje),"ejer_1_mse_a_porcentaje.pdf",i)        
+    i400= np.where(ejemplos==450)[0][0]
+    i300= np.where(ejemplos==350)[0][0]
+    i500= np.where(ejemplos==500)[0][0]
 
-    ejemplos_vector = [20,40,60,80,100,120]
-    i=-1
-    for ejemplos in ejemplos_vector:
-        i+=1
-        e1, e2= [], []
-        aux1, aux2= 0,0
-        for index in range(len(dimensiones)):
-            if dimensiones[index]> ejemplos: break
-            aux1, aux2 = regresion_lineal_numpy(dimensiones[index], ejemplos)
-            e1.append(aux1)
-            e2.append(aux2)
-        
-        plot_me(3, dimensiones, e1, "MSE entre $y_{exacto}$ e $y_{esperado}$", 
-                "{}".format(ejemplos), "ejer_1_mse_y_ejemplos.pdf", i)
+    a_error=np.zeros((len(dimensiones), len(ejemplos)))
+    y_error=np.zeros((len(dimensiones), len(ejemplos)))
 
-        plot_me(4, dimensiones, e2, "MSE entre $a_{i,exacto}$ y $a_{i}$", 
-                "{}".format(ejemplos),"ejer_1_mse_a_ejemplos.pdf", i)   
+
+    for i in range(len(dimensiones)):
+        e = np.zeros((2,len(ejemplos)))
+        for j in range(len(ejemplos)):
+            if ejemplos[j]>(dimensiones[i]+30):
+                y_error[i][j], a_error[i][j] = regresion_lineal_numpy(dimensiones[i], ejemplos[j])
+            else: continue
+
+    left, bottom, width, height = [0.45, 0.59, 0.35, 0.32]
+
+    fig1, ax11 = plt.subplots()    
+    #ax21 = fig1.add_axes([left, bottom, width, height])
+    ax11.set_title("MSE entre $y_{exacto}$ e $y_{esperado}$")
+    ax11.set_ylabel("MSE")
+    ax11.set_xlabel("Ejemplos")
+    
+    fig2, ax12 = plt.subplots()
+    #ax22 = fig2.add_axes([left, bottom, width, height])
+    ax12.set_title("MSE entre $a_{exacto}$ y $a_{esperado}$")
+    ax12.set_ylabel("MSE")
+    ax12.set_xlabel("Ejemplos")
+    
+    for i in range(len(dimensiones)):
+        ax11.plot(ejemplos[ejemplos>(dimensiones[i]+30)],y_error[i][y_error[i]>0], label="d={}".format(dimensiones[i]), c=cmap(i))
+        ax12.plot(ejemplos[ejemplos>(dimensiones[i]+30)],a_error[i][a_error[i]>0], label="d={}".format(dimensiones[i]), c=cmap(i))
+
+    plt.figure(22)
+
+    plt.plot(dimensiones, y_error[:,i300], label="350", c="red", alpha=0.6)
+    plt.scatter(dimensiones, y_error[:,i300], c="red", alpha=0.6)
+
+    plt.plot(dimensiones, y_error[:,i400], label="450", c="blue", alpha=0.6)
+    plt.scatter(dimensiones, y_error[:,i400], c="blue", alpha=0.6)
+
+    plt.plot(dimensiones, y_error[:,i500], label="500", c="black", alpha=0.6)
+    plt.scatter(dimensiones, y_error[:,i500], c="black", alpha=0.6)
+
+    plt.ylabel("MSE")
+    plt.xlabel("Dimensión")
+    plt.legend(loc=0)
+    plt.savefig("ejer_1_mse_y_ejemplos_fijo.pdf")
+
+    plt.figure(24)
+
+    plt.plot(dimensiones, a_error[:,i300], label="350", c="blue", alpha=0.6)
+    plt.scatter(dimensiones, a_error[:,i300], c="blue", alpha=0.6)
+    
+    plt.plot(dimensiones, a_error[:,i400], label="450", c="red", alpha=0.6)
+    plt.scatter(dimensiones, a_error[:,i400], c="red", alpha=0.6)
+
+    plt.plot(dimensiones, a_error[:,i500], label="500", c="black", alpha=0.6)
+    plt.scatter(dimensiones, a_error[:,i500], c="black", alpha=0.6)
+    
+    plt.ylabel("MSE")
+    plt.xlabel("Dimensión")
+    plt.savefig("ejer_1_mse_y_ejemplos_fijo.pdf")
+
+    ax11.legend(loc=0)
+
+
+    ax12.legend(loc=0)
+    plt.legend(loc=0)
+
+    fig1.savefig("ejer_1_mse_y_ejemplos.pdf")
+    fig2.savefig("ejer_1_mse_a_ejemplos.pdf")
 
     plt.show()
 

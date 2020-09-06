@@ -21,14 +21,14 @@ def run_cifar10():
     print(x_train.shape[0], 'ejemplos de entrenamiento')
     print(x_test.shape[0], 'ejemplos para probar')
 
-    model_SVM = SVM(eta=0.1, epochs = 50, batch_size=64, use_bias=True, lambda_L2=0.5)
-    model_SVM.fit(x_train, y_train, x_test, y_test) 
-    print("Con el test dado: ", model_SVM.error_pres," de ",len(y_test)," bien" )
+    model_SVM = SVM(eta=0.01, epochs = 200, batch_size=50, use_bias=True, lambda_L2=0.1)
+    model_SVM.fit(x_train[:], y_train[:], x_test[:100], y_test[:100]) 
+    #print("Con el test dado: ", model_SVM.error_pres," de ",len(y_test)," bien" )
 
-    model_SMC = SMC(eta=0.1, epochs = 50, batch_size=64, use_bias=False, lambda_L2=0.5)
-    model_SMC.fit(x_train, y_train, x_test, y_test)   
-    print("Con el test dado: ", model_SMC.error_pres," de ",len(y_test)," bien" )
-    
+    model_SMC = SMC(eta=0.01, epochs = 200, batch_size=50, use_bias=True, lambda_L2=0.1)
+    model_SMC.fit(x_train[:], y_train[:], x_test[:100], y_test[:100])   
+    #print("Con el test dado: ", model_SMC.error_pres," de ",len(y_test)," bien" )
+   
     return model_SMC, model_SVM
 
 
@@ -39,13 +39,13 @@ def run_mnist():
     print(x_train.shape[0], 'ejemplos de entrenamiento')
     print(x_test.shape[0], 'ejemplos para probar')
 
-    model_SVM = SVM(eta=0.001, epochs = 100, batch_size=64, use_bias=True, lambda_L2=0.5)
-    model_SVM.fit(x_train, y_train, x_test, y_test) 
-    print("Con el test dado: ", model_SVM.error_pres," de ",len(y_test)," bien" )
+    model_SVM = SVM(eta=0.01, epochs = 200, batch_size=50, use_bias=True, lambda_L2=0.1)
+    model_SVM.fit(x_train[:], y_train[:], x_test[:], y_test[:]) 
+    #print("Con el test dado: ", model_SVM.error_pres," de ",len(y_test)," bien" )
 
-    model_SMC = SMC(eta=0.001, epochs = 100, batch_size=64, use_bias=True, lambda_L2=0.005)
-    model_SMC.fit(x_train, y_train, x_test, y_test)   
-    print("Con el test dado: ", model_SMC.error_pres," de ",len(y_test)," bien" )
+    model_SMC = SMC(eta=0.01, epochs = 200, batch_size=50, use_bias=True, lambda_L2=0.1)
+    model_SMC.fit(x_train[:], y_train[:], x_test[:], y_test[:])   
+    #print("Con el test dado: ", model_SMC.error_pres," de ",len(y_test)," bien" )
 
     return model_SMC, model_SVM
 
@@ -79,8 +79,8 @@ def ejer5():
     #plt.axhline(100, color='black', alpha=0.5, ls='--')
     plt.plot(SVM_m.error_acc,color="blue",alpha=0.6, label="Support Vector Machine")
     plt.plot(SMC_m.error_acc,color="red", alpha=0.6, label="SoftMax Classifier")
-    plt.plot(SVM_m.error_pres*np.ones_like(SVM_m.error_acc),color="blue", ls='--',  label="SVM - Test {:4.3}%".format(SVM_m.error_pres))
-    plt.plot(SMC_m.error_pres*np.ones_like(SMC_m.error_acc),color="red", ls='--', label="SMC - Test: {:4.3}%".format(SMC_m.error_pres))
+    plt.plot(SVM_m.error_pres,color="blue", ls='--',  label="SVM - Test {:4.3}%".format(SVM_m.error_pres[-1]))
+    plt.plot(SMC_m.error_pres,color="red", ls='--', label="SMC - Test: {:4.3}%".format(SMC_m.error_pres[-1]))
     plt.savefig("ejer_5_"+title+"_acc.pdf")
     
     plt.legend(loc=0)

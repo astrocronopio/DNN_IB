@@ -25,7 +25,7 @@ class LinearClassifier(object):
         self.epochs=epochs
         self.batch_size=batch_size
         self.use_bias=use_bias
-        self.lambda_L2 = 0.05
+        self.lambda_L2 = lambda_L2
 
     def predict(self, x):
         X = np.copy(x) 
@@ -55,28 +55,29 @@ class LinearClassifier(object):
             self.x_test=np.hstack(( (np.ones((len(x_test),1) )), self.x_test))  #np.append(self.x_test, 1)
         
         #Inicializa pesos
-        self.W = np.random.uniform(-10,10,size=(n_clasifi, self.x.shape[1])) 
-        self.y = y
-        self.y_test = y_test
-
+        self.W = np.random.uniform(-1,1,size=(n_clasifi, self.x.shape[1])) 
+        self.y = np.copy(y)
+        self.y_test = np.copy(y_test)
         self.error_loss=np.zeros(self.epochs)
         self.error_acc =np.zeros(self.epochs)
+        self.error_pres=np.zeros(self.epochs)
         
         iter_batch= int(self.x.shape[0]/self.batch_size)
 
         for it in range(self.epochs):
+            L_loss=0
             for it_ba in range(iter_batch): #WHYYYYYYYYYYYYYYY uwuwuuwuwuw
-                x_batch =   self.x[it_ba*self.batch_size: (it_ba+1)*self.batch_size]#: index + self.batch_size]#self.x[index:final]
-                y_batch =   self.y[it_ba*self.batch_size: (it_ba+1)*self.batch_size]#: index + self.batch_size]
-                L_loss  =   self.bgd(x_batch, y_batch)
-                
-                self.error_acc[it]  += 100*np.mean((self.predict(x_batch) == y_batch))
-                self.error_loss[it] += L_loss/self.batch_size
+                index   =   np.random.randint(0, x.shape[0], self.batch_size)
+                x_batch =   self.x[index]#[it_ba*self.batch_size: (it_ba+1)*self.batch_size]#: index + self.batch_size]#self.x[index:final]
+                y_batch =   self.y[index]#[it_ba*self.batch_size: (it_ba+1)*self.batch_size]#: index + self.batch_size]
+                L_loss  +=   self.bgd(x_batch, y_batch)
+            
+            self.error_acc[it] += 100*np.mean((self.predict(x_batch) == y_batch))
+            self.error_loss[it] = L_loss
+            self.error_pres[it] = 100*np.mean((self.predict(self.x_test) == y_test))
 
         self.error_acc/=iter_batch 
         self.error_loss/=iter_batch
-        
-        self.error_pres=100*np.mean((self.predict(self.x_test) == y_test))
 
     def bgd(self,x_batch, y_batch):
         loss , dW = self.loss_gradient(x_batch , y_batch)
@@ -100,17 +101,17 @@ class SVM(LinearClassifier): #Support Vector Machine
         diff = yp - yp[y,id] + self.delta
         diff = np.maximum(diff, 0)
         diff[y, id]=0 
+         # 'y' tiene las posiciones de la solucion 
+        # es genial porque las puedo usar para forzar el 0 donde debe ir
 
         #sumo intra-vector, ahora tengo un [batchsize,(1)]  
         L=diff.sum(axis=0)
         loss = np.mean(L) + 0.5*self.lambda_L2*L2
 
-        # 'y' tiene las posiciones de la solucion 
-        # es genial porque las puedo usar para forzar el 0 donde debe ir
         diff=np.heaviside(diff,0)
         diff[y, id] -= diff.sum(axis=0)[id]
 
-        dW = np.dot(diff, x)/self.batch_size + self.lambda_L2*self.W
+        dW = np.dot(diff, x)/x.shape[0] + self.lambda_L2*self.W
         return loss, dW
 
 class SMC(LinearClassifier): #SoftMax Classifier
@@ -137,4 +138,5 @@ class SMC(LinearClassifier): #SoftMax Classifier
 
         dW = np.dot(diff, x)/self.batch_size + self.lambda_L2*self.W 
         loss= np.mean(L)  + 0.5*self.lambda_L2*L2
+
         return loss, dW
