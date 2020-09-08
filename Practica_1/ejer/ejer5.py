@@ -21,12 +21,12 @@ def run_cifar10():
     print(x_train.shape[0], 'ejemplos de entrenamiento')
     print(x_test.shape[0], 'ejemplos para probar')
 
-    model_SVM = SVM(eta=0.01, epochs = 200, batch_size=50, use_bias=True, lambda_L2=0.1)
-    model_SVM.fit(x_train[:], y_train[:], x_test[:100], y_test[:100]) 
+    model_SVM = SVM(eta=0.0001, epochs = 200, batch_size=50, use_bias=True, lambda_L2=0.1)
+    model_SVM.fit(x_train[:], y_train[:], x_test[:], y_test[:]) 
     #print("Con el test dado: ", model_SVM.error_pres," de ",len(y_test)," bien" )
 
-    model_SMC = SMC(eta=0.01, epochs = 200, batch_size=50, use_bias=True, lambda_L2=0.1)
-    model_SMC.fit(x_train[:], y_train[:], x_test[:100], y_test[:100])   
+    model_SMC = SMC(eta=0.0001, epochs = 200, batch_size=50, use_bias=True, lambda_L2=0.1)
+    model_SMC.fit(x_train[:], y_train[:], x_test[:], y_test[:])   
     #print("Con el test dado: ", model_SMC.error_pres," de ",len(y_test)," bien" )
    
     return model_SMC, model_SVM
@@ -39,28 +39,31 @@ def run_mnist():
     print(x_train.shape[0], 'ejemplos de entrenamiento')
     print(x_test.shape[0], 'ejemplos para probar')
 
-    model_SVM = SVM(eta=0.01, epochs = 200, batch_size=50, use_bias=True, lambda_L2=0.1)
+    model_SVM = SVM(eta=0.0001, epochs = 200, batch_size=32, use_bias=True, lambda_L2=0.1)
     model_SVM.fit(x_train[:], y_train[:], x_test[:], y_test[:]) 
     #print("Con el test dado: ", model_SVM.error_pres," de ",len(y_test)," bien" )
 
-    model_SMC = SMC(eta=0.01, epochs = 200, batch_size=50, use_bias=True, lambda_L2=0.1)
+    model_SMC = SMC(eta=0.0001, epochs = 200, batch_size=32, use_bias=True, lambda_L2=0.1)
     model_SMC.fit(x_train[:], y_train[:], x_test[:], y_test[:])   
     #print("Con el test dado: ", model_SMC.error_pres," de ",len(y_test)," bien" )
 
     return model_SMC, model_SVM
-
 
 def ejer5():
 
     choose = int(input(u"Ingrese (1) para el MNIST y (2) para el CIFAR-10: "))
 
     if(choose==1): 
-        SMC_m, SVM_m= run_mnist()
         title="MNIST"
+        print("\n___Trabajando con ",title,"___")
+        SMC_m, SVM_m= run_mnist()
+        
     elif (choose==2): 
-        SMC_m, SVM_m= run_cifar10()
         title="CIFAR-10"
+        print("\n___Trabajando con CIFAR-10.___\n(Es una RAM eater)")
+        SMC_m, SVM_m= run_cifar10()        
     else: print("No entendí.")
+
 
     plt.figure(1)
     plt.ylabel('loss')
@@ -68,9 +71,9 @@ def ejer5():
     plt.yscale('log')
     plt.title(title)
     plt.plot(SVM_m.error_loss,color="blue", alpha=0.6, label="Support Vector Machine")
-    plt.plot(SMC_m.error_acc,color="red", alpha=0.6, label="SoftMax Classifier")
-    plt.savefig("ejer_5_"+title+"_los.pdf")
+    plt.plot(SMC_m.error_loss,color="red", alpha=0.6, label="SoftMax Classifier")
     plt.legend(loc=0)
+    plt.savefig("ejer_5_"+title+"_los.pdf")
 
     plt.figure(2)
     plt.xlabel("Épocas")
@@ -81,9 +84,9 @@ def ejer5():
     plt.plot(SMC_m.error_acc,color="red", alpha=0.6, label="SoftMax Classifier")
     plt.plot(SVM_m.error_pres,color="blue", ls='--',  label="SVM - Test {:4.3}%".format(SVM_m.error_pres[-1]))
     plt.plot(SMC_m.error_pres,color="red", ls='--', label="SMC - Test: {:4.3}%".format(SMC_m.error_pres[-1]))
+    plt.legend(loc=0)
     plt.savefig("ejer_5_"+title+"_acc.pdf")
     
-    plt.legend(loc=0)
     plt.show()
 
 def main():

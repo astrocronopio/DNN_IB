@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.8.11)  6 SEP 2020 17:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.8.11)  6 SEP 2020 22:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -665,18 +665,18 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-<plots/ejer_1_mse_a_ejemplos.pdf, id=44, 867.24pt x 578.16pt>
+<plots/ejer_1_mse_a_ejemplos.pdf, id=40, 867.24pt x 578.16pt>
 File: plots/ejer_1_mse_a_ejemplos.pdf Graphic file (type pdf)
 <use plots/ejer_1_mse_a_ejemplos.pdf>
 Package pdftex.def Info: plots/ejer_1_mse_a_ejemplos.pdf  used on input line 46
 .
-(pdftex.def)             Requested size: 249.9028pt x 166.59464pt.
+(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
 
-Overfull \hbox (3.9028pt too wide) in paragraph at lines 46--47
+Overfull \hbox (9.0pt too wide) in paragraph at lines 46--47
  [][] 
  []
 
-<plots/ejer_1_mse_y_ejemplos.pdf, id=45, 867.24pt x 578.16pt>
+<plots/ejer_1_mse_y_ejemplos.pdf, id=41, 867.24pt x 578.16pt>
 File: plots/ejer_1_mse_y_ejemplos.pdf Graphic file (type pdf)
 <use plots/ejer_1_mse_y_ejemplos.pdf>
 Package pdftex.def Info: plots/ejer_1_mse_y_ejemplos.pdf  used on input line 54
@@ -693,33 +693,23 @@ mplos.pdf> <./plots/ejer_1_mse_y_ejemplos.pdf
 pdfTeX warning: pdflatex (file ./plots/ejer_1_mse_y_ejemplos.pdf): PDF inclusio
 n: multiple pdfs with page group included in a single page
 >]
-<plots/ejer_2_clasificando_a_conv.pdf, id=168, 867.24pt x 578.16pt>
+<plots/ejer_2_clasificando_a_conv.pdf, id=164, 867.24pt x 578.16pt>
 File: plots/ejer_2_clasificando_a_conv.pdf Graphic file (type pdf)
 <use plots/ejer_2_clasificando_a_conv.pdf>
 Package pdftex.def Info: plots/ejer_2_clasificando_a_conv.pdf  used on input li
 ne 69.
-(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
-<plots/ejer_2_si_converge.pdf, id=169, 867.24pt x 578.16pt>
+(pdftex.def)             Requested size: 242.25311pt x 161.49553pt.
+<plots/ejer_2_si_converge.pdf, id=165, 867.24pt x 578.16pt>
 File: plots/ejer_2_si_converge.pdf Graphic file (type pdf)
 <use plots/ejer_2_si_converge.pdf>
 Package pdftex.def Info: plots/ejer_2_si_converge.pdf  used on input line 70.
-(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
-
-Overfull \hbox (9.0pt too wide) in paragraph at lines 69--71
- [][] 
- []
-
-
-Overfull \hbox (9.0pt too wide) in paragraph at lines 69--71
- [] 
- []
-
-<plots/ejer_2_clasificando.pdf, id=171, 867.24pt x 578.16pt>
+(pdftex.def)             Requested size: 242.25311pt x 161.49553pt.
+<plots/ejer_2_clasificando.pdf, id=167, 867.24pt x 578.16pt>
 File: plots/ejer_2_clasificando.pdf Graphic file (type pdf)
 <use plots/ejer_2_clasificando.pdf>
 Package pdftex.def Info: plots/ejer_2_clasificando.pdf  used on input line 79.
 (pdftex.def)             Requested size: 255.0pt x 169.99992pt.
-<plots/ejer_2_no_converge.pdf, id=172, 867.24pt x 578.16pt>
+<plots/ejer_2_no_converge.pdf, id=168, 867.24pt x 578.16pt>
 File: plots/ejer_2_no_converge.pdf Graphic file (type pdf)
 <use plots/ejer_2_no_converge.pdf>
 Package pdftex.def Info: plots/ejer_2_no_converge.pdf  used on input line 80.
@@ -751,75 +741,31 @@ pdfTeX warning: pdflatex (file ./plots/ejer_2_clasificando.pdf): PDF inclusion:
 pdfTeX warning: pdflatex (file ./plots/ejer_2_no_converge.pdf): PDF inclusion: 
 multiple pdfs with page group included in a single page
 >]
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 117.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 117.
-
-<plots/ejer_4_K-1_no_coverge.pdf, id=305, 867.24pt x 578.16pt>
+<plots/ejer_4_K-1_no_coverge.pdf, id=301, 867.24pt x 578.16pt>
 File: plots/ejer_4_K-1_no_coverge.pdf Graphic file (type pdf)
 <use plots/ejer_4_K-1_no_coverge.pdf>
 Package pdftex.def Info: plots/ejer_4_K-1_no_coverge.pdf  used on input line 12
 3.
-(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
-
-Overfull \hbox (9.0pt too wide) in paragraph at lines 123--124
- [][] 
- []
-
-<plots/ejer_4_K-1_si_converge.pdf, id=307, 867.24pt x 578.16pt>
+(pdftex.def)             Requested size: 229.49844pt x 152.99112pt.
+<plots/ejer_4_K-1_si_converge.pdf, id=305, 867.24pt x 578.16pt>
 File: plots/ejer_4_K-1_si_converge.pdf Graphic file (type pdf)
 <use plots/ejer_4_K-1_si_converge.pdf>
 Package pdftex.def Info: plots/ejer_4_K-1_si_converge.pdf  used on input line 1
-32.
-(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
-
-Overfull \hbox (9.0pt too wide) in paragraph at lines 132--133
- [][] 
- []
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 137.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 137.
-
-<plots/ejer_4_K-3_si_converge.pdf, id=309, 867.24pt x 578.16pt>
+41.
+(pdftex.def)             Requested size: 229.49844pt x 152.99112pt.
+<plots/ejer_4_K-3_si_converge.pdf, id=306, 867.24pt x 578.16pt>
 File: plots/ejer_4_K-3_si_converge.pdf Graphic file (type pdf)
 <use plots/ejer_4_K-3_si_converge.pdf>
 Package pdftex.def Info: plots/ejer_4_K-3_si_converge.pdf  used on input line 1
-43.
-(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
-
-Overfull \hbox (9.0pt too wide) in paragraph at lines 143--144
- [][] 
- []
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 148.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 148.
-
-<plots/ejer_4_K-7_si_converge.pdf, id=311, 867.24pt x 578.16pt>
+48.
+(pdftex.def)             Requested size: 229.49844pt x 152.99112pt.
+<plots/ejer_4_K-7_si_converge.pdf, id=307, 867.24pt x 578.16pt>
 File: plots/ejer_4_K-7_si_converge.pdf Graphic file (type pdf)
 <use plots/ejer_4_K-7_si_converge.pdf>
 Package pdftex.def Info: plots/ejer_4_K-7_si_converge.pdf  used on input line 1
-54.
-(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
-
-Overfull \hbox (9.0pt too wide) in paragraph at lines 154--155
- [][] 
- []
-
-[3 <./plots/ejer_4_K-1_no_coverge.pdf> <./plots/ejer_4_K-1_si_converge.pdf
+55.
+(pdftex.def)             Requested size: 229.49844pt x 152.99112pt.
+ [3 <./plots/ejer_4_K-1_no_coverge.pdf> <./plots/ejer_4_K-1_si_converge.pdf
 
 pdfTeX warning: pdflatex (file ./plots/ejer_4_K-1_si_converge.pdf): PDF inclusi
 on: multiple pdfs with page group included in a single page
@@ -827,74 +773,98 @@ on: multiple pdfs with page group included in a single page
 
 pdfTeX warning: pdflatex (file ./plots/ejer_4_K-3_si_converge.pdf): PDF inclusi
 on: multiple pdfs with page group included in a single page
+> <./plots/ejer_4_K-7_si_converge.pdf
+
+pdfTeX warning: pdflatex (file ./plots/ejer_4_K-7_si_converge.pdf): PDF inclusi
+on: multiple pdfs with page group included in a single page
 >]
-<plots/ejer_5_MNIST_acc.pdf, id=425, 867.24pt x 578.16pt>
-File: plots/ejer_5_MNIST_acc.pdf Graphic file (type pdf)
-<use plots/ejer_5_MNIST_acc.pdf>
-Package pdftex.def Info: plots/ejer_5_MNIST_acc.pdf  used on input line 166.
+<../../ejer_5_MNIST_acc.pdf, id=456, 867.24pt x 578.16pt>
+File: ../../ejer_5_MNIST_acc.pdf Graphic file (type pdf)
+<use ../../ejer_5_MNIST_acc.pdf>
+Package pdftex.def Info: ../../ejer_5_MNIST_acc.pdf  used on input line 206.
 (pdftex.def)             Requested size: 255.0pt x 169.99992pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 166--167
+Overfull \hbox (9.0pt too wide) in paragraph at lines 206--207
  [][] 
  []
 
-<plots/ejer_5_MNIST_los.pdf, id=426, 867.24pt x 578.16pt>
-File: plots/ejer_5_MNIST_los.pdf Graphic file (type pdf)
-<use plots/ejer_5_MNIST_los.pdf>
-Package pdftex.def Info: plots/ejer_5_MNIST_los.pdf  used on input line 173.
+<../../ejer_5_MNIST_los.pdf, id=457, 867.24pt x 578.16pt>
+File: ../../ejer_5_MNIST_los.pdf Graphic file (type pdf)
+<use ../../ejer_5_MNIST_los.pdf>
+Package pdftex.def Info: ../../ejer_5_MNIST_los.pdf  used on input line 213.
 (pdftex.def)             Requested size: 255.0pt x 169.99992pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 173--174
+Overfull \hbox (9.0pt too wide) in paragraph at lines 213--214
  [][] 
  []
 
-(./informe_practica_1.bbl) [4 <./plots/ejer_4_K-7_si_converge.pdf> <./plots/eje
-r_5_MNIST_acc.pdf
+<../../ejer_5_CIFAR-10_acc.pdf, id=460, 867.24pt x 578.16pt>
+File: ../../ejer_5_CIFAR-10_acc.pdf Graphic file (type pdf)
+<use ../../ejer_5_CIFAR-10_acc.pdf>
+Package pdftex.def Info: ../../ejer_5_CIFAR-10_acc.pdf  used on input line 225.
 
-pdfTeX warning: pdflatex (file ./plots/ejer_5_MNIST_acc.pdf): PDF inclusion: mu
-ltiple pdfs with page group included in a single page
-> <./plots/ejer_5_MNIST_los.pdf
+(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
 
-pdfTeX warning: pdflatex (file ./plots/ejer_5_MNIST_los.pdf): PDF inclusion: mu
-ltiple pdfs with page group included in a single page
+Overfull \hbox (9.0pt too wide) in paragraph at lines 225--226
+ [][] 
+ []
+
+[4 <../../ejer_5_MNIST_acc.pdf> <../../ejer_5_MNIST_los.pdf
+
+pdfTeX warning: pdflatex (file ../../ejer_5_MNIST_los.pdf): PDF inclusion: mult
+iple pdfs with page group included in a single page
 >]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 178.
+<../../ejer_5_CIFAR-10_los.pdf, id=556, 867.24pt x 578.16pt>
+File: ../../ejer_5_CIFAR-10_los.pdf Graphic file (type pdf)
+<use ../../ejer_5_CIFAR-10_los.pdf>
+Package pdftex.def Info: ../../ejer_5_CIFAR-10_los.pdf  used on input line 232.
+
+(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 232--233
+ [][] 
+ []
+
+(./informe_practica_1.bbl) [5 <../../ejer_5_CIFAR-10_acc.pdf> <../../ejer_5_CIF
+AR-10_los.pdf
+
+pdfTeX warning: pdflatex (file ../../ejer_5_CIFAR-10_los.pdf): PDF inclusion: m
+ultiple pdfs with page group included in a single page
+>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 238.
  (./informe_practica_1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 178.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 178.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 238.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 238.
 Package rerunfilecheck Info: File `informe_practica_1.out' has not changed.
-(rerunfilecheck)             Checksum: AD0FEF4EA4AF7AE3247CD5D36D72EAC9;615.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right .
-
-
+(rerunfilecheck)             Checksum: 4591D03A177D04C542A24A20AA7EFD16;511.
  ) 
 Here is how much of TeX's memory you used:
- 13999 strings out of 483048
- 221623 string characters out of 5962772
- 633209 words of memory out of 5000000
- 28669 multiletter control sequences out of 15000+600000
- 545284 words of font info for 97 fonts, out of 8000000 for 9000
+ 14036 strings out of 483048
+ 222315 string characters out of 5962772
+ 636537 words of memory out of 5000000
+ 28688 multiletter control sequences out of 15000+600000
+ 545647 words of font info for 103 fonts, out of 8000000 for 9000
  85 hyphenation exceptions out of 8191
- 53i,5n,50p,557b,506s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 53i,8n,50p,557b,505s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
-7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on informe_practica_1.pdf (4 pages, 486457 bytes).
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on informe_practica_1.pdf (5 pages, 533537 bytes).
 PDF statistics:
- 571 PDF objects out of 1000 (max. 8388607)
- 196 compressed objects within 2 object streams
- 26 named destinations out of 1000 (max. 500000)
- 15493 words of extra memory for PDF output out of 17280 (max. 10000000)
+ 706 PDF objects out of 1000 (max. 8388607)
+ 219 compressed objects within 3 object streams
+ 29 named destinations out of 1000 (max. 500000)
+ 15495 words of extra memory for PDF output out of 17280 (max. 10000000)
 

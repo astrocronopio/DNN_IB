@@ -7,7 +7,7 @@ Codigo para la practica 1 de la materia de Deep Learning del Instituto Balseiro
 Escrito por Evelyn  Coronel
 Septiembre 2020
 '''
-
+  
 ###############################################################
 from ejer.ejer1 import ejer1
 ###############################################################

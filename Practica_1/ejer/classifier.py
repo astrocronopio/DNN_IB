@@ -55,7 +55,7 @@ class LinearClassifier(object):
             self.x_test=np.hstack(( (np.ones((len(x_test),1) )), self.x_test))  #np.append(self.x_test, 1)
         
         #Inicializa pesos
-        self.W = np.random.uniform(-1,1,size=(n_clasifi, self.x.shape[1])) 
+        self.W = np.random.uniform(-0.1,0.1,size=(n_clasifi, self.x.shape[1])) 
         self.y = np.copy(y)
         self.y_test = np.copy(y_test)
         self.error_loss=np.zeros(self.epochs)
@@ -65,16 +65,14 @@ class LinearClassifier(object):
         iter_batch= int(self.x.shape[0]/self.batch_size)
 
         for it in range(self.epochs):
-            L_loss=0
+            print("Epoca: ",it)
             for it_ba in range(iter_batch): #WHYYYYYYYYYYYYYYY uwuwuuwuwuw
-                index   =   np.random.randint(0, x.shape[0], self.batch_size)
-                x_batch =   self.x[index]#[it_ba*self.batch_size: (it_ba+1)*self.batch_size]#: index + self.batch_size]#self.x[index:final]
-                y_batch =   self.y[index]#[it_ba*self.batch_size: (it_ba+1)*self.batch_size]#: index + self.batch_size]
-                L_loss  +=   self.bgd(x_batch, y_batch)
-            
-            self.error_acc[it] += 100*np.mean((self.predict(x_batch) == y_batch))
-            self.error_loss[it] = L_loss
-            self.error_pres[it] = 100*np.mean((self.predict(self.x_test) == y_test))
+                #index   =   np.random.randint(0, x.shape[0])#, self.batch_size)
+                x_batch =   self.x[it_ba*self.batch_size: (it_ba+1)*self.batch_size]#: index + self.batch_size]#self.x[index:final]
+                y_batch =   self.y[it_ba*self.batch_size: (it_ba+1)*self.batch_size]#: index + self.batch_size]
+                self.error_loss[it]  +=   self.bgd(x_batch, y_batch)
+                self.error_acc[it]  += 100.0*np.mean((self.predict(x_batch) == y_batch))
+            self.error_pres[it] = 100.0*np.mean((self.predict(self.x_test) == y_test))
 
         self.error_acc/=iter_batch 
         self.error_loss/=iter_batch
@@ -101,7 +99,7 @@ class SVM(LinearClassifier): #Support Vector Machine
         diff = yp - yp[y,id] + self.delta
         diff = np.maximum(diff, 0)
         diff[y, id]=0 
-         # 'y' tiene las posiciones de la solucion 
+        # 'y' tiene las posiciones de la solucion 
         # es genial porque las puedo usar para forzar el 0 donde debe ir
 
         #sumo intra-vector, ahora tengo un [batchsize,(1)]  
@@ -132,9 +130,9 @@ class SMC(LinearClassifier): #SoftMax Classifier
         expo_sum=   np.sum(expo, axis=0)
         
         diff    =   expo/expo_sum
+        diff[y,ind] += -1
 
-        L = -yp[y,ind] + np.log(expo_sum)    
-        diff[y,ind] += -1 
+        L = -yp[y,ind] + np.log(expo_sum[ind])
 
         dW = np.dot(diff, x)/self.batch_size + self.lambda_L2*self.W 
         loss= np.mean(L)  + 0.5*self.lambda_L2*L2

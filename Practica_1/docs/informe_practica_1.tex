@@ -43,7 +43,7 @@ En el problema  de la dimensionalidad se espera que $\nicefrac{\Delta N}{\Delta 
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.49\textwidth]{plots/ejer_1_mse_a_ejemplos.pdf}
+        \includegraphics[width=0.5\textwidth]{plots/ejer_1_mse_a_ejemplos.pdf}
         \caption{MSE entre los parámetros exactos y obtenidos en función de los ejemplos de entrenamiento. También se muestra en la subfigura el comportamiento del MSE en función de la dimensión con cantidad de ejemplos fija.}
         \label{fig:ejer1_a_ejemplos}
     \end{figure}
@@ -66,8 +66,8 @@ En el problema  de la dimensionalidad se espera que $\nicefrac{\Delta N}{\Delta 
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.5\textwidth]{plots/ejer_2_clasificando_a_conv.pdf}
-        \includegraphics[width=0.5\textwidth]{plots/ejer_2_si_converge.pdf}
+        \includegraphics[width=0.475\textwidth]{plots/ejer_2_clasificando_a_conv.pdf}
+        \includegraphics[width=0.475\textwidth]{plots/ejer_2_si_converge.pdf}
         \caption{Estados inicial y final de la clasificación  del \emph{k-means}. La figura superior muestra los valores iniciales de los centroides y la clasificación inicial de los puntos. En la figura inferior se observa que la clasificación convergió y los centroides convergen a puntos cercanos a las medias de las gaussianas  usadas para generar los puntos.}
         \label{fig:ejer2_converge}
     \end{figure}
@@ -84,7 +84,7 @@ En el problema  de la dimensionalidad se espera que $\nicefrac{\Delta N}{\Delta 
 
    \section*{Ejercicio 3}
 
-   Para este ejercicio se utilizó el módulo \emph{datasets} de la librería \emph{Keras} para cargar los datos de entrenamiento y validación del MNIST y CIFAR-10, para utilizar el algoritmo de \emph{KNN} para la clasificación.
+   Para este ejercicio se utilizó el módulo \verb|datasets| de la librería \verb|Keras| para cargar los datos de entrenamiento y validación del MNIST y CIFAR-10, para utilizar el algoritmo de \emph{KNN} para la clasificación.
 
    La ejecución del programa se imprime lo siguiente  en la salida estándar:
 
@@ -114,65 +114,125 @@ Dimensiones del set de entrenamiento:
 
     Usando los datos generado para el ejercicio  2 como datos de entrenamiento  y  validación y se implementó el algoritmo \emph{KNN} para clasificar $375$ puntos,   distribuidos en  5 distribuciones normales  con media y dispersión aleatorias, en dos dimensiones para 1, 3 y 7 vecinos. 
 
-    \subsection*{Número de vecinos $k=1$}
+    %\subsection*{Número de vecinos $k=1$}
 
     Dependiendo de la clasificación de \emph{k-means}, el algoritmo de \emph{KNN} puede funcionar o no. En el caso presentado en la Fig.\,\ref{fig:ejer4_k_1_malo} se observa que el \emph{k-means} separó a los conjuntos de datos coherentemente pero el algoritmo de \emph{KNN} convergió a  una solución errónea, se presentaron $125$ ejemplos de validación de los cuales el $36\%$ fueron clasificados correctamente.
 
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{plots/ejer_4_K-1_no_coverge.pdf}
+    \includegraphics[width=0.45\textwidth]{plots/ejer_4_K-1_no_coverge.pdf}
     \caption{Estado final de la clasificación del algoritmo de \emph{KNN} con $K=1$, en la validación con 125 datos solo se pudo calificar correctamente el 36.0\%.}
     \label{fig:ejer4_k_1_malo}
-    \end{figure} 
+    \end{figure}
 
     En la Fig.\ref{fig:ejer4_k_1} se observa que el algoritmo converge a una solución, dando $99.2$ de aciertos en los 125 ejemplos de validación.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{plots/ejer_4_K-1_si_converge.pdf}
-    \caption{Estado final de la clasificación del algoritmo de \emph{KNN} con $K=1$. Se observa que la clasificación se corresponde con el entrenamiento y en la validación se obtuve un $99.2\%$ de acierto con 125 datos.}
-    \label{fig:ejer4_k_1}
-\end{figure} 
-
-    \subsection*{Número de vecinos $k=3$}
+    %\subsection*{Número de vecinos $k=3$}
 
     Para una cantidad de vecinos $k=3$, las  simulaciones y clasificaciones en promedio daban un porcentaje de aciertos menor que $k=1$. En el caso de la Fig.\,\ref{fig:ejer4_k_3} se obtuvo un $94.4\%$ probando con 125 ejemplos. 
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{plots/ejer_4_K-3_si_converge.pdf}
-    \caption{Estado final de la clasificación del algoritmo de \emph{KNN} con $k=3$. Se observa que la clasificación se corresponde con el entrenamiento y en la validación se obtuve un $99.2\%$ de acierto con 125 datos.}
-    \label{fig:ejer4_k_3}
-\end{figure} 
-
-    \subsection*{Número de vecinos $k=7$}
+        %\subsection*{Número de vecinos $k=7$}
 
     Para una cantidad de vecinos $k=7$, el rendimiento de las  simulaciones y clasificaciones en promedio eran peor que los casos anterior. En el caso de la Fig.\,\ref{fig:ejer4_k_7} se obtuvo un $72.0\%$ probando con 125 ejemplos. Para $k=7$, la solución a la que converge el algoritmo no tiene la misma generalización que para $k=1$ y $k=3$.
 
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{plots/ejer_4_K-7_si_converge.pdf}
-    \caption{Estado final de la clasificación del algoritmo de \emph{KNN} con $k=3$. El algoritmo pierde generalización y en la validación se obtiene un $72.0\%$ de acierto con 125 datos. }
+    \includegraphics[width=0.45\textwidth]{plots/ejer_4_K-1_si_converge.pdf}
+    \caption{Estado final con $K=1$. Se observa que la clasificación se corresponde con el entrenamiento y en la validación se obtuve un $99.2\%$ de acierto con 125 datos.}
+    \label{fig:ejer4_k_1}
+\end{figure} 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{plots/ejer_4_K-3_si_converge.pdf}
+    \caption{Estado final con $k=3$. Se observa que la clasificación se corresponde con el entrenamiento y en la validación se obtuve un $99.2\%$ de acierto con 125 datos.}
+    \label{fig:ejer4_k_3}
+\end{figure} 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{plots/ejer_4_K-7_si_converge.pdf}
+    \caption{Estado final con $k=7$. El algoritmo pierde generalización y en la validación se obtiene un $72.0\%$ de acierto con 125 datos. }
     \label{fig:ejer4_k_7}
 \end{figure} 
     
 
 \section*{Ejercicio 5}
 
+En este ejercicio se implementaron los clasificadores lineales \emph{Support Vector Machine} y \emph{SoftMax} para clasificación de los conjuntos de datos del \emph{MNIST} y \emph{CIFAR-10}, almacenados en el módulo \verb|datasets| de la librería \verb|keras|.  módulo ya proporciona los datos de entrenamiento y validación para ambos casos. En la función de pérdida se agregó una función de regularización del tipo $L_2$.
 
+Si implementó la clase \verb|LinearClassifier| donde se definieron las funciones de:
+\begin{itemize}
+    \item Inicialización:
+
+    En la inicialización se definen los parámetros de tasa de aprendizaje  $\eta$, la cantidad de épocas \verb|epochs|, el parámetro de la normalización $\lambda_{L2}$, el tamaño del batch de datos  para el \emph{gradiente estocástico por batch}, y también se  define si se implementa el uso de bias o no.
+
+    \item  \verb|fit|:
+
+    Esta función recibe el conjunto de datos de entrenamiento y validación. Transforma las imágenes en vector unidimensionales, dependiendo si utiliza el bias, se agregan el uno al inicio de cada imagen.
+
+    También en esta función se inicializa la matriz  de peso de forma uniforme entre $[-0.1, 0.1]$, como también se normaliza a las imágenes con el valor máximo de cada elemento que estas dos bases de datos es $255$.
+
+    Esta función recorre el conjunto de datos durante la cantidad de épocas definida en la inicialización. También realiza el entrenamiento por batch y la validación. Los valores de precisión y pérdida por época se almacenan en vectores inicializados en esta función.
+
+    \item \verb|predict|
+
+    Esta función devuelve la clasificación predicha por la matriz de pesos dada un época.
+
+    \item \verb|loss_gradient|
+
+    Esta función es propia de cada método de clasificación lineal. En la definición de las subclases \verb|SVM| y \verb|SMC| se detallan la funciones de pérdida y el gradiente de la matriz de pesos.
+\end{itemize}
+
+La precisión y la pérdida en función para los datos son calculados con las siguientes parámetros:
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c|c|c|c|c}
+             &  $\eta$ & Épocas & Batch & $\lambda_{L2}$ & Bias \\ \hline
+    MNIST    &  0.0001 & 200 & 32 & 0.1 & Sí \\ \hline
+    CIFAR-10 &  0.0001 & 200 & 50 & 0.1 & Sí \\ 
+    \end{tabular}
+\end{table}
+Los mismos se utilizaron para ambos clasificadores.
+
+\subsection*{MNIST} 
+
+Las Figs.\,\ref{fig:ejer5_mnist_acc} y \ref{fig:ejer5_mnist_loss} se muestran los valores de precisión y pérdida en función de la época para CIFAR-10.  Los resultados obtenidos dan una precisión $\sim90\%$ para los datos de entrenamiento y validación. Se observa que para esta base de datos el algoritmo \emph{VSM} tiene una mejor precisión y una menor pérdida con respecto a \emph{SoftMax}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{plots/ejer_5_MNIST_acc.pdf}
-    \caption{accuracy}
+    \includegraphics[width=0.5\textwidth]{../../ejer_5_MNIST_acc.pdf}
+    \caption{Precisión de los algoritmos sobre el MNIST}
     \label{fig:ejer5_mnist_acc}
 \end{figure} 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{plots/ejer_5_MNIST_los.pdf}
-    \caption{loss}
+    \includegraphics[width=0.5\textwidth]{../../ejer_5_MNIST_los.pdf}
+    \caption{Precisión de los algoritmos sobre el MNIST}
     \label{fig:ejer5_mnist_loss}
 \end{figure} 
+
+
+\subsection*{CIFAR-10}
+
+Las Figs.\,\ref{fig:ejer5_cifar10_acc} y \ref{fig:ejer5_cifar10_loss} se muestran los valores de precisión y pérdida en función de la época para CIFAR-10.  Los resultados obtenidos son cercanos a trabajar con una matriz de pesos aleatoria. La implementación realizada en este trabajo no es adecuada para trabajar con esta base de datos. La precisión de \emph{VSM} parece ser mejor que el SoftMax, pero dados los resultados no se puede hablar de una ventaja  de un clasificador por encima de otro.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../../ejer_5_CIFAR-10_acc.pdf}
+    \caption{Precisión en función de las épocas de los algoritmos sobre el CIFAR-10}
+    \label{fig:ejer5_cifar10_acc}
+\end{figure} 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../../ejer_5_CIFAR-10_los.pdf}
+    \caption{Pérdida en función de las épocas de los algoritmos sobre el CIFAR-10}
+    \label{fig:ejer5_cifar10_loss}
+\end{figure} 
+
 
 \end{document}
