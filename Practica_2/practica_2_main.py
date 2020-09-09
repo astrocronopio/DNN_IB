@@ -10,17 +10,9 @@ Septiembre 2020
   
 ######################################
 from ejer.ejer1 import ejer1
-######################################
-from ejer.ejer2 import ejer2
-######################################
-from ejer.ejer3 import ejer3
-######################################
-from ejer.ejer4 import ejer4
-######################################
-from ejer.ejer5 import ejer5
-######################################
+
 def main():
-	pract_0={	1 : ejer1,	2 : ejer2,	3 : ejer3,	4 : ejer4, 5 : ejer5}
+	pract_2={	1 : ejer1,	2 : ejer2,	3 : ejer3,	4 : ejer4, 5 : ejer5}
 	
 	while True:
 		try:
@@ -30,9 +22,9 @@ def main():
 				continue	
 			break
 		except ValueError:
-			print("Ingrese un número válido menor a 6")
+			print("Ingrese un número válido de ejercicio")
 		
-	pract_0[n]()
+	pract_2[n]()
 
 
 if __name__== "__main__":
