@@ -151,7 +151,7 @@ def flattening(x, y, n_clasifi ):
 def ejer3():
     proto= Classifier(epochs    =300,
                       batch_size= 64,
-                      eta       =0.003,
+                      eta       =0.001,
                       lambda_L2 =0.001)
 
     (x_train, y_train), (x_test, y_test) = datasets.cifar10.load_data()

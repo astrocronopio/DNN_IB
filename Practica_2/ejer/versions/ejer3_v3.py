@@ -1,4 +1,4 @@
-""" Versión 4"""
+""" Versión 3 funcionó"""
 
 import numpy as np
 from keras import datasets
@@ -131,7 +131,7 @@ class Classifier(object):
 
             self.pres_vect[it] = 100*self.accuracy(S2_tout, y_test_out)
 
-            print("Epoch: {}/{} - pres:{:.4} - loss:{:.4} - acc:{:.4}".format(it, self.epochs, self.pres_vect[it],self.loss_vect[it], self.acc_vect[it]))
+            print("Epoch: {} - pres:{:.4} - loss:{:.4} - acc:{:.4}".format(it, self.pres_vect[it],self.loss_vect[it], self.acc_vect[it]))
             
             
 def flattening(x, y, n_clasifi ):
@@ -149,10 +149,10 @@ def flattening(x, y, n_clasifi ):
 
 
 def ejer3():
-    proto= Classifier(epochs    =300,
-                      batch_size= 64,
-                      eta       =0.003,
-                      lambda_L2 =0.001)
+    proto= Classifier(epochs =150,
+                      batch_size=32,
+                      eta    = 0.0005,
+                      lambda_L2=0.001)
 
     (x_train, y_train), (x_test, y_test) = datasets.cifar10.load_data()
     

@@ -1,38 +1,8 @@
-""" Versión 4"""
-
 import numpy as np
-from keras import datasets
-np.random.seed(54)
-import matplotlib.pyplot as plt
+import model.layer as layer 
+import model.layer as layer 
 
-import matplotlib as mpl
-mpl.rcParams.update({
-	'font.size': 20,
-	'figure.figsize': [12, 8],
-	'figure.autolayout': True,
-	'font.family': 'serif',
-	'font.sans-serif': ['Palatino']})
-
-def MSE(scores, y_true):
-    mse = np.mean(np.sum((scores-y_true)**2, axis=0))
-    return mse
-
-def grad_mse(scores, y_true):
-    return 2*(scores-y_true)
-
-def sigmoid(x):
-    try:
-        exp = 1 + np.exp(-1*x)
-    except RuntimeWarning:
-        print("F")
-        exit()
-    return 1/exp
-
-def grad_sigmoid(x):
-    return np.exp(-x)*(sigmoid(x)**2)
-
-
-class Classifier(object):
+class Model(object):
     def __init__(self,  eta         =   0.01, 
                         tolerance   =   9e-1, 
                         epochs      =   10,
@@ -66,8 +36,13 @@ class Classifier(object):
 
         iter_batch= int(x.shape[0]/self.batch_size)
 
-        w1 = np.random.uniform(-0.00001, 0.00001, size=(100,(x.shape[1])))
-        w2 = np.random.uniform(-0.001, 0.001, size=((10, (w1.shape[0]+1))))
+        layer1= layer.layer(input_size=x.shape[0], output_size=100,
+                            activation= , name='L1')
+                        #w1 = np.random.uniform(-0.00001, 0.00001, size=(100,(x.shape[1])))
+        
+        layer2= layer.layer(input_size=101, output_size=10,
+                        activation=, name='No name')
+                        #w2 = np.random.uniform(-0.001, 0.001, size=((10, (w1.shape[0]+1))))
 
 
         for it in range(self.epochs): 
@@ -132,51 +107,5 @@ class Classifier(object):
             self.pres_vect[it] = 100*self.accuracy(S2_tout, y_test_out)
 
             print("Epoch: {}/{} - pres:{:.4} - loss:{:.4} - acc:{:.4}".format(it, self.epochs, self.pres_vect[it],self.loss_vect[it], self.acc_vect[it]))
-            
-            
-def flattening(x, y, n_clasifi ):
-    X= np.copy(x) 
-    X= np.reshape(X, (X.shape[0], np.prod(x.shape[1:])))
-    X= (X - X.max())/255
-    
-    X= np.hstack(( (np.ones((len(X),1) )), X)) 
-    
-    Y = np.zeros(shape=(y.shape[0], n_clasifi))
-    y_aux  = np.copy(y).reshape(y.shape[0])
 
-    Y[np.arange(Y.shape[0]), y_aux]=1
-    return X,Y
-
-
-def ejer3():
-    proto= Classifier(epochs    =300,
-                      batch_size= 64,
-                      eta       =0.003,
-                      lambda_L2 =0.001)
-
-    (x_train, y_train), (x_test, y_test) = datasets.cifar10.load_data()
-    
-    n_clasifi=10
-    X, Y            = flattening(x_train,y_train, n_clasifi)
-    X_test, Y_test  = flattening(x_test ,y_test , n_clasifi)
-
-    proto.fit(X, Y, X_test, Y_test)
-
-    plt.figure(1)
-    plt.plot(proto.acc_vect, label="Acc")
-    plt.plot(proto.pres_vect, label="Pres")
-    plt.legend(loc=0)
-
-    plt.figure(2)
-    plt.plot(proto.loss_vect, label="loss")
-    plt.legend(loc=0)
-    plt.show()
-    pass
-
-def main():
-    ejer3()
-    pass
-
-if __name__ == '__main__':
-    main()
-    
+        

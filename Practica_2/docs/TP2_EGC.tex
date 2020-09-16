@@ -1,0 +1,95 @@
+\input{Preamblev2.sty}
+\begin{document}
+
+\title{Práctica 2: Introducción a las redes neuronales}
+\author{Evelyn~G.~Coronel}
+
+\affiliation{
+Aprendizaje Profundo y Redes Neuronales Artificiales\\ Instituto Balseiro\\}
+
+\date[]{\lowercase{\today}} %%lw para lw, [] sin date
+
+\maketitle
+%\onecolumngrid
+
+
+\section*{Ejercicio 1}
+
+Debido a la utilización  de bias, definimos $\tilde x = \{ x, 1\}$ y $\tilde w =\{ w, b \}$ a partir de esto:
+
+Entrada: $ x = (2.8, -1.8)$
+
+Pesos: $ w = (1.45, -0.35)$
+
+Bias: $b= -4$
+
+Pasamos a esto:
+
+Entrada Modificada: $ \tilde x = (2.8, -1.8, 1)$
+
+Pesos Modificada: $\tilde  w = (1.45, -0.35, -4)$
+
+Con una salida $y = \sum_i \tilde x_i \tilde{w}_i = 0.69$
+
+La arquitectura simplificada de la red es de esta manera:
+
+
+Grafico feo con el detalle del bias y la entrada extra
+
+
+
+\begin{enumerate}[label=(\alph*)]
+    \item Sigmoid Function:
+    \[
+        f(x) = \frac{1}{1 + e^{-x}}
+        \]
+    
+    Derivada:
+    \[
+        f'(x) = \frac{e^{-x}}{(1 + e^{-x})^2} =  e^{-x}\times f(x)
+        \]
+    \item Hyperbolic tangent:
+    \[  \tanh(x)
+        \]
+
+    Derivada:
+    \[
+        f'(x) =  \frac{1}{\cosh{x}^2} = 1 - \tanh^2x = 1 - f(x)^2
+        \]
+
+    \item ELU:
+    \[  f(x)=
+        \begin{cases}
+            x  & x \geq 0 \\
+            \alpha(e^x - 1) & x \le 0\\
+        \end{cases}
+        \]
+
+    Derivada:
+
+    \[ f'(x)=
+        \begin{cases}
+            1  & x \geq 0 \\
+            \alpha e^x & x \le 0\\
+        \end{cases}
+        \]
+    \item Leaky Relu:
+    \[ f(x) = max(0.1x, x) =  \]
+
+\end{enumerate}
+
+\section*{Ejercicio 2}
+
+\section*{Ejercicio 3}
+
+\section*{Ejercicio 4}
+
+\section*{Ejercicio 5}
+
+\section*{Ejercicio 6}
+
+\section*{Ejercicio 7}
+
+\section*{Ejercicio 8}
+
+\end{document}
