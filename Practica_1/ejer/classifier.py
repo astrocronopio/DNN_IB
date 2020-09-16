@@ -40,39 +40,30 @@ class LinearClassifier(object):
     def fit(self, x, y, x_test, y_test):
         n_clasifi=10
 
-        # transformo a la imagen a un vector unidimensional
-        self.x = np.copy(x) 
-        self.x = np.reshape(self.x, (self.x.shape[0], np.prod(x.shape[1:])))
-        self.x/=255 #Porque las imagenes del cifar10 y mnist varian hasta 255
-
-        self.x_test=np.copy(x_test) 
-        self.x_test= np.reshape(self.x_test, (self.x_test.shape[0], np.prod(x_test.shape[1:])))
-        self.x_test=self.x_test/255
-
         #Si hay bias, agrego un 1 al final del vector
         if (self.use_bias==True):
-            self.x= np.hstack(( (np.ones((len(x),1) )), self.x)) 
-            self.x_test=np.hstack(( (np.ones((len(x_test),1) )), self.x_test))  #np.append(self.x_test, 1)
+            X= np.hstack(( (np.ones((len(x),1) )), X)) 
+            X_test=np.hstack(( (np.ones((len(x_test),1) )), X_test))  #np.append(X_test, 1)
         
         #Inicializa pesos
-        self.W = np.random.uniform(-0.1,0.1,size=(n_clasifi, self.x.shape[1])) 
+        self.W = np.random.uniform(-0.1,0.1,size=(n_clasifi, X.shape[1])) 
         self.y = np.copy(y)
         self.y_test = np.copy(y_test)
         self.error_loss=np.zeros(self.epochs)
         self.error_acc =np.zeros(self.epochs)
         self.error_pres=np.zeros(self.epochs)
         
-        iter_batch= int(self.x.shape[0]/self.batch_size)
+        iter_batch= int(X.shape[0]/self.batch_size)
 
         for it in range(self.epochs):
             print("Epoca: ",it)
             for it_ba in range(iter_batch): #WHYYYYYYYYYYYYYYY uwuwuuwuwuw
                 #index   =   np.random.randint(0, x.shape[0])#, self.batch_size)
-                x_batch =   self.x[it_ba*self.batch_size: (it_ba+1)*self.batch_size]#: index + self.batch_size]#self.x[index:final]
+                x_batch =   X[it_ba*self.batch_size: (it_ba+1)*self.batch_size]#: index + self.batch_size]#X[index:final]
                 y_batch =   self.y[it_ba*self.batch_size: (it_ba+1)*self.batch_size]#: index + self.batch_size]
                 self.error_loss[it]  +=   self.bgd(x_batch, y_batch)
                 self.error_acc[it]  += 100.0*np.mean((self.predict(x_batch) == y_batch))
-            self.error_pres[it] = 100.0*np.mean((self.predict(self.x_test) == y_test))
+            self.error_pres[it] = 100.0*np.mean((self.predict(X_test) == y_test))
 
         self.error_acc/=iter_batch 
         self.error_loss/=iter_batch
@@ -124,6 +115,7 @@ class SMC(LinearClassifier): #SoftMax Classifier
         
         yp = self.activacion(x)
         yp-= np.max(yp,axis=0)
+        
         ind= np.arange(self.batch_size, dtype=np.int)
 
         expo    =   np.exp(yp)

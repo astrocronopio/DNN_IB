@@ -17,16 +17,27 @@ mpl.rcParams.update({
 def run_cifar10():
     (x_train, y_train), (x_test, y_test) = datasets.cifar10.load_data()
     x_train = x_train.astype(np.float)
+
+
+    # transformo a la imagen a un vector unidimensional
+    X = np.copy(x_train) 
+    X = np.reshape(X, (X.shape[0], np.prod(x.shape[1:])))
+    X/=255 #Porque las imagenes del cifar10 y mnist varian hasta 255
+
+    X_test=np.copy(x_test) 
+    X_test= np.reshape(X_test, (X_test.shape[0], np.prod(x_test.shape[1:])))
+    X_test=X_test/255
+
     print('Dimensiones del set de entrenamiento ', x_train.shape)
     print(x_train.shape[0], 'ejemplos de entrenamiento')
     print(x_test.shape[0], 'ejemplos para probar')
 
     model_SVM = SVM(eta=0.0001, epochs = 200, batch_size=50, use_bias=True, lambda_L2=0.1)
-    model_SVM.fit(x_train[:], y_train[:], x_test[:], y_test[:]) 
+    model_SVM.fit(X, y_train[:], X_test[:], y_test[:]) 
     #print("Con el test dado: ", model_SVM.error_pres," de ",len(y_test)," bien" )
 
     model_SMC = SMC(eta=0.0001, epochs = 200, batch_size=50, use_bias=True, lambda_L2=0.1)
-    model_SMC.fit(x_train[:], y_train[:], x_test[:], y_test[:])   
+    model_SMC.fit(X_train[:], y_train[:], X_test[:], y_test[:])   
     #print("Con el test dado: ", model_SMC.error_pres," de ",len(y_test)," bien" )
    
     return model_SMC, model_SVM
@@ -35,16 +46,27 @@ def run_cifar10():
 def run_mnist():
     (x_train, y_train), (x_test, y_test) = datasets.mnist.load_data()
     x_train = x_train.astype(np.float)
+
+    # transformo a la imagen a un vector unidimensional
+    X = np.copy(x_train) 
+    X = np.reshape(X, (X.shape[0], np.prod(x.shape[1:])))
+    X/=255 #Porque las imagenes del cifar10 y mnist varian hasta 255
+
+    X_test=np.copy(x_test) 
+    X_test= np.reshape(X_test, (X_test.shape[0], np.prod(x_test.shape[1:])))
+    X_test=X_test/255
+
+
     print('Dimensiones del set de entrenamiento ', x_train.shape)
     print(x_train.shape[0], 'ejemplos de entrenamiento')
     print(x_test.shape[0], 'ejemplos para probar')
 
     model_SVM = SVM(eta=0.0001, epochs = 200, batch_size=32, use_bias=True, lambda_L2=0.1)
-    model_SVM.fit(x_train[:], y_train[:], x_test[:], y_test[:]) 
+    model_SVM.fit(X_train[:], y_train[:], X_test[:], y_test[:]) 
     #print("Con el test dado: ", model_SVM.error_pres," de ",len(y_test)," bien" )
 
     model_SMC = SMC(eta=0.0001, epochs = 200, batch_size=32, use_bias=True, lambda_L2=0.1)
-    model_SMC.fit(x_train[:], y_train[:], x_test[:], y_test[:])   
+    model_SMC.fit(X_train[:], y_train[:], X_test[:], y_test[:])   
     #print("Con el test dado: ", model_SMC.error_pres," de ",len(y_test)," bien" )
 
     return model_SMC, model_SVM
