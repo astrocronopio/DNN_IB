@@ -3,9 +3,9 @@ import numpy as np
 class activation(object):
     def __init__(self):
         pass
-    def __call__(self, scores, y_true):
+    def __call__(self, x):
         pass
-    def gradient(self, scores, y_true):
+    def gradient(self,x):
         pass    
 
 
@@ -25,3 +25,9 @@ class Linear(activacion):
     def derivate(self, x):
         return np.ones_like(x)
 
+
+class ReLU(activation):
+    def __call__(self, x):
+        X = x 
+    def gradient(self,x):
+        pass 

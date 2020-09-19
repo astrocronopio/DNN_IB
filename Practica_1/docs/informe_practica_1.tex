@@ -191,48 +191,50 @@ La precisión y la pérdida en función para los datos son calculados con las si
     \centering
     \begin{tabular}{c|c|c|c|c|c}
              &  $\eta$ & Épocas & Batch & $\lambda_{L2}$ & Bias \\ \hline
-    MNIST    &  0.0001 & 200 & 32 & 0.1 & Sí \\ \hline
-    CIFAR-10 &  0.0001 & 200 & 50 & 0.1 & Sí \\ 
+    MNIST    &  0.00005 & 50 & 50 & 0.01 & Sí \\ \hline
+    CIFAR-10 &  0.0001 & 50 & 50 & 0.001 & Sí \\ 
     \end{tabular}
 \end{table}
 Los mismos se utilizaron para ambos clasificadores.
 
 \subsection*{MNIST} 
 
-Las Figs.\,\ref{fig:ejer5_mnist_acc} y \ref{fig:ejer5_mnist_loss} se muestran los valores de precisión y pérdida en función de la época para CIFAR-10.  Los resultados obtenidos dan una precisión $\sim90\%$ para los datos de entrenamiento y validación. Se observa que para esta base de datos el algoritmo \emph{VSM} tiene una mejor precisión y una menor pérdida con respecto a \emph{SoftMax}.
+%Las Figs.\,\ref{fig:ejer5_mnist_acc} y \ref{fig:ejer5_mnist_loss} se muestran los valores de precisión y pérdida en función de la época para CIFAR-10.  Los resultados obtenidos dan una precisión $\sim90\%$ para los datos de entrenamiento y validación. Se observa que para esta base de datos el algoritmo \emph{VSM} tiene una mejor precisión y una menor pérdida con respecto a \emph{SoftMax}.
+
+Las Figs.\,\ref{fig:ejer5_mnist_acc}  se muestran los valores de precisión en función de la época para CIFAR-10.  Los resultados obtenidos con el algoritmo de \emph{VSM} dan una precisión $\sim90\%$ para los datos de entrenamiento y validación, en cambio para el algoritmo \emph{SoftMax}. Se observa que para esta base de datos el algoritmo \emph{VSM} tiene una mejor precisión con respecto a \emph{SoftMax}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{../../ejer_5_MNIST_acc.pdf}
+    \includegraphics[width=0.5\textwidth]{plots/ejer_5_MNIST_acc.pdf}
     \caption{Precisión de los algoritmos sobre el MNIST}
     \label{fig:ejer5_mnist_acc}
 \end{figure} 
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{../../ejer_5_MNIST_los.pdf}
-    \caption{Precisión de los algoritmos sobre el MNIST}
-    \label{fig:ejer5_mnist_loss}
-\end{figure} 
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.5\textwidth]{../../ejer_5_MNIST_los.pdf}
+%     \caption{Precisión de los algoritmos sobre el MNIST}
+%     \label{fig:ejer5_mnist_loss}
+% \end{figure} 
 
 
 \subsection*{CIFAR-10}
 
-Las Figs.\,\ref{fig:ejer5_cifar10_acc} y \ref{fig:ejer5_cifar10_loss} se muestran los valores de precisión y pérdida en función de la época para CIFAR-10.  Los resultados obtenidos son cercanos a trabajar con una matriz de pesos aleatoria. La implementación realizada en este trabajo no es adecuada para trabajar con esta base de datos. La precisión de \emph{VSM} parece ser mejor que el SoftMax, pero dados los resultados no se puede hablar de una ventaja  de un clasificador por encima de otro.
+Las Figs.\,\ref{fig:ejer5_cifar10_acc}  se muestran los valores de precisión en función de la época para CIFAR-10.  Los resultados obtenidos tienen una presición menor que con la base de datos del MNIST, donde la presición no supera el 40\%. Esto se debe a que el CIFAR-10 tiene las tres componentes del RGB, mientras que el MNIST solo tiene la información de una componente de color. En este caso, tambien la precisión de \emph{VSM} es mejor que el clasificador \emph{SoftMax}.%, pero dados los resultados no se puede hablar de una ventaja  de un clasificador por encima de otro.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{../../ejer_5_CIFAR-10_acc.pdf}
+    \includegraphics[width=0.5\textwidth]{plots/ejer_5_CIFAR-10_acc.pdf}
     \caption{Precisión en función de las épocas de los algoritmos sobre el CIFAR-10}
     \label{fig:ejer5_cifar10_acc}
 \end{figure} 
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{../../ejer_5_CIFAR-10_los.pdf}
-    \caption{Pérdida en función de las épocas de los algoritmos sobre el CIFAR-10}
-    \label{fig:ejer5_cifar10_loss}
-\end{figure} 
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.5\textwidth]{../../ejer_5_CIFAR-10_los.pdf}
+%     \caption{Pérdida en función de las épocas de los algoritmos sobre el CIFAR-10}
+%     \label{fig:ejer5_cifar10_loss}
+% \end{figure} 
 
 
 \end{document}
