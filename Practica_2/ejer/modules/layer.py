@@ -1,41 +1,71 @@
 import numpy  as np
 
+import modules.activation  as activation 
+import modules.metric as metric
+import modules.model as model
+import modules.optimizer as optimizer
+import modules.regularizador as regularizador
 
-class layer(object):
-    def __init__(self,  input_size=16, 
-                        output_size=1,  
-                        bias=False, 
-                        activation=None, 
-                        name='No name'):
-        """
-        La función de activación ya está necesariamente vectorizada
-        y tiene que se ser inicializa o  sino  muere
-        """
-        self.input_size =input_size
-        self.output_size=output_size
-        self.bias       =bias
-        self.activation =activation
-        self.name       =name
-        self.weight_init()
 
-        if activation==None:
-            print("Dame la función de  activacion\n")
-            exit()
-
-    def weight_init(self, initializer= np.random.uniform ):
-        self.w = initializer(-0.00001, 0.00001,shape=(self.input_size, self.output_size))
-        
-        if self.bias==True:
-            self.w = np.hstack(( (initializer(-0.00001, 0.00001, shape=self.output_size), self.w))) 
-
-    def local_gradient(self):
+class BaseLayer():
+    def __init__():
         pass
     
-    def __call__(self, inputs):
-        inputs_copy= np.copy(inputs)
-        
-        if self.bias==True:
-            inputs_copy = np.hstack(( (np.ones((len(inputs_copy),1) )), inputs_copy)) 
-        
-        return self.activation(np.matmul(inputs_copy, weight_init) + self.b)  
-   
+    def get_ydim(self):
+        pass
+
+    def set_ydim(self):
+        pass
+
+    def get_xdim(self):
+        pass
+
+    def set_xdim(self):
+        pass
+    
+
+class Entrada(BaseLayer):
+    def __init__():
+        pass
+    
+    def get_ydim(self):
+        pass
+    
+    def set_ydim(self):
+        pass
+
+
+
+class Layer(BaseLayer):
+    def __init__(self, neuronas=0, 
+                 activation= None, 
+                 input_size= None,
+                 reg       = None):
+        super()
+        pass
+
+    def get_weights(self):
+        pass
+    
+    def update_weights(self): 
+        pass
+
+
+class Dense(Layer):
+    def ini_weights():
+        pass
+
+    def __call__():
+        pass
+
+    def prod():
+        pass
+
+
+
+def Concatenate(BaseLayer):
+    def __call__(self):
+        pass
+
+    def get_xdimextra(self):
+        pass

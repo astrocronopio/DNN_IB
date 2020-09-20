@@ -14,7 +14,8 @@ mpl.rcParams.update({
 	'font.sans-serif': ['Palatino']})
 
 def MSE(scores, y_true):
-    mse = np.mean(np.sum((scores-y_true)**2, axis=0))
+    sume= np.sum((scores-y_true)**2, axis=1)
+    mse = np.mean(sume)
     return mse
 
 def grad_mse(scores, y_true):
@@ -63,6 +64,7 @@ class Classifier(object):
         self.acc_vect = np.zeros(self.epochs)
         self.loss_vect= np.zeros(self.epochs)
         self.pres_vect= np.zeros(self.epochs)
+        self.loss_test= np.zeros(self.epochs)
 
         iter_batch= int(x.shape[0]/self.batch_size)
 
@@ -130,14 +132,15 @@ class Classifier(object):
             y_test_out=self.predict(y_test)
 
             self.pres_vect[it] = 100*self.accuracy(S2_tout, y_test_out)
+            self.loss_test[it] = MSE(S2_test,y_test) + 0.5*self.lambda_L2*reg
 
             print("Epoch: {}/{} - pres:{:.4} - loss:{:.4} - acc:{:.4}".format(it, self.epochs, self.pres_vect[it],self.loss_vect[it], self.acc_vect[it]))
             
             
-def flattening(x, y, n_clasifi ):
+def flattening(x, y, n_clasifi, max_train ):
     X= np.copy(x) 
     X= np.reshape(X, (X.shape[0], np.prod(x.shape[1:])))
-    X= (X - X.max())/255
+    X= (X - max_train)/255
     
     X= np.hstack(( (np.ones((len(X),1) )), X)) 
     
@@ -149,27 +152,34 @@ def flattening(x, y, n_clasifi ):
 
 
 def ejer3():
-    proto= Classifier(epochs    =300,
+    proto= Classifier(epochs    =200,
                       batch_size= 64,
-                      eta       =0.001,
+                      eta       =0.003,
                       lambda_L2 =0.001)
 
     (x_train, y_train), (x_test, y_test) = datasets.cifar10.load_data()
     
+    max_train= x_train.max()
+
     n_clasifi=10
-    X, Y            = flattening(x_train,y_train, n_clasifi)
-    X_test, Y_test  = flattening(x_test ,y_test , n_clasifi)
+    X, Y            = flattening(x_train,y_train, n_clasifi, max_train)
+    X_test, Y_test  = flattening(x_test ,y_test , n_clasifi, max_train)
 
     proto.fit(X, Y, X_test, Y_test)
 
     plt.figure(1)
-    plt.plot(proto.acc_vect, label="Acc")
-    plt.plot(proto.pres_vect, label="Pres")
+    plt.ylabel("Accuracy [%]")
+    plt.plot(proto.acc_vect, label="Entrenamiento", c='red', alpha=0.6, ls='--')
+    plt.plot(proto.pres_vect, label="Validación", c='blue', alpha=0.6)
     plt.legend(loc=0)
+    plt.savefig("ejer3_acc.pdf")
 
     plt.figure(2)
-    plt.plot(proto.loss_vect, label="loss")
+    plt.ylabel("Pérdida")
+    plt.plot(proto.loss_vect, label="Entrenamiento", c='red', alpha=0.6, ls='--')
+    plt.plot(proto.loss_test, label="Validación", c='blue', alpha=0.6)
     plt.legend(loc=0)
+    plt.savefig("ejer3_loss.pdf")
     plt.show()
     pass
 

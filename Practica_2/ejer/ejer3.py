@@ -153,7 +153,7 @@ def flattening(x, y, n_clasifi, max_train ):
 
 def ejer3():
     proto= Classifier(epochs    =200,
-                      batch_size= 64,
+                      batch_size=60,
                       eta       =0.003,
                       lambda_L2 =0.001)
 
