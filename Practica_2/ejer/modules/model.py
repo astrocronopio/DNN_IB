@@ -13,14 +13,14 @@ import modules.loss as loss
 
 class Red(object):
     def __init__(self):
-        self.capas=[]
+        self.capas=[layer.Entrada("Input")]
         pass
 
     def predict(self, y):
         pass
 
     def add(self, layer_neuronas):
-        if len(self.capas)>0:
+        if len(self.capas)>1:
             capa_anterior=self.capas[-1]
             capa_anterior.output_size = layer_neuronas.neuronas
             capa_anterior.ini_weights()
@@ -48,9 +48,9 @@ class Red(object):
 
         self.iter_batch= int(x_train.shape[0]/batch_size)
 
-        capa_anterior=self.capas[-1]
-        capa_anterior.output_size = y_train.shape[1]
-        capa_anterior.ini_weights()
+        ultima_capa=self.capas[-1]
+        ultima_capa.output_size = y_train.shape[1]
+        ultima_capa.ini_weights()
 
         for it in range(epochs):
             loss, acc=0,0

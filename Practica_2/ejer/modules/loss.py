@@ -12,7 +12,7 @@ class loss(object):
 class MSE(loss):
     def __call__(self, scores, y_true):
         super()
-        mse = np.mean(np.sum((scores-y_true)**2, axis=0))
+        mse = np.mean(np.sum((scores-y_true)**2, axis=1))
         return mse
 
     def gradient(self, scores, y_true):

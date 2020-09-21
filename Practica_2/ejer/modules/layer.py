@@ -23,6 +23,14 @@ class Layer(BaseLayer):
     def update_weights(self): 
         pass
 
+class Entrada(BaseLayer):
+    def __call__(self, x):
+        super()
+        self.S=np.copy(x)
+        return self.S
+    
+    def reg(self, x):
+        return 0
 
 
 class Dense(Layer):

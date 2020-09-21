@@ -8,11 +8,10 @@
 
 """
 Classifier.py
-    Vesión 1: Cree modulo
+    Versión 1: Cree modulo
 """
 
 import numpy as np
-from keras import datasets
 np.random.seed(54)
 import matplotlib.pyplot as plt
 import modules.activation as act
@@ -94,9 +93,10 @@ class Classifier(object):
                 """Hasta acá bien"""
                 ####regularization##
 
-                reg1= np.sum(w1*w1)
-                reg2= np.sum(w2*w2)
-                reg = reg1+reg2
+                
+                #reg1= np.sum(w1*w1)
+                #reg2= np.sum(w2*w2)
+                #reg = reg1+reg2
 
                 #loss and acc
                 
@@ -119,10 +119,10 @@ class Classifier(object):
                 grad1    = np.dot(grad2, w2)
 
                 #Capa 1
-                grad_sig = act_function.derivate(S1)                
+                grad_sig = act_function1.derivate(S1)                
                 grad1 = grad1*grad_sig 
                 grad1 = np.delete(grad1, (0), axis=1)
-                gradw1 = np.dot(grad1.T, x_batch) +  reg1.derivate(w1).
+                gradw1 = np.dot(grad1.T, x_batch) +  reg1.derivate(w1)
 
 
                 w1+= -self.eta*(gradw1)#+  self.lambda_L2*w1
@@ -131,7 +131,7 @@ class Classifier(object):
             self.loss_vect[it]=loss/iter_batch
             self.acc_vect[it]=100*acc/iter_batch
 
-            S1_test= act_function(np.dot(x_test,w1.T))
+            S1_test= act_function1(np.dot(x_test,w1.T))
 
             S1_test= np.hstack(((np.ones((len(S1_test),1) ),S1_test)))
             S2_test= np.dot(S1_test, w2.T)
@@ -140,11 +140,12 @@ class Classifier(object):
             y_test_out=self.predict(y_test)
 
             self.pres_vect[it] = 100*self.accuracy(S2_tout, y_test_out)
-            self.loss_test[it] = loss_function(S2_test,y_test) + 0.5*self.lambda_L2*reg
+            self.loss_test[it] = loss_function(S2_test,y_test) + reg1(w1) + reg2(w2)
 
-            print("Epoch: {}/{} - acc_test:{:.4} - loss:{:.4} - acc:{:.4}".format(it, 
+            print("Epoch: {}/{} - acc_test:{:.4} -loss_test:{:.4}- loss:{:.4} - acc:{:.4}".format(it, 
             self.epochs, 
             self.pres_vect[it],
+            self.loss_test[it],
             self.loss_vect[it], 
             self.acc_vect[it]))
             

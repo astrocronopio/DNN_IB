@@ -61,14 +61,14 @@ def ejer6_221(x_train, y_train):
     plt.plot(red_densa.acc_vect, label="Entrenamiento", c='red', alpha=0.6)
     #plt.plot(red_densa.pres_vect, label="Validación", c='blue', alpha=0.6)
     plt.legend(loc=0)
-    plt.savefig("ejer6_acc.pdf")
+    #plt.savefig("ejer6_acc.pdf")
 
     plt.figure(2)
     plt.ylabel("Pérdida")
     plt.plot(red_densa.loss_vect, label="Entrenamiento", c='red', alpha=0.6)
     #plt.plot(red_densa.loss_test, label="Validación", c='blue', alpha=0.6)
     plt.legend(loc=0)
-    plt.savefig("ejer6_loss.pdf")
+    #plt.savefig("ejer6_loss.pdf")
     plt.show()
 
 

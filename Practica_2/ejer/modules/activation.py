@@ -45,6 +45,22 @@ class ReLU(activation):
         X= np.heaviside(x + self.delta, 0)
         return X
 
+class ReLU_Linear(activation):
+    def __init__(self, delta=1):
+        super()
+        self.delta=delta
+
+    def __call__(self, x):
+        super()
+        X = np.maximum(x + self.delta, 0) + x
+        return X
+
+    def derivate(self,x):
+        super()
+        X= np.heaviside(x + self.delta, 0) + 1
+        return X
+
+
 class Tanh(activation):
     def __call__(self, x):
         super()
