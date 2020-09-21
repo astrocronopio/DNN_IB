@@ -15,7 +15,7 @@ mpl.rcParams.update({
 	'font.sans-serif': ['Palatino']})
 
 def flattening(x_train,y_train):
-    X = np.copy(x_train) 
+    X = x_train #Me aseguro no modificar nunca los datos
     X = np.reshape(X, (X.shape[0], np.prod(X.shape[1:])))
     X=X/255
     Y = y_train.reshape(X.shape[0])
@@ -35,17 +35,13 @@ def run_fit(dataset):
     print(x_train.shape[0], 'ejemplos de entrenamiento')
     print(x_test.shape[0], 'ejemplos para probar')
 
+    print("\n====SoftMax====")
+    model_SMC = SMC(eta=0.0002, epochs = 400, batch_size=50, lambda_L2=0.001)
+    model_SMC.fit(X, Y, X_t, Y_t)   
    
     print("\n==Support Vector Machine==")
-    model_SVM = SVM(eta=0.0001, epochs = 50, batch_size=50, lambda_L2=0.0001)
+    model_SVM = SVM(eta=0.0002, epochs = 400, batch_size=50, lambda_L2=0.001)
     model_SVM.fit(X, Y, X_t, Y_t) 
-
-
-
-    print("\n====SoftMax====")
-    model_SMC = SMC(eta=0.0001, epochs = 50, batch_size=50, lambda_L2=0.01)
-    model_SMC.fit(X, Y, X_t, Y_t)   
-
 
     return model_SMC, model_SVM
 
@@ -64,26 +60,43 @@ def ejer5():
         SMC_m, SVM_m= run_fit(datasets.cifar10)        
     else: print("No entendí.")
 
+    outputfile = "ejer5_"+title
+
+    #np.save(outputfile, )
+    
+    np.save(outputfile, SVM_m.error_loss)
+    np.save(outputfile, SMC_m.error_loss)
+    np.save(outputfile, SVM_m.loss_test)
+    np.save(outputfile, SMC_m.loss_test)
+    np.save(outputfile, SVM_m.error_acc)
+    np.save(outputfile, SMC_m.error_acc)
+    np.save(outputfile, SVM_m.error_pres)
+    np.save(outputfile, SMC_m.error_pres)
+
 
     plt.figure(1)
     plt.ylabel('loss')
     plt.xlabel("Épocas")
     #plt.yscale('log')
     plt.title(title)
-    plt.plot(SVM_m.error_loss,color="blue", alpha=0.6, label="Support Vector Machine")
-    plt.plot(SMC_m.error_loss,color="red", alpha=0.6, label="SoftMax Classifier")
+    plt.plot(SVM_m.error_loss,color="blue",   ls='--', alpha=0.6, label="SVM - Train")
+    plt.plot(SMC_m.error_loss,color="red",   ls='--', alpha=0.6, label="SMC - Train")
+    plt.plot(SVM_m.loss_test,color="blue",  label="SVM - Test")
+    plt.plot(SMC_m.loss_test,color="red", label="SMC - Test")
+    
     plt.legend(loc=0)
     plt.savefig("ejer_5_"+title+"_los.pdf")
 
     plt.figure(2)
     plt.xlabel("Épocas")
-    plt.ylabel('accuracy')
+    plt.ylabel('accuracy [%]')
     
     plt.title(title)
-    plt.plot(SVM_m.error_acc,   color="blue",   alpha=0.6, label="Support Vector Machine")
-    plt.plot(SMC_m.error_acc,   color="red",    alpha=0.6, label="SoftMax Classifier")
-    plt.plot(SVM_m.error_pres,  color="blue",   ls='--', label="SVM - Test {:4.3}%".format(SVM_m.error_pres[-1]))
-    plt.plot(SMC_m.error_pres,  color="red",    ls='--',  label="SMC - Test: {:4.3}%".format(SMC_m.error_pres[-1]))
+    plt.plot(SVM_m.error_acc,   color="blue",   ls='--',   alpha=0.6, label="SVM - Train".format(SVM_m.error_acc[-1]))
+    plt.plot(SMC_m.error_acc,   color="red",   ls='--',    alpha=0.6, label="SMC - Train".format(SMC_m.error_acc[-1]))
+    plt.plot(SVM_m.error_pres,  color="blue", label="SVM - Test {:4.3}%".format(SVM_m.error_pres[-1]))
+    plt.plot(SMC_m.error_pres,  color="red",   label="SMC - Test: {:4.3}%".format(SMC_m.error_pres[-1]))
+    
     plt.legend(loc=0)
     plt.savefig("ejer_5_"+title+"_acc.pdf")
     

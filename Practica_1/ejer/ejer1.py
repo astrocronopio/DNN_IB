@@ -132,7 +132,7 @@ def ejer1():
     
     plt.ylabel("MSE")
     plt.xlabel("Dimensión")
-    plt.savefig("ejer_1_mse_y_ejemplos_fijo.pdf")
+    plt.savefig("ejer_1_mse_a_ejemplos_fijo.pdf")
 
     ax11.legend(loc=0)
 
