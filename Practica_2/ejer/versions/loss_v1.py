@@ -19,22 +19,21 @@ class MSE(loss):
         """La primera componente es siempre el tamaño de batch"""
         return 2*(scores-y_true)/y_true.shape[0]       
 
-
 class cross_entropy(loss):
     def __call__(self, scores, y_true):
         super()
+        scores-= np.max(scores,axis=0)
 
-        ind= np.arange(scores.shape[0], dtype=np.int)
-        scores -= np.max(scores,axis=1)[:, np.newaxis]
+        ind= np.arange(y_true.shape[0], dtype=np.int)
+        y = np.argmax(y_true, axis=0)
 
         expo    =   np.exp(scores)
-        y = np.argmax(y_true, axis=1)
-
-        loss = np.mean(-scores[ind,y] + np.log(np.sum(expo, axis=1)))
-
-        self.diff    =   expo/np.sum(expo, axis=1)[:,np.newaxis]
+        expo_sum=   np.sum(expo, axis=0)
         
-        self.diff[ind,y] += -1
+        self.diff    =   expo/expo_sum
+        self.diff[y,ind] += -1
+
+        loss = np.mean(-scores[y,ind] + np.log(np.sum(expo, axis=0)))
 
         return loss
 

@@ -9,21 +9,25 @@ class activation(object):
         pass    
 
 
-class Sigmoid(activation):
+class sigmoid(activation):
     def __call__(self, x):
+        super()
         exp = 1 + np.exp(-1*x)
         return 1/exp
 
     def derivate(self, x):
-        return np.exp(-x)/((1 + np.exp(-1*x))**2) 
+        super()
+        return np.exp(-x)*(self.__call__(x)**2)
 
 
 class Linear(activation):
     def __call__(self, x):
+        super()
         return x
 
     def derivate(self, x):
-        return np.ones_like(x)
+        super()
+        return 1.0
 
 
 class ReLU(activation):
@@ -32,17 +36,20 @@ class ReLU(activation):
         self.delta=delta
 
     def __call__(self, x):
-        X = np.max(x + self.delta, 0)  
+        super()
+        X = np.maximum(x + self.delta, 0)  
         return X
 
     def derivate(self,x):
+        super()
         X= np.heaviside(x + self.delta, 0)
         return X
 
 class Tanh(activation):
     def __call__(self, x):
-        self.X = np.tanh(x)
-        return self.X
+        super()
+        return  np.tanh(1.0*x)
 
     def derivate(self, x):
-        return 1 - self.X**2
+        super()
+        return 1 - (np.tanh(1.0*x))**2

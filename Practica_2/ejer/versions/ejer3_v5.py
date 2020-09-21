@@ -1,9 +1,15 @@
-""" Versión 3 funcionó"""
+""" Versión 4: Antes de agregar la clase loss y activation
+    Versión 5: Separé las activaciones y losses en otro modulo
+               También agregué la activación de la segunda capa.
+    Versión    
+"""
 
 import numpy as np
 from keras import datasets
 np.random.seed(54)
 import matplotlib.pyplot as plt
+import modules.activation as act
+import modules.loss as los
 
 import matplotlib as mpl
 mpl.rcParams.update({
@@ -13,24 +19,7 @@ mpl.rcParams.update({
 	'font.family': 'serif',
 	'font.sans-serif': ['Palatino']})
 
-def MSE(scores, y_true):
-    mse = np.mean(np.sum((scores-y_true)**2, axis=0))
-    return mse
-
-def grad_mse(scores, y_true):
-    return 2*(scores-y_true)
-
-def sigmoid(x):
-    try:
-        exp = 1 + np.exp(-1*x)
-    except RuntimeWarning:
-        print("F")
-        exit()
-    return 1/exp
-
-def grad_sigmoid(x):
-    return np.exp(-x)*(sigmoid(x)**2)
-
+######
 
 class Classifier(object):
     def __init__(self,  eta         =   0.01, 
@@ -58,11 +47,14 @@ class Classifier(object):
     def loss_function(self, scores, y_true):
         pass
 
-    def fit(self, x, y, x_test, y_test):
+    def fit(self, x, y, x_test, y_test, 
+            act_function, loss_function,
+            act_function2):
 
         self.acc_vect = np.zeros(self.epochs)
         self.loss_vect= np.zeros(self.epochs)
         self.pres_vect= np.zeros(self.epochs)
+        self.loss_test= np.zeros(self.epochs)
 
         iter_batch= int(x.shape[0]/self.batch_size)
 
@@ -79,10 +71,10 @@ class Classifier(object):
                 y_batch =   y[index]
                 
                 ####Forward####
-                S1= sigmoid(np.dot(x_batch, w1.T))                
+                S1= act_function(np.dot(x_batch, w1.T))                
                 S1= np.hstack(((np.ones((len(S1),1) ),S1))) 
 
-                S2= np.dot(S1,w2.T)
+                S2= act_function2(np.dot(S1,w2.T))
                 """Hasta acá bien"""
                 ####regularization##
 
@@ -92,7 +84,7 @@ class Classifier(object):
 
                 #loss and acc
                 
-                loss += MSE(S2,y_batch) + 0.5*self.lambda_L2*reg
+                loss += loss_function(S2,y_batch) + 0.5*self.lambda_L2*reg
 
                 S2_out = self.predict(S2)
                 y_batch_out = self.predict(y_batch)
@@ -101,27 +93,29 @@ class Classifier(object):
                 
                 ###"Backguard"
 
-                grad2 = grad_mse(S2, y_batch)/self.batch_size #+ reg2
-                
+                grad2 = loss_function.gradient(S2, y_batch)
+                grad_lin=act_function2.derivate(S2)
+                grad2=grad2*grad_lin
 
                 #Capa 2
-                gradw2  = np.dot(grad2.T, S1) + self.lambda_L2*w2
+
+                gradw2  = np.dot(grad2.T, S1)
                 grad1    = np.dot(grad2, w2)
 
                 #Capa 1
-                grad_sig = grad_sigmoid(S1)                
+                grad_sig = act_function.derivate(S1)                
                 grad1 = grad1*grad_sig 
                 grad1 = np.delete(grad1, (0), axis=1)
-                gradw1 = np.dot(grad1.T, x_batch) +  self.lambda_L2*w1
+                gradw1 = np.dot(grad1.T, x_batch) 
 
 
-                w1+= -self.eta*(gradw1)
-                w2+= -self.eta*(gradw2)
+                w1+= -self.eta*(gradw1)+  self.lambda_L2*w1
+                w2+= -self.eta*(gradw2) + self.lambda_L2*w2
 
             self.loss_vect[it]=loss/iter_batch
             self.acc_vect[it]=100*acc/iter_batch
 
-            S1_test= sigmoid(np.dot(x_test,w1.T))
+            S1_test= act_function(np.dot(x_test,w1.T))
 
             S1_test= np.hstack(((np.ones((len(S1_test),1) ),S1_test)))
             S2_test= np.dot(S1_test, w2.T)
@@ -130,14 +124,15 @@ class Classifier(object):
             y_test_out=self.predict(y_test)
 
             self.pres_vect[it] = 100*self.accuracy(S2_tout, y_test_out)
+            self.loss_test[it] = MSE(S2_test,y_test) + 0.5*self.lambda_L2*reg
 
-            print("Epoch: {} - acc:{:.4} - loss:{:.4} - acc:{:.4}".format(it, self.pres_vect[it],self.loss_vect[it], self.acc_vect[it]))
+            print("Epoch: {}/{} - pres:{:.4} - loss:{:.4} - acc:{:.4}".format(it, self.epochs, self.pres_vect[it],self.loss_vect[it], self.acc_vect[it]))
             
             
-def flattening(x, y, n_clasifi ):
+def flattening(x, y, n_clasifi, max_train ):
     X= np.copy(x) 
     X= np.reshape(X, (X.shape[0], np.prod(x.shape[1:])))
-    X= (X - X.max())/255
+    X= (X - max_train)/255
     
     X= np.hstack(( (np.ones((len(X),1) )), X)) 
     
@@ -149,27 +144,46 @@ def flattening(x, y, n_clasifi ):
 
 
 def ejer3():
-    proto= Classifier(epochs =150,
-                      batch_size=32,
-                      eta    = 0.0005,
-                      lambda_L2=0.001)
+    proto= Classifier(epochs    =200,
+                      batch_size=60,
+                      eta       =0.003,
+                      lambda_L2 =0.001)
+    outputfile='ejer3_e200_bs_60_lr_0-003_lmf_0-001.npy'
 
     (x_train, y_train), (x_test, y_test) = datasets.cifar10.load_data()
     
-    n_clasifi=10
-    X, Y            = flattening(x_train,y_train, n_clasifi)
-    X_test, Y_test  = flattening(x_test ,y_test , n_clasifi)
+    max_train= x_train.max()
 
-    proto.fit(X, Y, X_test, Y_test)
+    n_clasifi=10
+    X, Y            = flattening(x_train,y_train, n_clasifi, max_train)
+    X_test, Y_test  = flattening(x_test ,y_test , n_clasifi, max_train)
+
+    proto.fit(
+            X, Y, X_test, Y_test,
+            act_function = act.sigmoid(),
+            loss_function= los.MSE(),
+            act_function2= act.Linear())
 
     plt.figure(1)
-    plt.plot(proto.acc_vect, label="Acc")
-    plt.plot(proto.pres_vect, label="Pres")
+    plt.ylabel("Accuracy [%]")
+    plt.plot(proto.acc_vect, label="Entrenamiento", c='red', alpha=0.6, ls='--')
+    plt.plot(proto.pres_vect, label="Validación", c='blue', alpha=0.6)
     plt.legend(loc=0)
+    plt.savefig("ejer3_acc.pdf")
+    
+    np.save(outputfile, proto.acc_vect )
+    np.save(outputfile, proto.pres_vect )
 
     plt.figure(2)
-    plt.plot(proto.loss_vect, label="loss")
+    plt.ylabel("Pérdida")
+    plt.plot(proto.loss_vect, label="Entrenamiento", c='red', alpha=0.6, ls='--')
+    plt.plot(proto.loss_test, label="Validación", c='blue', alpha=0.6)
     plt.legend(loc=0)
+    plt.savefig("ejer3_loss.pdf")
+
+    np.save(outputfile, proto.loss_vect)
+    np.save(outputfile, proto.loss_test)
+
     plt.show()
     pass
 

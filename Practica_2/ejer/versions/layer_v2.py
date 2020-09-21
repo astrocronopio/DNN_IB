@@ -1,12 +1,12 @@
 import numpy  as np
-
-""" Esta versión 3"""
+""" Esta versión 2 tiene las propuestas de Lucca"""
 import modules.activation  as activation
 import modules.metric as metric
 import modules.model as model
 import modules.optimizer as optimizer
 import modules.regularizador as regularizador
 
+import copy
 
 class BaseLayer():
     def __init__(self, name="No name"):
@@ -18,8 +18,34 @@ class BaseLayer():
     def __str__(self):
         return self.name
 
+    def get_ydim(self):
+        pass
+
+    def set_ydim(self):
+        pass
+
+    def get_xdim(self):
+        pass
+
+    def set_xdim(self):
+        pass
+    
+
+class Entrada(BaseLayer):
+    
+    def get_ydim(self):
+        pass
+    
+    def set_ydim(self):
+        pass
+
+
 
 class Layer(BaseLayer):
+
+    def get_weights(self):
+        pass
+    
     def update_weights(self): 
         pass
 
@@ -28,7 +54,8 @@ class Layer(BaseLayer):
 class Dense(Layer):
     def __init__(self, 
                  neuronas   = 1, 
-                 act        = 1,
+                 act        = 1, 
+                 input_size = 1,
                  reg        = None,
                  name       = "No Name",
                  bias       = False):
@@ -36,23 +63,35 @@ class Dense(Layer):
         
         self.neuronas   = neuronas
         self.act        = act 
+        self.input_size = input_size
         self.reg        = reg   
         self.name       = name  
         self.bias       = bias
-        self.output_size= 0
+        #self.ini_weights()
+        self.output_size=0
+        #self.w=[]   
 
     def ini_weights(self):
-        self.w= np.random.uniform(-0.1,0.1,size=(self.output_size, self.neuronas + 1*self.bias))
-
+        if self.bias:
+            self.w= np.random.uniform(-0.1,0.1,size=(self.input_size + 1 , self.output_size))
+        else:
+            self.w= np.random.uniform(-0.1,0.1,size=(self.input_size, self.output_size))
+        pass
 
     def __call__(self, x):
         super()
-        self.S = self.act(self.dot(self.w, x)) 
+        W = self.w
+        self.S = self.act(self.dot(W, x)) 
         return self.S
 
     def dot(self, W, x):
-        xx = np.hstack(((np.ones((len(x),1) ),x))) if self.bias else x
-        return np.dot(xx, W.T)
+        if self.bias:
+            xx = np.hstack(((np.ones((len(x),1) ),x)))
+            return np.dot(xx, W)
+        else:
+            return np.dot(x, W)
+
+        pass
 
 
 def Concatenate(BaseLayer):
