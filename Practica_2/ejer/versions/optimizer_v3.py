@@ -1,7 +1,7 @@
 import numpy as np
 
 """
-Versión 4
+Versión 3: Esta funciona con el 6 y 7
 """
 import modules.activation  as activation 
 import modules.layer as layer

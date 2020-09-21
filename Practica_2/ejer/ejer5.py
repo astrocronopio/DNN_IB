@@ -26,7 +26,7 @@ def ejer5_loss(loss_fun, label):
                     epochs    =200,
                     batch_size=50,
                     eta       =0.003,
-                    lambda_L2 =0.001)
+                    lambda_L2 =0.0001)
 
     outputfile="ejer5_"+label+".npy"
 

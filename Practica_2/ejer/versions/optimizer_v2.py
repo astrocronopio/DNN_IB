@@ -1,8 +1,10 @@
 import numpy as np
 
+
 """
-Versión 4
+Versión 2:  Ya funciona con el XOR 221
 """
+
 import modules.activation  as activation 
 import modules.layer as layer
 import modules.metric as metric
@@ -25,10 +27,16 @@ class SGD(optimizer):
         self.model=model
         
         output, reg_sum =self.forwprop(x_batch)
+        
+        loss= self.model.loss_function(output, y_batch) + reg_sum
+        acc = self.model.acc_function(output, y_batch)
 
+        self.model.loss_vect.append(loss/model.iter_batch)
+        self.model.acc_vect.append(100*acc/model.iter_batch)
+        
         self.backprop(output, y_batch, x_batch)
 
-        return output, reg_sum
+        return output
 
     def update_weights(self, W, gradW):
         super()
@@ -75,4 +83,6 @@ class SGD(optimizer):
             S = capa(S)
             reg_sum+= capa.reg(capa.w)
         #print("ultimo scores", S)
+        # S[S>0]=1
+        # S[S<=0]=-1
         return S, reg_sum

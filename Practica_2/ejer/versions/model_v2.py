@@ -1,6 +1,6 @@
 import numpy as np
 """
-Versión 3
+Versión 2: Funciona con el 6 y 7
 """
 
 import modules.activation  as activation 

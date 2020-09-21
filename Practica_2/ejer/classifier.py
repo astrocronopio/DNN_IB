@@ -63,8 +63,9 @@ class Classifier(object):
         pass
 
     def fit(self, x, y, x_test, y_test, 
-            act_function, loss_function,
-            act_function2):
+            act_function1, reg1, 
+            act_function2, reg2,
+            loss_function):
 
         self.acc_vect = np.zeros(self.epochs)
         self.loss_vect= np.zeros(self.epochs)
@@ -86,7 +87,7 @@ class Classifier(object):
                 y_batch =   y[index]
                 
                 ####Forward####
-                S1= act_function(np.dot(x_batch, w1.T))                
+                S1= act_function1(np.dot(x_batch, w1.T))                
                 S1= np.hstack(((np.ones((len(S1),1) ),S1))) 
 
                 S2= act_function2(np.dot(S1,w2.T))
@@ -99,7 +100,7 @@ class Classifier(object):
 
                 #loss and acc
                 
-                loss += loss_function(S2,y_batch) + 0.5*self.lambda_L2*reg
+                loss += loss_function(S2,y_batch) + reg1(w1) + reg2(w2)
 
                 S2_out = self.predict(S2)
                 y_batch_out = self.predict(y_batch)
@@ -114,14 +115,14 @@ class Classifier(object):
 
                 #Capa 2
 
-                gradw2  = np.dot(grad2.T, S1) + self.lambda_L2*w2
+                gradw2  = np.dot(grad2.T, S1) + reg2.derivate(w2)
                 grad1    = np.dot(grad2, w2)
 
                 #Capa 1
                 grad_sig = act_function.derivate(S1)                
                 grad1 = grad1*grad_sig 
                 grad1 = np.delete(grad1, (0), axis=1)
-                gradw1 = np.dot(grad1.T, x_batch) +  self.lambda_L2*w1
+                gradw1 = np.dot(grad1.T, x_batch) +  reg1.derivate(w1).
 
 
                 w1+= -self.eta*(gradw1)#+  self.lambda_L2*w1

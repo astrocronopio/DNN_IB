@@ -42,8 +42,7 @@ class Dense(Layer):
         self.output_size= 0
 
     def ini_weights(self):
-        self.w= np.random.uniform(-0.1,0.1,size=(self.output_size, self.neuronas + 1*self.bias))
-
+        self.w= np.random.uniform(-1.0,1.0,size=(self.output_size, self.neuronas + 1*self.bias))
 
     def __call__(self, x):
         super()
@@ -53,7 +52,6 @@ class Dense(Layer):
     def dot(self, W, x):
         xx = np.hstack(((np.ones((len(x),1) ),x))) if self.bias else x
         return np.dot(xx, W.T)
-
 
 def Concatenate(BaseLayer):
     def __call__(self):

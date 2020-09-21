@@ -1,16 +1,10 @@
 import numpy as np
 
-
-import modules.activation  as activation 
-import modules.layer as layer
-import modules.metric as metric
-import modules.model as model
-import modules.optimizer as optimizer
-import modules.regularizador as regularizador
-import modules.loss as loss
-
-
+np.random.seed(54)
 import matplotlib.pyplot as plt
+import modules.activation as act
+import modules.loss as los
+import classifier as clasificador 
 
 import matplotlib as mpl
 mpl.rcParams.update({
@@ -20,13 +14,14 @@ mpl.rcParams.update({
 	'font.family': 'serif',
 	'font.sans-serif': ['Palatino']})
 
+
 # def accuracy(y_pred, y_true):
 #     #y_pred = np.argmax(scores, axis=0)
 #     acc = (y_pred==y_true)
 #     return np.mean(acc)
 
 
-def ejer6_221(x_train, y_train):
+def ejer8_221(x_train, y_train):
     reg1 = regularizador.L1(0.0)
     reg2 = regularizador.L2(0.0)
 
@@ -51,8 +46,8 @@ def ejer6_221(x_train, y_train):
     red_densa.fit(  
                 x_train=x_train,    y_train=y_train, 
                 batch_size=4,
-                epochs=300,
-                opt=optimizer.SGD(lr=0.02),
+                epochs=100,
+                opt=optimizer.SGD(lr=0.1),
                 loss_function=loss.MSE(),
                 acc_function=metric.accuracy_xor)
 
@@ -61,14 +56,14 @@ def ejer6_221(x_train, y_train):
     plt.plot(red_densa.acc_vect, label="Entrenamiento", c='red', alpha=0.6)
     #plt.plot(red_densa.pres_vect, label="Validación", c='blue', alpha=0.6)
     plt.legend(loc=0)
-    plt.savefig("ejer6_acc.pdf")
+    plt.savefig("ejer8_acc.pdf")
 
     plt.figure(2)
     plt.ylabel("Pérdida")
     plt.plot(red_densa.loss_vect, label="Entrenamiento", c='red', alpha=0.6)
     #plt.plot(red_densa.loss_test, label="Validación", c='blue', alpha=0.6)
     plt.legend(loc=0)
-    plt.savefig("ejer6_loss.pdf")
+    plt.savefig("ejer8_loss.pdf")
     plt.show()
 
 
@@ -78,11 +73,11 @@ def ejer6_221(x_train, y_train):
 #     red_densa.add(layer.Dense(  neuronas= 1, 
 
 def main():
-    x_train = np.array([[-1.0, -1.0], [-1.0, 1.0], [-1.0, 1.0], [1.0,1.0]])
-    y_train = np.array([[1.0], [-1.0], [-1.0], [1.0]])
+    x_train = np.array([[-1, -1], [-1, 1], [-1, 1], [1,1]])
+    y_train = np.array([1], [-1], [-1], [1]])
 
-    ejer6_221(x_train, y_train)
-    #ejer6_221(x_train, y_train)
+    ejer8_221(x_train, y_train)
+    #ejer8_221(x_train, y_train)
 
 if __name__ == '__main__':
     main()

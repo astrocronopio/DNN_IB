@@ -1,6 +1,6 @@
 import numpy as np
 """
-Versión 3
+Versión 1: Anda con el xor 221
 """
 
 import modules.activation  as activation 
@@ -53,38 +53,24 @@ class Red(object):
         capa_anterior.ini_weights()
 
         for it in range(epochs):
-            loss, acc=0,0
             for it_ba in range(self.iter_batch):
                 x_batch =   x_train[it_ba :(it_ba + 1)*batch_size]
                 y_batch =   y_train[it_ba :(it_ba + 1)*batch_size]
 
-                output, reg_sum = opt(x_batch, y_batch, self)
-                #print(output)
-                #print(y_batch)
-                        
-                loss+= self.loss_function(output, y_batch) + reg_sum
-                acc += self.acc_function(output, y_batch)
+                output = opt(x_batch, y_batch, self)
+                print(output)
+                print(y_batch)
 
-            self.loss_vect.append(loss/self.iter_batch)
-            self.acc_vect.append(100*acc/self.iter_batch)
-                
-
-            if np.any(x_test!=None) and np.any(y_test!=None):
+            if x_test!=None and y_test!=None:
                 output, reg_sum = opt.forwprop(x_test)
                 loss= self.loss_function(output, y_test) + reg_sum
                 acc = self.acc_function(output, y_test)
-                self.loss_test.append(loss)
-                self.pres_vect.append(100*acc)
+                self.loss_vect.append(loss)
+                self.acc_vect.append(100*acc)
             
 
-                print("Epoca {}/{} - loss: {} - acc:{} - acc_test:{}".format(
-                        it, epochs, 
-                        self.loss_vect[-1],
-                        self.acc_vect[-1] ,
-                        self.pres_vect[-1]))
-            else:    
-                print("Epoca {}/{} - loss: {} - acc:{}".format(
+            print("Epoca {}/{} - loss: {} - acc:{}".format(
                     it, epochs, 
-                    self.loss_vect[-1],
-                    self.acc_vect[-1] ))
+                    self.loss_vect[-1]/self.iter_batch,
+                    self.acc_vect[-1]/self.iter_batch ))
 
