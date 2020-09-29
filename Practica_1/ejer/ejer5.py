@@ -60,19 +60,18 @@ def ejer5():
         SMC_m, SVM_m= run_fit(datasets.cifar10)        
     else: print("No entendí.")
 
-    outputfile = "ejer5_"+title
+    outputfile = "ejer5_"+title+"_v2.dat"
 
     #np.save(outputfile, )
     
-    np.save(outputfile, SVM_m.error_loss)
-    np.save(outputfile, SMC_m.error_loss)
-    np.save(outputfile, SVM_m.loss_test)
-    np.save(outputfile, SMC_m.loss_test)
-    np.save(outputfile, SVM_m.error_acc)
-    np.save(outputfile, SMC_m.error_acc)
-    np.save(outputfile, SVM_m.error_pres)
-    np.save(outputfile, SMC_m.error_pres)
-
+    np.savetxt(outputfile,   np.array([SVM_m.error_loss,
+                             SMC_m.error_loss,
+                             SVM_m.loss_test,
+                             SMC_m.loss_test,
+                             SVM_m.error_acc,
+                             SMC_m.error_acc,
+                             SVM_m.error_pres,
+                             SMC_m.error_pres]).T)
 
     plt.figure(1)
     plt.ylabel('loss')

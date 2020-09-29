@@ -11,7 +11,6 @@ class loss(object):
 
 class MSE(loss):
     def __call__(self, scores, y_true):
-        super()
         mse = np.mean(np.sum((scores-y_true)**2, axis=1))
         return mse
 
@@ -22,8 +21,6 @@ class MSE(loss):
 
 class cross_entropy(loss):
     def __call__(self, scores, y_true):
-        super()
-
         ind= np.arange(scores.shape[0], dtype=np.int)
         scores -= np.max(scores,axis=1)[:, np.newaxis]
 
@@ -31,14 +28,18 @@ class cross_entropy(loss):
         y = np.argmax(y_true, axis=1)
 
         loss = np.mean(-scores[ind,y] + np.log(np.sum(expo, axis=1)))
-
-        self.diff    =   expo/np.sum(expo, axis=1)[:,np.newaxis]
-        
-        self.diff[ind,y] += -1
-
         return loss
 
-    def gradient(self, scores, y_true):  
-        super()  
+    def gradient(self, scores, y_true): 
+        ind= np.arange(scores.shape[0], dtype=np.int)
+        #scores -= np.max(scores,axis=1)[:, np.newaxis] 
+        #Lo hago en la __call__
+
+        expo    =   np.exp(scores)
+        y = np.argmax(y_true, axis=1)
+
+        diff    =   expo/np.sum(expo, axis=1)[:,np.newaxis]
+        
+        diff[ind,y] += -1  
         """La primera componente es siempre el tamaño de batch"""
-        return self.diff/y_true.shape[0]
+        return diff/y_true.shape[0]

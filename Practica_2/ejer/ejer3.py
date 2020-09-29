@@ -31,7 +31,7 @@ def ejer3():
                     batch_size=50,
                     eta       =0.003)
     
-    outputfile='ejer3_v2_mse.npy'
+    outputfile='ejer3_v2_mse.dat'
 
     (x_train, y_train), (x_test, y_test) = datasets.cifar10.load_data()
     
@@ -64,11 +64,13 @@ def ejer3():
     # plt.savefig("ejer3_loss.pdf")
 
     # plt.close()
+    
 
-    np.save(outputfile, proto.acc_vect)
-    np.save(outputfile, proto.pres_vect)
-    np.save(outputfile, proto.loss_vect)
-    np.save(outputfile, proto.loss_test)
+    np.save(outputfile,  np.array([
+                         proto.acc_vect,
+                         proto.pres_vect,
+                         proto.loss_vect,
+                         proto.loss_test]).T)
 
     #plt.show()
     pass

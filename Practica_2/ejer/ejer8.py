@@ -1,6 +1,6 @@
 import numpy as np
-
-
+np.random.seed(54)
+from keras import datasets
 import modules.activation  as activation 
 import modules.layer as layer
 import modules.metric as metric
@@ -8,7 +8,7 @@ import modules.model as model
 import modules.optimizer as optimizer
 import modules.regularizador as regularizador
 import modules.loss as loss
-
+import classifier as clasificador 
 
 import matplotlib.pyplot as plt
 
@@ -20,76 +20,83 @@ mpl.rcParams.update({
 	'font.family': 'serif',
 	'font.sans-serif': ['Palatino']})
 
-# def accuracy(y_pred, y_true):
-#     #y_pred = np.argmax(scores, axis=0)
-#     acc = (y_pred==y_true)
-#     return np.mean(acc)
 
-
-def ejer7_NN1(x_train, y_train, x_test, y_test, N, NN):
+def ejer8_NN1(x_train, y_train, x_test, y_test, N, NN):
     reg1 = regularizador.L1(0.001)
     reg2 = regularizador.L2(0.001)
 
     red_densa = model.Red()
     input_size=x_train.shape[1]
 
-    Layer1= layer.Dense(neuronas    =N, 
-                        act         =activation.sigmoid(), 
+    outputfile = "ejer8.dat"
+
+    Layer1= layer.Dense(neuronas    = x_train.shape[1], 
+                        act         = activation.ReLU(), 
                         reg         = reg2,
                         name        ="Layer 1"  ,
                         bias        = True  )
 
-    Layer2= layer.Dense(neuronas    =NN, 
-                        act         =activation.Tanh(), 
-                        reg         =reg1,
+    Layer2= layer.Dense(neuronas    =N, 
+                        act         =activation.ReLU(), 
+                        reg         =reg2,
                         name        ="Layer 2",
                         bias        = True)
 
+    Layer3= layer.Dense(neuronas    =NN, 
+                        act         =activation.Linear(), 
+                        reg         =reg2,
+                        name        ="Layer 3",
+                        bias        = True)
+
     red_densa.add(Layer1)
-    #red_densa.add(Layer2)
-    
+    red_densa.add(Layer2)
+    red_densa.add(Layer3)
+
     red_densa.fit(  
                 x_train=x_train,    y_train=y_train, 
                 x_test=x_test,      y_test= y_test,
-                batch_size=4,
-                epochs=300,
-                opt=optimizer.SGD(lr=0.003),
-                loss_function=loss.MSE(),
-                acc_function=metric.accuracy_xor)
+                batch_size=50,
+                epochs=400,
+                opt=optimizer.SGD(lr=0.0002),
+                loss_function=loss.cross_entropy(),
+                acc_function=metric.accuracy)
 
-    plt.figure(1)
-    plt.title("N={} - N'={} - Ejemplos {}".format(N, NN, y_train.shape[0]))
-    plt.ylabel("Accuracy [%]")
-    plt.plot(red_densa.acc_vect, label="Entrenamiento", c='red', alpha=0.6)
-    plt.plot(red_densa.pres_vect, label="Validación", c='blue', alpha=0.6)
-    plt.legend(loc=0)
-    plt.savefig("ejer7_acc.pdf")
+    np.savetxt(outputfile,  np.array([ red_densa.acc_vect,
+                            red_densa.pres_vect,
+                            red_densa.loss_vect,
+                            red_densa.loss_test]).T)
 
-    plt.figure(2)
-    plt.title("N={} - N'={} - Ejemplos {}".format(N, NN, y_train.shape[0]))
-    plt.ylabel("Pérdida")
-    plt.plot(red_densa.loss_vect, label="Entrenamiento", c='red', alpha=0.6)
-    plt.plot(red_densa.loss_test, label="Validación", c='blue', alpha=0.6)
-    plt.legend(loc=0)
-    plt.savefig("ejer7_loss.pdf")
-    plt.show()
+    # plt.figure(1)
+    # plt.title("N={} - N'={} - Ejemplos {}".format(N, NN, y_train.shape[0]))
+    # plt.ylabel("Accuracy [%]")
+    # plt.plot(red_densa.acc_vect, label="Entrenamiento", c='red', alpha=0.6)
+    # plt.plot(red_densa.pres_vect, label="Validación", c='blue', alpha=0.6)
+    # plt.legend(loc=0)
+    # plt.savefig("ejer8_acc.pdf")
 
+    # plt.figure(2)
+    # plt.title("N={} - N'={} - Ejemplos {}".format(N, NN, y_train.shape[0]))
+    # plt.ylabel("Pérdida")
+    # plt.plot(red_densa.loss_vect, label="Entrenamiento", c='red', alpha=0.6)
+    # plt.plot(red_densa.loss_test, label="Validación", c='blue', alpha=0.6)
+    # plt.legend(loc=0)
+    # plt.savefig("ejer8_loss.pdf")
+    # plt.show()
 
-#     input_layer = layer.Input(x_train.shape[1])
-#     red_densa.add(layer.Dense(  neuronas    = 1, 
-#     red_densa.add(layer.Concatenate(input_layer))
-#     red_densa.add(layer.Dense(  neuronas= 1, 
 
 def main():
-    N, NN =100
-    ejemplos=0
-    train=4 
+    N, NN =100, 100
 
     (x_train, y_train), (x_test, y_test) = datasets.cifar10.load_data()
-  
-    print(x_train.shape)
-    print(y_train.shape)
-    ejer7_NN1(x_train, y_train, x_test, y_test, N, NN)
+    
+    mean_train= x_train.mean()
+    n_clasifi=10
+    X, Y            = clasificador.flattening(x_train,y_train, n_clasifi, mean_train, False)
+    X_test, Y_test  = clasificador.flattening(x_test ,y_test , n_clasifi, mean_train, False)
+
+    print(X.shape)
+    print(Y.shape)
+    ejer8_NN1(X, Y, X_test, Y_test, N, NN)
 
 if __name__ == '__main__':
     main()

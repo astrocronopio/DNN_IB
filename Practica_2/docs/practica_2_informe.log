@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.8.11)  9 SEP 2020 11:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.8.11)  28 SEP 2020 19:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/ponci/Desktop/DNN_IB/Practica_2/docs/TP2_EGC
-(/home/ponci/Desktop/DNN_IB/Practica_2/docs/TP2_EGC.tex
+**/home/ponci/Desktop/DNN_IB/Practica_2/docs/practica_2_informe
+(/home/ponci/Desktop/DNN_IB/Practica_2/docs/practica_2_informe.tex
 LaTeX2e <2020-02-02> patch level 2
 L3 programming layer <2020-02-14> (./Preamblev2.sty (/usr/share/texlive/texmf-dist/tex/latex/revtex/revtex4-1.cls
 Document Class: revtex4-1 2010/07/25/20:33:00 4.1r (http://publish.aps.org/revtex4/ for documentation)
@@ -466,8 +466,18 @@ Class revtex4-1 Warning: Repair the float package.
 Class revtex4-1 Info: cite was not loaded (OK!) on input line 2.
 Class revtex4-1 Info: mcite was not loaded (OK!) on input line 2.
 Class revtex4-1 Info: multicol was not loaded (OK!) on input line 2.
-(./TP2_EGC.aux)
-\openout1 = `TP2_EGC.aux'.
+(./practica_2_informe.aux
+
+LaTeX Warning: Label `fig:' multiply defined.
+
+
+LaTeX Warning: Label `fig:' multiply defined.
+
+
+LaTeX Warning: Label `fig:221' multiply defined.
+
+)
+\openout1 = `practica_2_informe.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 2.
 LaTeX Font Info:    ... okay on input line 2.
@@ -539,14 +549,14 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 2.
 LaTeX Info: Redefining \pageref on input line 2.
 LaTeX Info: Redefining \nameref on input line 2.
- (./TP2_EGC.out) (./TP2_EGC.out)
+ (./practica_2_informe.out) (./practica_2_informe.out)
 \@outlinefile=\write5
-\openout5 = `TP2_EGC.out'.
+\openout5 = `practica_2_informe.out'.
 
 Class revtex4-1 Info: Taking \maketitle back from hyperref on input line 2.
 Class revtex4-1 Info: Overriding lineo.sty, restoring output routine, on input line 2.
 Class revtex4-1 Info: Line numbering not turned on yet on input line 2.
-\openout3 = `TP2_EGCNotes.bib'.
+\openout3 = `practica_2_informeNotes.bib'.
 
 Class revtex4-1 Info: Overriding \@LN@LLerror on input line 2.
 LaTeX Font Info:    Trying to load font information for U+msa on input line 18.
@@ -560,27 +570,134 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 18.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-) (./TP2_EGC.bbl) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 95.
- (./TP2_EGC.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 95.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 95.
-Package rerunfilecheck Info: File `TP2_EGC.out' has not changed.
-(rerunfilecheck)             Checksum: 2A36039CADD7204599E5D9A55CAB66B5;545.
+)
+<Graphs/ejer1a.pdf, id=40, 464.93701pt x 284.26201pt>
+File: Graphs/ejer1a.pdf Graphic file (type pdf)
+<use Graphs/ejer1a.pdf>
+Package pdftex.def Info: Graphs/ejer1a.pdf  used on input line 55.
+(pdftex.def)             Requested size: 255.0pt x 155.91083pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 55--56
+ [] 
+ []
+
+<Graphs/ejer1b.pdf, id=41, 464.93701pt x 284.26201pt>
+File: Graphs/ejer1b.pdf Graphic file (type pdf)
+<use Graphs/ejer1b.pdf>
+Package pdftex.def Info: Graphs/ejer1b.pdf  used on input line 75.
+(pdftex.def)             Requested size: 255.0pt x 155.91083pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 75--76
+ [] 
+ []
+
+<Graphs/ejer1c.pdf, id=42, 464.93701pt x 284.26201pt>
+File: Graphs/ejer1c.pdf Graphic file (type pdf)
+<use Graphs/ejer1c.pdf>
+Package pdftex.def Info: Graphs/ejer1c.pdf  used on input line 103.
+(pdftex.def)             Requested size: 255.0pt x 155.91083pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 103--104
+ [] 
+ []
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./Graphs/ejer1a.pdf> <./Graphs/ejer1b.pdf
+
+pdfTeX warning: pdflatex (file ./Graphs/ejer1b.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./Graphs/ejer1c.pdf
+
+pdfTeX warning: pdflatex (file ./Graphs/ejer1c.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+<Graphs/ejer1d.pdf, id=102, 464.93701pt x 284.26201pt>
+File: Graphs/ejer1d.pdf Graphic file (type pdf)
+<use Graphs/ejer1d.pdf>
+Package pdftex.def Info: Graphs/ejer1d.pdf  used on input line 121.
+(pdftex.def)             Requested size: 255.0pt x 155.91083pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 121--122
+ [] 
+ []
+
+<Graphs/ejer2_grafico.pdf, id=103, 439.40161pt x 465.4188pt>
+File: Graphs/ejer2_grafico.pdf Graphic file (type pdf)
+<use Graphs/ejer2_grafico.pdf>
+Package pdftex.def Info: Graphs/ejer2_grafico.pdf  used on input line 137.
+(pdftex.def)             Requested size: 255.0pt x 270.09932pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 137--138
+ [] 
+ []
+
+<Graphs/ejer3_acc.pdf, id=104, 867.24pt x 578.16pt>
+File: Graphs/ejer3_acc.pdf Graphic file (type pdf)
+<use Graphs/ejer3_acc.pdf>
+Package pdftex.def Info: Graphs/ejer3_acc.pdf  used on input line 150.
+(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 150--151
+ [] 
+ []
+
+<Graphs/ejer3_loss.pdf, id=105, 867.24pt x 578.16pt>
+File: Graphs/ejer3_loss.pdf Graphic file (type pdf)
+<use Graphs/ejer3_loss.pdf>
+Package pdftex.def Info: Graphs/ejer3_loss.pdf  used on input line 161.
+(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 161--162
+ [] 
+ []
+
+<Graphs/221.png, id=106, 462.72874pt x 295.1025pt>
+File: Graphs/221.png Graphic file (type png)
+<use Graphs/221.png>
+Package pdftex.def Info: Graphs/221.png  used on input line 178.
+(pdftex.def)             Requested size: 203.99689pt x 130.09766pt.
+[2 <./Graphs/ejer2_grafico.pdf> <./Graphs/ejer1d.pdf
+
+pdfTeX warning: pdflatex (file ./Graphs/ejer1d.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./Graphs/ejer3_acc.pdf
+
+pdfTeX warning: pdflatex (file ./Graphs/ejer3_acc.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./Graphs/ejer3_loss.pdf
+
+pdfTeX warning: pdflatex (file ./Graphs/ejer3_loss.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+<Graphs/211.png, id=218, 516.93124pt x 307.1475pt>
+File: Graphs/211.png Graphic file (type png)
+<use Graphs/211.png>
+Package pdftex.def Info: Graphs/211.png  used on input line 186.
+(pdftex.def)             Requested size: 203.99689pt x 121.2071pt.
+<Graphs/NN1.png, id=219, 613.29124pt x 797.98125pt>
+File: Graphs/NN1.png Graphic file (type png)
+<use Graphs/NN1.png>
+Package pdftex.def Info: Graphs/NN1.png  used on input line 196.
+(pdftex.def)             Requested size: 203.99689pt x 265.42892pt.
+ (./practica_2_informe.bbl) [3 <./Graphs/221.png> <./Graphs/211.png> <./Graphs/NN1.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 203.
+ (./practica_2_informe.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 203.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 203.
+Package rerunfilecheck Info: File `practica_2_informe.out' has not changed.
+(rerunfilecheck)             Checksum: 06496F0E0ED001BCFC4538DCFC4AE08E;550.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 13795 strings out of 483048
- 217288 string characters out of 5962772
- 639403 words of memory out of 5000000
- 28551 multiletter control sequences out of 15000+600000
+ 13887 strings out of 483048
+ 219245 string characters out of 5962772
+ 630727 words of memory out of 5000000
+ 28619 multiletter control sequences out of 15000+600000
  538920 words of font info for 55 fonts, out of 8000000 for 9000
  85 hyphenation exceptions out of 8191
- 53i,6n,50p,290b,434s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 53i,6n,50p,301b,514s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
-Output written on TP2_EGC.pdf (1 page, 113294 bytes).
+Output written on practica_2_informe.pdf (3 pages, 1029895 bytes).
 PDF statistics:
- 100 PDF objects out of 1000 (max. 8388607)
- 85 compressed objects within 1 object stream
- 14 named destinations out of 1000 (max. 500000)
- 11849 words of extra memory for PDF output out of 12000 (max. 10000000)
+ 274 PDF objects out of 1000 (max. 8388607)
+ 165 compressed objects within 2 object streams
+ 26 named destinations out of 1000 (max. 500000)
+ 11899 words of extra memory for PDF output out of 12000 (max. 10000000)
 
