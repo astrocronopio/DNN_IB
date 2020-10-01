@@ -10,29 +10,29 @@ ejer5.py
 
 import numpy as np
 from tensorflow.keras import datasets
-np.random.seed(648)
-import matplotlib.pyplot as plt
+#np.random.seed(648)
+#import matplotlib.pyplot as plt
 import modules.activation as act
 import modules.loss as los
 import classifier as clasificador 
 import modules.regularizador as regularizador
 
-import matplotlib as mpl
-mpl.rcParams.update({
-	'font.size': 20,
-	'figure.figsize': [12, 8],
-	'figure.autolayout': True,
-	'font.family': 'serif',
-	'font.sans-serif': ['Palatino']})
+# import matplotlib as mpl
+# mpl.rcParams.update({
+# 	'font.size': 20,
+# 	'figure.figsize': [12, 8],
+# 	'figure.autolayout': True,
+# 	'font.family': 'serif',
+# 	'font.sans-serif': ['Palatino']})
 
 
 def ejer5_loss(loss_fun, act_fun_last, label, nfig1, nfig2):
     print(label)
-    reg1 = regularizador.L2(0.0001)
-    reg2 = regularizador.L2(0.0001)
+    reg1 = regularizador.L2(0.1)
+    reg2 = regularizador.L2(0.1)
 
     proto= clasificador.Classifier(
-                    epochs    =400,
+                    epochs    =300,
                     batch_size=50,
                     eta       =0.001)
 
@@ -48,27 +48,28 @@ def ejer5_loss(loss_fun, act_fun_last, label, nfig1, nfig2):
 
     proto.fit(
             X, Y, X_test, Y_test,
-            act_function1 = act.ReLU(1),
+            act_function1 = act.ReLU(0),
             reg1=reg1,
             loss_function= loss_fun,
             act_function2= act_fun_last,
             reg2=reg2)
 
-    plt.figure(nfig1)
-    plt.ylabel("Accuracy [%]")
-    plt.plot(proto.acc_vect, label="Entrenamiento", c='red', alpha=0.6, ls='--')
-    plt.plot(proto.pres_vect, label="Validación", c='blue', alpha=0.6)
-    plt.legend(loc=0)
-    plt.savefig("ejer5_acc_"+label+".pdf")
+    # plt.figure(nfig1)
+    # plt.ylabel("Accuracy [%]")
+    # plt.plot(proto.acc_vect, label="Entrenamiento", c='red', alpha=0.6, ls='--')
+    # plt.plot(proto.pres_vect, label="Validación", c='blue', alpha=0.6)
+    # plt.legend(loc=0)
+    # plt.savefig("ejer5_acc_"+label+".pdf")
     
 
-    plt.figure(nfig2)
-    plt.ylabel("Pérdida")
-    plt.plot(proto.loss_vect, label="Entrenamiento", c='red', alpha=0.6, ls='--')
-    plt.plot(proto.loss_test, label="Validación", c='blue', alpha=0.6)
-    plt.legend(loc=0)
-    plt.savefig("ejer5_loss_"+label+".pdf")
-    plt.close()
+    # plt.figure(nfig2)
+    # plt.ylabel("Pérdida")
+    # plt.plot(proto.loss_vect, label="Entrenamiento", c='red', alpha=0.6, ls='--')
+    # plt.plot(proto.loss_test, label="Validación", c='blue', alpha=0.6)
+    # plt.legend(loc=0)
+    # plt.savefig("ejer5_loss_"+label+".pdf")
+    # plt.show()
+    #plt.close()
     #plt.clf()
     
     
@@ -79,11 +80,17 @@ def ejer5_loss(loss_fun, act_fun_last, label, nfig1, nfig2):
                              proto.loss_test]).T)
 
 def ejer5():
-    ejer5_loss(los.cross_entropy(), act.sigmoid(), "cross-sig", 1,2)
-    ejer5_loss(los.cross_entropy(), act.ReLU_Linear(), "cross-ReLuLineal", 3,4)
+
+    #ejer5_loss(los.cross_entropy(), act.sigmoid(), "cross-sig-v4", 1,2)
     
-    ejer5_loss(los.MSE(), act.sigmoid(), "mse-sig", 5,6)
-    ejer5_loss(los.MSE(), act.ReLU_Linear(), "mse-ReLuLineal", 7,8)
+    # LLegó a 51 % en v4 y lr 0.0007#
+    #ejer5_loss(los.cross_entropy(), act.ReLU_Linear(), "cross-ReLuLineal-v4", 3,4)
+    
+    ejer5_loss(los.MSE(), act.sigmoid(), "mse-sig_v5", 5,6)
+    
+    # LLegó a  52% en vv4 con 0.0005
+    #ejer5_loss(los.MSE(), act.ReLU_Linear(), "mse-ReLuLineal-v4", 7,8)
+    pass
 
 def main():
     ejer5()

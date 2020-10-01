@@ -1,6 +1,6 @@
 import numpy as np
 
-#np.random.seed(548)
+np.random.seed(554548)
 
 import modules.activation  as activation 
 import modules.layer as layer
@@ -20,8 +20,6 @@ mpl.rcParams.update({
 	'figure.autolayout': True,
 	'font.family': 'serif',
 	'font.sans-serif': ['Palatino']})
-
-cmap = plt.get_cmap('nipy_spectral',4)
 
 def ejer6_221(x_train, y_train):
     reg1 = regularizador.L2(0.0)
@@ -48,25 +46,25 @@ def ejer6_221(x_train, y_train):
     red_densa.fit(  
                 x_train=x_train,    y_train=y_train, 
                 batch_size=4,
-                epochs=200,
-                opt=optimizer.SGD(lr=0.01),
+                epochs=300,
+                opt=optimizer.SGD(lr=0.1),
                 loss_function=loss.MSE(),
                 acc_function=metric.accuracy_xor)
 
     plt.figure(1)
     plt.ylabel("Accuracy [%]")
-    plt.plot(red_densa.acc_vect, label="Entrenamiento", c=cmap(0), alpha=0.6)
+    plt.plot(red_densa.acc_vect, label="221", c='red', alpha=0.6)
     #plt.plot(red_densa.pres_vect, label="Validación", c='blue', alpha=0.6)
     plt.legend(loc=0)
     #plt.savefig("ejer6_acc.pdf")
 
     plt.figure(2)
     plt.ylabel("Pérdida")
-    plt.plot(red_densa.loss_vect, label="Entrenamiento", c=cmap(2), alpha=0.6)
+    plt.plot(red_densa.loss_vect/np.max(red_densa.loss_vect), label="221", c='red', alpha=0.6)
     #plt.plot(red_densa.loss_test, label="Validación", c='blue', alpha=0.6)
     plt.legend(loc=0)
     #plt.savefig("ejer6_loss.pdf")
-    plt.show()
+    #plt.show()
 
 
 def ejer6_211(x_train, y_train):
@@ -90,39 +88,38 @@ def ejer6_211(x_train, y_train):
 
     red_densa.add(Layer1)
 
-    layer_aux= layer.ConcatInput()
+    layer_aux= layer.ConcatInput(input_size, Layer2)
     
-    red_densa.add(layer_aux(input_size, Layer2))
-
-    #red_densa.add(Layer2)
+    red_densa.add(layer_aux)
     
     red_densa.fit(  
                 x_train=x_train,    y_train=y_train, 
                 batch_size=4,
                 epochs=300,
-                opt=optimizer.SGD(lr=0.2),
+                opt=optimizer.SGD(lr=0.1),
                 loss_function=loss.MSE(),
                 acc_function=metric.accuracy_xor)
 
     plt.figure(1)
-    plt.ylabel("Accuracy [%]")
-    plt.plot(red_densa.acc_vect, label="Entrenamiento", c='red', alpha=0.6)
+    plt.ylabel("Precisión [%]")
+    plt.plot(red_densa.acc_vect, label="211", alpha=0.6)
     plt.legend(loc=0)
     #plt.savefig("ejer6_acc_211.pdf")
 
     plt.figure(2)
-    plt.ylabel("Pérdida")
-    plt.plot(red_densa.loss_vect, label="Entrenamiento", c='red', alpha=0.6)
+    plt.ylabel("Pérdida Normalizada")
+    plt.plot(red_densa.loss_vect/np.max(red_densa.loss_vect), label="211", alpha=0.6)
     plt.legend(loc=0)
     #plt.savefig("ejer6_loss_211.pdf")
-    plt.show()
+    #plt.show()
 
 def main():
     x_train = np.array([[-1.0, -1.0],  [1.0, -1.0], [-1.0, 1.0], [1.0, 1.0],])
     y_train = np.array([   [1.0],       [-1.0],      [-1.0],      [1.0]])
 
     ejer6_221(x_train, y_train)
-    #ejer6_211(x_train, y_train)
+    ejer6_211(x_train, y_train)
+    plt.show()
 
 if __name__ == '__main__':
     main()

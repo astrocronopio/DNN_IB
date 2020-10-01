@@ -28,13 +28,14 @@ class Layer(BaseLayer):
                 act        = 1,
                 reg        = regularizador.L2(0.0),
                 name       = "No Name",
-                bias       = False):
+                bias       = False,
+                isCon      = False):
         self.neuronas   = neuronas
         self.act        = act 
         self.reg        = reg   
         self.name       = name  
         self.bias       = bias
-        self.isCon      = False
+        self.isCon      = isCon
 
 
     def get_ydim(self):
@@ -65,7 +66,7 @@ class Entrada(Layer):
 
 class Dense(Layer):
     def ini_weights(self):
-        self.w= np.random.normal(0,0.03,size=(self.output_size, self.neuronas + 1*self.bias))
+        self.w= np.random.normal(0,0.07,size=(self.output_size, self.neuronas + 1*self.bias))
 
     def __call__(self, x):
         self.X=x
@@ -81,16 +82,19 @@ class Dense(Layer):
         return np.dot(xx, W.T)
 
 
-class ConcatInput(Layer):
-    def __call__(self, input_size, Layer2):
-        self = copy.copy(Layer2)
-        self.neuronas = input_size + Layer2.get_xdim()
+class ConcatInput(Dense):
+    def __init__(self, input_size, Layer2):
+        self.neuronas   = input_size + Layer2.get_xdim()
         self.layer2xdim = Layer2.get_xdim()
-        self.con= input_size
-        self.isCon    = True
-    
+        self.layer1xdim = input_size
+        self.act        = Layer2.act 
+        self.reg        = Layer2.reg   
+        self.name       = Layer2.name  
+        self.bias       = Layer2.bias
+        self.isCon      = True
+
     def get_xdim1(self):
-        return self.con
+        return self.layer1xdim
     
     def get_xdim2(self):
         return self.layer2xdim

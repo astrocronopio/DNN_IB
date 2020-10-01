@@ -1,7 +1,7 @@
 import numpy as np
 
 """
-Versión 5
+Versión 5: El que rescate del cluster y tenía lindas condiciones iniciales
 """
 import modules.activation  as activation 
 import modules.layer as layer
@@ -26,8 +26,8 @@ class SGD(optimizer):
         loss, acc=0,0
         for it_ba in range(model.iter_batch):
             index = np.random.randint(0, x_train.shape[0], model.batch_size)
-            x_batch =   x_train[index]#[it_ba*model.batch_size :(it_ba + 1)*model.batch_size]
-            y_batch =   y_train[index]#[it_ba*model.batch_size :(it_ba + 1)*model.batch_size]
+            x_batch =   x_train[it_ba*model.batch_size :(it_ba + 1)*model.batch_size]
+            y_batch =   y_train[it_ba*model.batch_size :(it_ba + 1)*model.batch_size]
             
             output, reg_sum = model.forwprop(x_batch)
             

@@ -1,7 +1,7 @@
 import numpy as np
 """
 Versión 4: NO Funciona con los fors :()
-Version 5
+Version 6: El que rescate del cluster y tenía lindas condiciones iniciales
 """
 
 import modules.activation  as activation 
@@ -64,16 +64,17 @@ class Red(object):
         for it in range(epochs):
             
             opt(x_train,y_train,self)
-                       
+
             if np.any(x_test!=None) and np.any(y_test!=None):
                 output, reg_sum = self.forwprop(x_test)
-                loss= self.loss_function(output, y_test) + reg_sum
-                acc = self.acc_function(output, y_test)
+
+                loss = self.loss_function(output, y_test) + reg_sum
+                acc  = self.acc_function(output, y_test)
                 self.loss_test.append(loss)
                 self.pres_vect.append(100*acc)
             
 
-                print("Epoca {}/{} - loss:{:.4} - loss_test: {:.4} - acc:{:.4} - acc_test:{:.4}".format(
+                print("-Epoca {}/{} - loss:{:.4} - loss_test: {:.4} - acc:{:.4} - acc_test:{:.4}".format(
                         it, epochs, 
                         self.loss_vect[-1],
                         self.loss_test[-1],
@@ -88,7 +89,7 @@ class Red(object):
 
     def backprop(self, output, y, x): #Back Propagation
         capa2= self.capas[-1]
-        #scapa_media= self.capas[-2]
+        #capa_media= self.capas[-2]
         capa1= self.capas[1]
 
         ### "Backguard" ###
@@ -100,9 +101,18 @@ class Red(object):
             xx = np.hstack(((np.ones((len(capa2.X),1) ), capa2.X)))
         else: xx=capa2.X
 
+
         gradw  = np.dot(grad.T, xx) + capa2.reg.derivate(capa2.w)
         grad   = np.dot(grad, capa2.w)
         capa2.update_weights(self.opt.lr, gradw)
+
+        if capa2.isCon:
+            # print(xx.shape)
+            # print(xx)
+            ind = np.arange(capa2.layer2xdim + 1*capa2.bias, dtype=np.int)
+            xx=xx[:,ind]
+            grad = grad[:,ind]
+            pass
 
         ####################################
         #print(len(self.capas[-2:1:1]))
@@ -110,6 +120,7 @@ class Red(object):
             for capa_media in self.capas[-2:1:1]:
                 grad_act = capa_media.act.derivate(xx)                
                 grad = grad*grad_act 
+                
                 if capa_media.bias:
                     grad = np.delete(grad, (0), axis=1)
                     xx = np.hstack(((np.ones((len(capa_media.X),1) ),capa_media.X)))
@@ -131,12 +142,16 @@ class Red(object):
         capa1.update_weights(self.opt.lr, gradw)
 
 
-    def forwprop(self, X):#Forward Propagation
+    def forwprop(self, X): #Forward Propagation
         reg_sum=0
         S=self.capas[1](X)
 
         for capa in self.capas[2::1]:
-            S = capa(S)
+            if capa.isCon:
+                S = np.concatenate((S,X), axis=1)
+                S = capa(S)
+            else:
+                S= capa(S)
             reg_sum+= capa.reg(capa.w)
-        
+
         return S, reg_sum

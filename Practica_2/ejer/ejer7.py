@@ -12,6 +12,7 @@ import modules.loss as loss
 
 import matplotlib.pyplot as plt
 
+
 import matplotlib as mpl
 mpl.rcParams.update({
 	'font.size': 20,
@@ -20,13 +21,14 @@ mpl.rcParams.update({
 	'font.family': 'serif',
 	'font.sans-serif': ['Palatino']})
 
+cmap = plt.get_cmap('gist_rainbow',6)
 # def accuracy(y_pred, y_true):
 #     #y_pred = np.argmax(scores, axis=0)
 #     acc = (y_pred==y_true)
 #     return np.mean(acc)
 
 
-def ejer7_NN1(x_train, y_train, x_test, y_test, N, NN, ejemplos):
+def ejer7_NN1(x_train, y_train, x_test, y_test, N, NN, ejemplos, i):
     reg1 = regularizador.L1(0.0)
     reg2 = regularizador.L2(0.0)
 
@@ -56,28 +58,18 @@ def ejer7_NN1(x_train, y_train, x_test, y_test, N, NN, ejemplos):
                 opt=optimizer.SGD(lr=0.1),
                 loss_function=loss.MSE(),
                 acc_function=metric.accuracy_xor)
-
     plt.figure(1)
+
     plt.ylabel("Accuracy [%]")
-    plt.plot(red_densa.acc_vect, label="({},{},{})".format(N, NN, ejemplos))
-    #plt.plot(red_densa.pres_vect, label="Validación", c='blue', alpha=0.6)
+    plt.plot(red_densa.acc_vect, c=cmap(i), label="({},{},{})".format(N, NN, ejemplos))
     plt.legend(loc=0)
 
 
     plt.figure(2)
-    # plt.title("N={} - N'={} - Ejemplos {}".format(N, NN, y_train.shape[0]))
-    plt.ylabel("Pérdida")
-    plt.plot(red_densa.loss_vect, label="({},{},{})".format(N, NN, ejemplos), c='red', alpha=0.6)
-    # #plt.plot(red_densa.loss_test, label="Validación", c='blue', alpha=0.6)
-    # plt.legend(loc=0)
-    # plt.savefig("ejer7_loss.pdf")
-    # plt.show()
-
-
-#     input_layer = layer.Input(x_train.shape[1])
-#     red_densa.add(layer.Dense(  neuronas    = 1, 
-#     red_densa.add(layer.Concatenate(input_layer))
-#     red_densa.add(layer.Dense(  neuronas= 1, 
+    plt.ylabel("Pérdida Normalizada")
+    plt.plot(red_densa.loss_vect/np.max(red_densa.loss_vect), c=cmap(i),label="({},{},{})".format(N, NN, ejemplos))
+    plt.legend(loc=0)
+    
 
 def create_data(N, ejemplos=0):
     train=2**N - ejemplos
@@ -90,22 +82,25 @@ def create_data(N, ejemplos=0):
     return X[:train],  Y[:train] ,x_test, y_test 
 
 def main():
-    #plt.figure(1)
     plt.title("(N,N',Ejemplos)")
+    i=0
 
     N, NN = 7, 7
     x_train, y_train , x_test, y_test = create_data(N)
-    ejer7_NN1(x_train, y_train, x_test, y_test, N, 2, 15)
-    ejer7_NN1(x_train, y_train, x_test, y_test, N, 7, 15)
-    ejer7_NN1(x_train, y_train, x_test, y_test, N, 10, 15)
+    ejer7_NN1(x_train, y_train, x_test, y_test, N, 2, 15, i)
+    i=i+1
+    ejer7_NN1(x_train, y_train, x_test, y_test, N, 7, 15, i)
+    i=i+1
+    ejer7_NN1(x_train, y_train, x_test, y_test, N, 12, 15, i)
+    i=i+1
 
     N, NN = 10, 10
     x_train, y_train , x_test, y_test = create_data(N)
-    ejer7_NN1(x_train, y_train, x_test, y_test, N, 3, 20)
-    ejer7_NN1(x_train, y_train, x_test, y_test, N, 25, 20)
+    ejer7_NN1(x_train, y_train, x_test, y_test, N, 3, 20, i)
+    i=i+1
+    ejer7_NN1(x_train, y_train, x_test, y_test, N, 25, 20, i)
 
-
-    plt.savefig("ejer7_acc.pdf")
+    #plt.savefig("ejer7_acc.pdf")
     plt.show()
 if __name__ == '__main__':
     main()

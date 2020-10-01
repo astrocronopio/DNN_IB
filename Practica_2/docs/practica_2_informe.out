@@ -1,9 +1,12 @@
 \BOOKMARK [0][-]{section*.1}{Pr\341ctica 2: Introducci\363n a las redes neuronales}{}% 1
 \BOOKMARK [1][-]{section*.2}{Ejercicio 1}{section*.1}% 2
 \BOOKMARK [1][-]{section*.7}{Ejercicio 2}{section*.1}% 3
-\BOOKMARK [1][-]{section*.9}{Ejercicio 3}{section*.1}% 4
-\BOOKMARK [1][-]{section*.12}{Ejercicio 4}{section*.1}% 5
-\BOOKMARK [1][-]{section*.13}{Ejercicio 5}{section*.1}% 6
-\BOOKMARK [1][-]{section*.14}{Ejercicio 6}{section*.1}% 7
-\BOOKMARK [1][-]{section*.17}{Ejercicio 7}{section*.1}% 8
-\BOOKMARK [1][-]{section*.19}{Ejercicio 8}{section*.1}% 9
+\BOOKMARK [1][-]{section*.9}{Clasificando las im\341genes del CIFAR-10}{section*.1}% 4
+\BOOKMARK [2][-]{section*.10}{Ejercicio 3}{section*.9}% 5
+\BOOKMARK [2][-]{section*.14}{Ejercicio 4}{section*.9}% 6
+\BOOKMARK [2][-]{section*.19}{Ejercicio 5}{section*.9}% 7
+\BOOKMARK [1][-]{section*.24}{Resolviendo el XOR y XOR generalizado}{section*.1}% 8
+\BOOKMARK [2][-]{section*.25}{Ejercicio 6}{section*.24}% 9
+\BOOKMARK [2][-]{section*.29}{Ejercicio 7}{section*.24}% 10
+\BOOKMARK [1][-]{section*.34}{Clasificando el CIFAR-10 con dos capas ocultas}{section*.1}% 11
+\BOOKMARK [2][-]{section*.35}{Ejercicio 8}{section*.34}% 12

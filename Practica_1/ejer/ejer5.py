@@ -36,11 +36,11 @@ def run_fit(dataset):
     print(x_test.shape[0], 'ejemplos para probar')
 
     print("\n====SoftMax====")
-    model_SMC = SMC(eta=0.0002, epochs = 400, batch_size=50, lambda_L2=0.001)
+    model_SMC = SMC(eta=0.002, epochs = 400, batch_size=50, lambda_L2=0.001)
     model_SMC.fit(X, Y, X_t, Y_t)   
    
     print("\n==Support Vector Machine==")
-    model_SVM = SVM(eta=0.0002, epochs = 400, batch_size=50, lambda_L2=0.001)
+    model_SVM = SVM(eta=0.002, epochs = 400, batch_size=50, lambda_L2=0.001)
     model_SVM.fit(X, Y, X_t, Y_t) 
 
     return model_SMC, model_SVM
@@ -60,7 +60,7 @@ def ejer5():
         SMC_m, SVM_m= run_fit(datasets.cifar10)        
     else: print("No entendí.")
 
-    outputfile = "ejer5_"+title+"_v2.dat"
+    outputfile = "ejer5_"+title+"_v3.dat"
 
     #np.save(outputfile, )
     

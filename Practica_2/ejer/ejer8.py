@@ -22,13 +22,17 @@ mpl.rcParams.update({
 
 
 def ejer8_NN1(x_train, y_train, x_test, y_test, N, NN):
-    reg1 = regularizador.L1(0.001)
-    reg2 = regularizador.L2(0.001)
+    reg1 = regularizador.L1(0.1)
+    reg2 = regularizador.L2(0.1)
 
     red_densa = model.Red()
     input_size=x_train.shape[1]
 
-    outputfile = "ejer8.dat"
+    # Llegó a  36.1% en v3 con 0.001
+    #outputfile = "ejer8_v3_sigmoid.dat"
+
+    # LLegó a  52% en v2 con 0.001
+    outputfile = "ejer8_v3.dat"
 
     Layer1= layer.Dense(neuronas    = x_train.shape[1], 
                         act         = activation.ReLU(), 
@@ -43,7 +47,7 @@ def ejer8_NN1(x_train, y_train, x_test, y_test, N, NN):
                         bias        = True)
 
     Layer3= layer.Dense(neuronas    =NN, 
-                        act         =activation.Linear(), 
+                        act         =activation.ReLU(), 
                         reg         =reg2,
                         name        ="Layer 3",
                         bias        = True)
@@ -57,8 +61,8 @@ def ejer8_NN1(x_train, y_train, x_test, y_test, N, NN):
                 x_test=x_test,      y_test= y_test,
                 batch_size=50,
                 epochs=400,
-                opt=optimizer.SGD(lr=0.0002),
-                loss_function=loss.cross_entropy(),
+                opt=optimizer.SGD(lr=0.001),
+                loss_function=loss.MSE(),
                 acc_function=metric.accuracy)
 
     np.savetxt(outputfile,  np.array([ red_densa.acc_vect,

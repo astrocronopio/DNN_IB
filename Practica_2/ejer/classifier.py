@@ -14,7 +14,7 @@ Classifier.py
 """
 
 import numpy as np
-np.random.seed(54)
+#np.random.seed(54)
 import matplotlib.pyplot as plt
 import modules.activation as act
 import modules.loss as los
@@ -71,7 +71,7 @@ class Classifier(object):
         iter_batch= int(x.shape[0]/self.batch_size)
 
         w1 = np.random.uniform(-0.001, 0.001, size=(100,(x.shape[1])))
-        w2 = np.random.uniform(-0.001, 0.001, size=((10, (w1.shape[0]+1))))
+        w2 = np.random.uniform(-0.0001, 0.0001, size=((10, (w1.shape[0]+1))))
 
 
         for it in range(self.epochs): 
@@ -122,18 +122,19 @@ class Classifier(object):
             S1_test= act_function1(np.dot(x_test,w1.T))
 
             S1_test= np.hstack(((np.ones((len(S1_test),1) ),S1_test)))
-            S2_test= np.dot(S1_test, w2.T)
+            S2_test= act_function2(np.dot(S1_test, w2.T))
 
             S2_tout     = self.predict(S2_test)
-            y_test_out  =self.predict(y_test)
+            y_test_out  = self.predict(y_test)
 
             self.pres_vect[it] = 100*self.accuracy(S2_tout, y_test_out)
-            self.loss_test[it] = loss_function(S2_test,y_test) + reg1(w1) + reg2(w2)
+            self.loss_test[it] = loss_function(S2_test,y_test) #+ reg1(w1) + reg2(w2)
 
+            
             print("Epoch: {}/{} - acc_test:{:.4} -loss_test:{:.4}- loss:{:.4} - acc:{:.4}".format(it, 
             self.epochs, 
             self.pres_vect[it],
             self.loss_test[it],
             self.loss_vect[it], 
             self.acc_vect[it]))
-            
+          

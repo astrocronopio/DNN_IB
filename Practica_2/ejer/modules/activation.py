@@ -12,7 +12,7 @@ class activation(object):
 class sigmoid(activation):
     def __call__(self, x):
         
-        exp = 1 + np.exp(-1*x)
+        exp = 1 + np.exp(-1.0*x)
         return 1/exp
 
     def derivate(self, x):
@@ -31,7 +31,7 @@ class Linear(activation):
 
 
 class ReLU(activation):
-    def __init__(self, delta=1):
+    def __init__(self, delta=0):
         
         self.delta=delta
 
@@ -46,7 +46,7 @@ class ReLU(activation):
         return X
 
 class ReLU_Linear(activation):
-    def __init__(self, delta=1):
+    def __init__(self, delta=0):
         
         self.delta=delta
 
@@ -67,5 +67,4 @@ class Tanh(activation):
         return  np.tanh(1.0*x)
 
     def derivate(self, x):
-        
         return 1 - (np.tanh(1.0*x))**2

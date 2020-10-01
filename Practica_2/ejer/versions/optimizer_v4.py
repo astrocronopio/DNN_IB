@@ -81,7 +81,7 @@ class SGD(optimizer):
 
     def forwprop(self, X):#Forward Propagation
         reg_sum=0
-        S = np.copy(X)
+        S = X
         for capa in self.model.capas[1::1]:
             S = capa(S)
             reg_sum+= capa.reg(capa.w)
