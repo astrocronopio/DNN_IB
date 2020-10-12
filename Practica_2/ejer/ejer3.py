@@ -47,7 +47,7 @@ def ejer3():
             reg1=reg1,
             act_function2= act.Linear()     , 
             reg2=reg2,
-            loss_function= los.MSE(),)
+            loss_function= los.MSE())
 
     # plt.figure(1)
     # plt.ylabel("Accuracy [%]")
