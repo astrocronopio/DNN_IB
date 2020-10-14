@@ -1,11 +1,10 @@
 import numpy as np 
-from tensorflow.keras import datasets
+from tensorflow.keras.datasets import cifar10
 from tensorflow.keras import models, layers, optimizers
 from tensorflow.keras import losses, activations, regularizers
-
+from tensorflow.keras.utils import to_categorical
 
 import matplotlib.pyplot as plt
-
 import matplotlib as mpl
 mpl.rcParams.update({
 	'font.size': 20,
@@ -24,11 +23,15 @@ def flattening(x, y, n_clasifi, mean_train, std_train=1 ):
     y_aux  = np.copy(y).reshape(y.shape[0])
 
     Y[np.arange(Y.shape[0]), y_aux]=1
+    
+    #y_train = to_categorical(y_train)
+    #y_test  = to_categorical(y_test)
+    
     return X,Y
 
 
 def ejer2_3():
-    (x_train, y_train), (x_test, y_test) = datasets.cifar10.load_data()
+    (x_train, y_train), (x_test, y_test) = cifar10.load_data()
     
     mean_train= x_train.mean()
     std_train=x_train.std()
@@ -57,7 +60,7 @@ def ejer2_3():
                     metrics=['acc'])
 
     history = model.fit(X, Y, 
-                        epochs=400, 
+                        epochs=4, 
                         batch_size=50,
                         validation_data=(X_test,Y_test))
 
@@ -67,18 +70,21 @@ def ejer2_3():
     
     
     plt.figure(1)
+    plt.xlabel("Épocas")
+    epocas = np.arange(len(history.history['acc']))
     plt.ylabel("Precisión [%]")
-    plt.plot(history.history['acc']    , label="Entrenamiento", c='red', alpha=0.6, ls='--')
-    plt.plot(history.history['val_acc'], label="Validación", c='blue', alpha=0.6)
+    plt.plot(epocas, 100*acc_train  , label="Entrenamiento", c='red', alpha=0.6, ls='--')
+    plt.plot(epocas, 100*acc_test, label="Validación", c='blue', alpha=0.6)
     plt.legend(loc=0)
-    plt.savefig("ejer2_3_acc.pdf")
+    plt.savefig("../docs/Figs/ejer2_3_acc.pdf")
     
     plt.figure(2)
+    plt.xlabel("Épocas")
     plt.ylabel("Pérdida")
-    plt.plot(history.history['loss']    , label="Entrenamiento", c='red', alpha=0.6, ls='--')
-    plt.plot(history.history['val_loss'], label="Validación", c='blue', alpha=0.6)
+    plt.plot(epocas, history.history['loss']    , label="Entrenamiento", c='red', alpha=0.6, ls='--')
+    plt.plot(epocas, history.history['val_loss'], label="Validación", c='blue', alpha=0.6)
     plt.legend(loc=0)
-    plt.savefig("ejer2_3_loss.pdf")
+    plt.savefig("../docs/Figs/ejer2_3_loss.pdf")
 
     plt.close()
     

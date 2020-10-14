@@ -1,5 +1,5 @@
 import numpy as np 
-from tensorflow.keras import datasets
+from tensorflow.keras.datasets import cifar10
 from tensorflow.keras import models, layers, optimizers
 from tensorflow.keras import losses, activations, regularizers
 
@@ -28,7 +28,7 @@ def flattening(x, y, n_clasifi, mean_train, std_train=1 ):
 
 
 def ejer2_4():
-    (x_train, y_train), (x_test, y_test) = datasets.cifar10.load_data()
+    (x_train, y_train), (x_test, y_test) = cifar10.load_data()
     
     mean_train= x_train.mean()
     std_train=x_train.std()
@@ -50,8 +50,8 @@ def ejer2_4():
     model.add(layers.Dense(
                         units=10,
                         activity_regularizer=regularizers.L2(0.0001),
-                        use_bias=True)
-)
+                        use_bias=True))
+    
     model.compile(  optimizer=optimizers.SGD(0.003),
                     loss=losses.CategoricalCrossentropy( from_logits=True), 
                     metrics=['acc'])
@@ -67,6 +67,7 @@ def ejer2_4():
     
     
     plt.figure(1)
+    plt.xlabel("Épocas")    
     plt.ylabel("Precisión [%]")
     plt.plot(history.history['acc']    , label="Entrenamiento", c='red', alpha=0.6, ls='--')
     plt.plot(history.history['val_acc'], label="Validación", c='blue', alpha=0.6)
@@ -74,11 +75,12 @@ def ejer2_4():
     plt.savefig("ejer2_4_acc.pdf")
     
     plt.figure(2)
+    plt.xlabel("Épocas")
     plt.ylabel("Pérdida")
     plt.plot(history.history['loss']    , label="Entrenamiento", c='red', alpha=0.6, ls='--')
     plt.plot(history.history['val_loss'], label="Validación", c='blue', alpha=0.6)
     plt.legend(loc=0)
-    plt.savefig("ejer2_4_loss.pdf")
+    plt.savefig("../docs/Figs/ejer2_4_loss.pdf")
 
     plt.close()
     

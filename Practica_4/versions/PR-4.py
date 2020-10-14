@@ -1,3 +1,8 @@
+"""
+Prac 4 
+Redes Neuronales - Instituto Balseiro
+Evelyn Coronel
+"""
 import numpy as np
 from keras.models import Sequential
 from keras.layers.core import Activation, Dense

@@ -1,5 +1,5 @@
 import numpy as np 
-from tensorflow.keras import datasets
+
 from tensorflow.keras import models, layers, optimizers
 from tensorflow.keras import losses, activations, regularizers
 
@@ -75,8 +75,8 @@ def ejer_3():
     ax2.legend(loc='upper right', title="Ejemplos.", ncol=3)
     ax1.legend(loc='lower right', title="Ejemplos", ncol=3)
 
-    fig1.savefig('ejer_3_acc.pdf')
-    fig2.savefig('ejer_3_los_gen.pdf')
+    fig1.savefig('ejer_5_acc.pdf')
+    fig2.savefig('ejer_5_los_gen.pdf')
     plt.show()
 
 

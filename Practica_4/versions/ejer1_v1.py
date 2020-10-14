@@ -52,10 +52,9 @@ def ejer1():
                         input_shape=(13,), 
                         use_bias=True))
 
-    model.compile(
-                        optimizer=optimizers.SGD(0.001),
-                        loss=losses.MSE, 
-                        metrics=['mse'])
+    model.compile(optimizer=optimizers.SGD(0.001),
+                loss=losses.MSE, 
+                metrics=['mse'])
 
     history = model.fit(x_train, y_train, 
                         epochs=50, 
@@ -93,6 +92,20 @@ def ejer1():
     plt.plot(loss_test, label="Validación", c='blue', alpha=0.6)
     plt.savefig("../docs/Figs/ejer1_loss.pdf")
     plt.show()
+    # x_max = X.max()
+    # y_max = Y.max()
+
+    # print(X[:,1].shape, Y.shape)
+
+    # x_train, y_train = X/x_max, Y/y_max
+
+
+    # plt.figure(3)
+    # plt.scatter(X[:,12], Y)
+
+    # plt.show()
+
+    # exit()
     
 if __name__ == '__main__':
     ejer1()
