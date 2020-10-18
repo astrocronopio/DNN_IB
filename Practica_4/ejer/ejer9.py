@@ -29,6 +29,19 @@ def preprocesing():
     y_test = to_categorical(y_test)   #Para usar el categorical sin asco
     
     return (x_train, y_train), (x_test, y_test)
+
+def permute_mnist(x_train, x_test):
+    permutation = np.random.permutation(28*28)
+    
+    x_train_perm = x_train.reshape(x_train.shape[0], -1)
+    x_train_perm = x_train_perm[:,permutation]
+    x_train_perm = x_train_perm.reshape(x_train.shape)
+    
+    x_test_perm = x_test.reshape(x_test.shape[0], -1)
+    x_test_perm = x_test_perm[:,permutation]
+    x_test_perm = x_test_perm.reshape(x_test.shape)   
+     
+    return x_train_perm, x_test_perm
     
 def model_definition(num_classes):
     
@@ -49,7 +62,7 @@ def model_definition(num_classes):
                   metrics=['acc'])
     return model
 
-def ejer8():
+def ejer9():
     (x_train, y_train), (x_test, y_test) = preprocesing()
 
     num_classes = y_test.shape[1]
@@ -74,7 +87,7 @@ def plot_ejercicio(history):
     plt.plot(epocas, 100*acc_train  , label="Entrenamiento", c='red', alpha=0.6, ls='--')
     plt.plot(epocas, 100*acc_test, label="Validación", c='blue', alpha=0.6)
     plt.legend(loc=0)
-    plt.savefig("../docs/Figs/ejer8_acc.pdf")
+    plt.savefig("../docs/Figs/ejer9_acc.pdf")
     
     plt.figure(2)
     plt.xlabel("Épocas")
@@ -82,10 +95,10 @@ def plot_ejercicio(history):
     plt.plot(epocas, history.history['loss']    , label="Entrenamiento", c='red', alpha=0.6, ls='--')
     plt.plot(epocas, history.history['val_loss'], label="Validación", c='blue', alpha=0.6)
     plt.legend(loc=0)
-    plt.savefig("../docs/Figs/ejer8_loss.pdf")
+    plt.savefig("../docs/Figs/ejer9_loss.pdf")
 
     plt.show()
 
 if __name__ == '__main__':
-    ejer8()
+    ejer9()
     

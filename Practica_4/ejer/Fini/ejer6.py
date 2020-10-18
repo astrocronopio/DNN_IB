@@ -4,6 +4,11 @@ import tensorflow as tf
 from tensorflow.keras import  models, layers, optimizers
 from tensorflow.keras import  losses, activations, regularizers
 
+"""
+Versión 1: Con k-fold, todavía no coverge plot
+Versión 2: This
+"""
+
 import os
 from sklearn.model_selection import KFold, StratifiedKFold
 
@@ -22,7 +27,31 @@ def data_loading():
     df = pandas.read_csv("~/Desktop/Datos/pima-indians-diabetes.csv", header=None)
     df = df.to_numpy()
     x, y = df[:,0:8:1], df[:,8]
-    return x,y
+    
+    media_paper = np.array([    
+      3.8 , #Pregnant
+    120.9 , #Glucose Complete
+     69.1 , #Blood Complete
+     20.5 , #Triceps
+     79.8 , #Insulin
+     32.0 , #BMI
+      0.5 , #Diabetes
+     33.2 ]) #Age
+    
+    # for paciente in x:
+    #     if paciente[1]==0.0: #Glucose Complete
+    #         paciente[1]= media_paper[1]
+
+    #     if paciente[2]==0.0: #Blood Complete
+    #         paciente[2]= media_paper[2]
+
+    #     if paciente[4]==0.0:#Insulin
+    #         paciente[4]= media_paper[4]
+
+    #     if paciente[5]==0.0: #BMI
+    #         paciente[5]= media_paper[5]
+
+    return x,y, 
 
 def preprocessing(x_train, x_test):
     media = x_train.mean(axis=0)
@@ -59,7 +88,7 @@ def model_definition(input_shape):
                     use_bias=True))
 
     model.compile(  
-                    optimizer=optimizers.SGD(0.0005),
+                    optimizer=optimizers.SGD(0.001),
                     loss=losses.MSE, 
                     metrics=['acc'])
     
@@ -97,16 +126,28 @@ def ejer6():
         
     val_acc_kfold = np.array(val_acc_kfold)
     val_loss_kfold = np.array(val_loss_kfold)
-        
+    
+    min_acc = np.min(val_acc_kfold, axis=0)
+    max_acc = np.max(val_acc_kfold, axis=0)
+    
+    min_loss = np.min(val_loss_kfold, axis=0)
+    max_loss = np.max(val_loss_kfold, axis=0)
+    
+    epocas = np.arange(len(min_acc))    
     plt.figure(1)
     plt.ylabel("Precisión [%]")
-    plt.plot(np.mean(val_acc_kfold, axis=0), label="Validación", c='blue', alpha=0.6)
+    plt.xlabel("Épocas")
+    plt.plot(epocas, np.mean(100*val_acc_kfold, axis=0), label="Validación", c='blue', alpha=0.6)
+    plt.fill_between(epocas, 100*max_acc, 100*min_acc, alpha=0.1)
+    
     plt.legend(loc=0)
     plt.savefig("../docs/Figs/ejer6_acc.pdf")
 
     plt.figure(2)
     plt.ylabel("Pérdida")
-    plt.plot(np.mean(val_loss_kfold, axis=0), label="Validación", c='blue', alpha=0.6)
+    plt.xlabel("Épocas")
+    plt.plot(epocas, np.mean(val_loss_kfold, axis=0), label="Validación", c='blue', alpha=0.6)
+    plt.fill_between(epocas, max_loss, min_loss, alpha=0.1)
     plt.legend(loc=0)
     plt.savefig("../docs/Figs/ejer6_loss.pdf")
 

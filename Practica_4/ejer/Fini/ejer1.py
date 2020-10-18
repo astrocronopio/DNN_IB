@@ -1,7 +1,4 @@
-"""
-Versión 1: Con k-fold, todavía no coverge plot
-Versión 2: This
-"""
+
 
 import tensorflow as tf 
 
@@ -74,7 +71,7 @@ def ejer1():
     plt.scatter(X_TEST[:,12], y_test, c='black', alpha=0.5, label="Datos" , marker='*', s=100)
     plt.scatter(X_TEST[:,12], model.predict(x_test), c='red', alpha=0.7, label="Predicción")
     plt.legend(loc=0)
-    plt.savefig("ejer1_low_income.pdf")
+    plt.savefig("../docs/Figs/ejer1_low_income.pdf")
     
 
     plt.figure(4)
@@ -91,6 +88,8 @@ def ejer1():
     plt.ylabel("Pérdida")
     plt.plot(loss_train,label="Entrenamiento", c='red', alpha=0.6)
     plt.plot(loss_test, label="Validación", c='blue', alpha=0.6)
+    plt.yscale('log')
+    plt.legend(loc=0)
     plt.savefig("../docs/Figs/ejer1_loss.pdf")
     plt.show()
     

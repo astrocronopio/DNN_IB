@@ -13,8 +13,6 @@ mpl.rcParams.update({
 	'font.family': 'serif',
 	'font.sans-serif': ['Palatino']})
 
-
-
 n_epochs = 100
 verbosity_mode = True
 validation_split = 0.20

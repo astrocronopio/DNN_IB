@@ -64,7 +64,7 @@ def model_definition(input_shape):
     
     
     model.compile(  optimizer=optimizers.SGD(0.003),
-                    loss=losses.MSE, 
+                    loss=losses.BinaryCrossentropy(), 
                     metrics=['acc'])
     
     return model
@@ -80,7 +80,6 @@ def ejer3():
     
     model.summary()
     #exit()
-    
     history = model.fit(x_train, y_train, 
                         epochs=n_epochs, 
                         batch_size=20,
