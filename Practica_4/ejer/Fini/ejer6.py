@@ -38,18 +38,18 @@ def data_loading():
       0.5 , #Diabetes
      33.2 ]) #Age
     
-    # for paciente in x:
-    #     if paciente[1]==0.0: #Glucose Complete
-    #         paciente[1]= media_paper[1]
+    for paciente in x:
+        if paciente[1]==0: #Glucose Complete
+            paciente[1]= media_paper[1]
 
-    #     if paciente[2]==0.0: #Blood Complete
-    #         paciente[2]= media_paper[2]
+        if paciente[2]==0: #Blood Complete
+            paciente[2]= media_paper[2]
 
-    #     if paciente[4]==0.0:#Insulin
-    #         paciente[4]= media_paper[4]
+        if paciente[4]==0:#Insulin
+            paciente[4]= media_paper[4]
 
-    #     if paciente[5]==0.0: #BMI
-    #         paciente[5]= media_paper[5]
+        if paciente[5]==0: #BMI
+            paciente[5]= media_paper[5]
 
     return x,y, 
 
@@ -72,19 +72,19 @@ def model_definition(input_shape):
                     units=10, 
                     input_shape=(input_shape,), 
                     use_bias=True,
-                    activation=activations.relu,
-                    activity_regularizer=regularizers.L2(0.000)))
+                    #activation=activations.relu,
+                    activity_regularizer=regularizers.L2(0.0)))
 
     # model.add(layers.Dense(
     #                 units=3,
     #                 activity_regularizer=regularizers.L2(0.000),
-    #                 activation=activations.relu,
+    #                 #activation=activations.relu,
     #                 use_bias=True))
 
     model.add(layers.Dense(
                     units=1,
-                    activity_regularizer=regularizers.L2(0.000),
-                    activation=activations.relu,
+                    activity_regularizer=regularizers.L1(0.0),
+                    #activation=activations.sigmoid,
                     use_bias=True))
 
     model.compile(  
@@ -95,7 +95,7 @@ def model_definition(input_shape):
     return model
     
 def ejer6():
-    n_epochs=500
+    n_epochs=400
     n_splits=5
     kf = KFold(n_splits = 5)
 
@@ -109,6 +109,9 @@ def ejer6():
         x_train, x_test  = x[train_index], x[test_index]
         y_train, y_test  = y[train_index], y[test_index]
         
+        print(y_train.shape, x_train.shape)
+        print(y_test.shape, x_test.shape)
+        
         x_train, x_test = preprocessing(x_train, x_test)
 
         model = model_definition(x_train.shape[1])
@@ -117,7 +120,8 @@ def ejer6():
                         x_train, y_train, 
                         epochs=n_epochs, 
                         batch_size=5,
-                        validation_data=(x_test,y_test))
+                        validation_data=(x_test,y_test),
+                        verbose=0)
         
         val_acc_kfold.append(history.history['val_acc'])
         val_loss_kfold.append(history.history['val_loss'])
@@ -127,13 +131,14 @@ def ejer6():
     val_acc_kfold = np.array(val_acc_kfold)
     val_loss_kfold = np.array(val_loss_kfold)
     
-    min_acc = np.min(val_acc_kfold, axis=0)
-    max_acc = np.max(val_acc_kfold, axis=0)
+    min_acc = np.mean(val_acc_kfold, axis=0)-np.std(val_acc_kfold, axis=0)
+    max_acc = np.mean(val_acc_kfold, axis=0)+np.std(val_acc_kfold, axis=0)
     
-    min_loss = np.min(val_loss_kfold, axis=0)
-    max_loss = np.max(val_loss_kfold, axis=0)
+    min_loss = np.mean(val_loss_kfold, axis=0) - np.std(val_loss_kfold, axis=0)
+    max_loss = np.mean(val_loss_kfold, axis=0) + np.std(val_loss_kfold, axis=0)
     
-    epocas = np.arange(len(min_acc))    
+    epocas = np.arange(len(min_acc))   
+     
     plt.figure(1)
     plt.ylabel("Precisión [%]")
     plt.xlabel("Épocas")

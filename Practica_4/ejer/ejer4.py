@@ -2,18 +2,20 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Embedding, Flatten, Dense, Dropout, Conv1D, MaxPooling1D
 from tensorflow.keras.datasets import imdb
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras import losses, activations, regularizers, optimizers, metrics
 import numpy as np
-import matplotlib.pyplot as plt
 
-import matplotlib as mpl
-mpl.rcParams.update({
-	'font.size': 20,
-	'figure.figsize': [12, 8],
-	'figure.autolayout': True,
-	'font.family': 'serif',
-	'font.sans-serif': ['Palatino']})
+# import matplotlib.pyplot as plt
 
-n_epochs = 100
+# import matplotlib as mpl
+# mpl.rcParams.update({
+# 	'font.size': 20,
+# 	'figure.figsize': [12, 8],
+# 	'figure.autolayout': True,
+# 	'font.family': 'serif',
+# 	'font.sans-serif': ['Palatino']})
+
+
 verbosity_mode = True
 validation_split = 0.20
 
@@ -30,49 +32,87 @@ def padding(num_words, secuencia):
     return (padded_inputs, y_train), (padded_inputs_test, y_test) 
 
 def ejer4():
-    secuencia = 100
-    num_words = 10000 #100 x 100
-    embedding_output = 15    
+    secuencia = 400         # Voy a suponer que no existen reviews más largas que esto
+    num_words = 10000       
+    embedding_output = 50  #Downsizing   
     
     (x_train, y_train), (x_test, y_test) = padding(num_words, secuencia)
     print(x_train.shape)
     
     model = Sequential()
+    
     model.add(Embedding(num_words, embedding_output, input_length=secuencia))
     model.add(Dropout(0.50))
-    model.add(Conv1D(filters=32, kernel_size=2, padding='same', activation='relu'))
-    model.add(Dropout(0.50))
+    
+    model.add(Conv1D(filters=16, 
+                     kernel_size=4, 
+                     padding='same', 
+                     activation='relu'))
     model.add(MaxPooling1D(pool_size=2))
-    model.add(Flatten())
+    
     model.add(Dropout(0.50))
-    model.add(Dense(1, activation='sigmoid'))
+        
+    # model.add(Conv1D(filters=16, 
+    #                  kernel_size=4, 
+    #                  padding='same', 
+    #                  activation='relu'))
+    
+    # model.add(MaxPooling1D(pool_size=2))
+    
+    #model.add(Dropout(0.50))
+    
+    model.add(Flatten())
 
-    model.compile(optimizer='adam', 
-                  loss='binary_crossentropy', 
-                  metrics=['acc'])
+    model.add(Dense(30, activation='relu', 
+              activity_regularizer=regularizers.l2(0.01)))
+
+    model.add(Dense(1, activation='sigmoid', 
+              activity_regularizer=regularizers.l2(0.01)))
+
+    model.compile(  optimizer=optimizers.SGD(0.002),
+                    loss=losses.BinaryCrossentropy(), 
+                    metrics=[metrics.binary_accuracy])
 
     model.summary()
-
+    n_epochs = 300
     history = model.fit(x_train, y_train, 
-                        epochs=n_epochs, 
+                        epochs=n_epochs,
+                        batch_size=50, 
                         validation_data=(x_test,y_test))
-        
     
-    plt.figure(1)
-    plt.ylabel("Precisión [%]")
-    plt.plot(100*history.history['acc']    , label="Entrenamiento", c='red', alpha=0.6, ls='--')
-    plt.plot(100*history.history['val_acc'], label="Validación", c='blue', alpha=0.6)
-    plt.legend(loc=0)
-    plt.savefig("../docs/Figs/ejer4_acc.pdf")
     
-    plt.figure(2)
-    plt.ylabel("Pérdida")
-    plt.plot(history.history['loss']    , label="Entrenamiento", c='red', alpha=0.6, ls='--')
-    plt.plot(history.history['val_loss'], label="Validación", c='blue', alpha=0.6)
-    plt.legend(loc=0)
-    plt.savefig("../docs/Figs/ejer4_loss.pdf")
+    #acc, val_acc, loss, val_loss =  plot_ejercicio(history)    
+    
+    np.savetxt("ejer4.txt", np.array([ 
+                            acc, val_acc, loss, val_loss
+                            ]).T)
+    
+#     plt.figure(1)
+#     plt.ylabel("Precisión [%]")
+#     plt.plot(acc    , label="Entrenamiento", c='red', alpha=0.6, ls='--')
+#     plt.plot(val_acc, label="Validación", c='blue', alpha=0.6)
+#     plt.legend(loc=0)
+#     plt.savefig("../docs/Figs/ejer4_acc.pdf")
+    
+#     plt.figure(2)
+#     plt.ylabel("Pérdida")
+#     plt.plot(loss    , label="Entrenamiento", c='red', alpha=0.6, ls='--')
+#     plt.plot(val_loss, label="Validación", c='blue', alpha=0.6)
+#     plt.legend(loc=0)
+#     plt.savefig("../docs/Figs/ejer4_loss.pdf")
 
-    plt.close()
+#     plt.show()
+    
+# def plot_ejercicio(history):   
+     
+#     acc_train = 100*np.array(history.history['binary_accuracy'])
+#     acc_test  = 100*np.array(history.history['val_binary_accuracy'])
+
+#     loss = np.array(history.history['loss'])
+#     val_loss  = np.array(history.history['val_loss'])  
+    
+#     return acc_train, acc_test, loss, val_loss
+
     
 if __name__ == '__main__':
     ejer4()

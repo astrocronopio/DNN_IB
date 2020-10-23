@@ -66,7 +66,7 @@ class Entrada(Layer):
 
 class Dense(Layer):
     def ini_weights(self):
-        self.w= np.random.normal(0,0.07,size=(self.output_size, self.neuronas + 1*self.bias))
+        self.w= np.random.normal(0,2,size=(self.output_size, self.neuronas + 1*self.bias))
 
     def __call__(self, x):
         self.X=x

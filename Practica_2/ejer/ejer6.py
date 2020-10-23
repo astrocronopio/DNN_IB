@@ -45,7 +45,7 @@ def ejer6_221(x_train, y_train):
     
     red_densa.fit(  
                 x_train=x_train,    y_train=y_train, 
-                batch_size=4,
+                batch_size=1,
                 epochs=300,
                 opt=optimizer.SGD(lr=0.1),
                 loss_function=loss.MSE(),
@@ -65,7 +65,9 @@ def ejer6_221(x_train, y_train):
     plt.legend(loc=0)
     #plt.savefig("ejer6_loss.pdf")
     #plt.show()
-
+    np.savetxt("ejer6_221.txt",  np.array([
+                         red_densa.acc_vect,
+                         red_densa.loss_vect]).T)
 
 def ejer6_211(x_train, y_train):
     reg1 = regularizador.L1(0.0)
@@ -94,7 +96,7 @@ def ejer6_211(x_train, y_train):
     
     red_densa.fit(  
                 x_train=x_train,    y_train=y_train, 
-                batch_size=4,
+                batch_size=1,
                 epochs=300,
                 opt=optimizer.SGD(lr=0.1),
                 loss_function=loss.MSE(),
@@ -110,10 +112,15 @@ def ejer6_211(x_train, y_train):
     plt.ylabel("Pérdida Normalizada")
     plt.plot(red_densa.loss_vect/np.max(red_densa.loss_vect), label="211", alpha=0.6)
     plt.legend(loc=0)
+    
     #plt.savefig("ejer6_loss_211.pdf")
     #plt.show()
 
-def main():
+    np.savetxt("ejer6_211.txt",  np.array([
+                         red_densa.acc_vect,
+                         red_densa.loss_vect]).T)
+
+def ejer6():
     x_train = np.array([[-1.0, -1.0],  [1.0, -1.0], [-1.0, 1.0], [1.0, 1.0],])
     y_train = np.array([   [1.0],       [-1.0],      [-1.0],      [1.0]])
 
@@ -122,5 +129,5 @@ def main():
     plt.show()
 
 if __name__ == '__main__':
-    main()
+    ejer6()
     
