@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.8.11)  23 OCT 2020 08:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.8.11)  24 OCT 2020 02:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -559,7 +559,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-<Graphs/ejer1_loss.pdf, id=73, 867.24pt x 578.16pt>
+<Graphs/ejer1_loss.pdf, id=81, 867.24pt x 578.16pt>
 File: Graphs/ejer1_loss.pdf Graphic file (type pdf)
 <use Graphs/ejer1_loss.pdf>
 Package pdftex.def Info: Graphs/ejer1_loss.pdf  used on input line 25.
@@ -569,7 +569,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 25--26
  [] 
  []
 
-<Graphs/ejer1_versus.pdf, id=75, 867.24pt x 578.16pt>
+<Graphs/ejer1_versus.pdf, id=83, 867.24pt x 578.16pt>
 File: Graphs/ejer1_versus.pdf Graphic file (type pdf)
 <use Graphs/ejer1_versus.pdf>
 Package pdftex.def Info: Graphs/ejer1_versus.pdf  used on input line 37.
@@ -579,7 +579,7 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 37--38
  [] 
  []
 
-<Graphs/ejer1_low_income.pdf, id=77, 867.24pt x 578.16pt>
+<Graphs/ejer1_low_income.pdf, id=85, 867.24pt x 578.16pt>
 File: Graphs/ejer1_low_income.pdf Graphic file (type pdf)
 <use Graphs/ejer1_low_income.pdf>
 Package pdftex.def Info: Graphs/ejer1_low_income.pdf  used on input line 49.
@@ -608,33 +608,23 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-<Graphs/ejer2_3_acc.pdf, id=194, 867.24pt x 578.16pt>
+<Graphs/ejer2_3_acc.pdf, id=204, 867.24pt x 578.16pt>
 File: Graphs/ejer2_3_acc.pdf Graphic file (type pdf)
 <use Graphs/ejer2_3_acc.pdf>
-Package pdftex.def Info: Graphs/ejer2_3_acc.pdf  used on input line 73.
+Package pdftex.def Info: Graphs/ejer2_3_acc.pdf  used on input line 86.
 (pdftex.def)             Requested size: 255.0pt x 169.99992pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 73--74
+Overfull \hbox (9.0pt too wide) in paragraph at lines 86--87
  [] 
  []
 
-<Graphs/ejer2_3_loss.pdf, id=195, 867.24pt x 578.16pt>
+<Graphs/ejer2_3_loss.pdf, id=205, 867.24pt x 578.16pt>
 File: Graphs/ejer2_3_loss.pdf Graphic file (type pdf)
 <use Graphs/ejer2_3_loss.pdf>
-Package pdftex.def Info: Graphs/ejer2_3_loss.pdf  used on input line 84.
+Package pdftex.def Info: Graphs/ejer2_3_loss.pdf  used on input line 97.
 (pdftex.def)             Requested size: 255.0pt x 169.99992pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 84--85
- [] 
- []
-
-<Graphs/ejer2_4_acc.pdf, id=198, 867.24pt x 578.16pt>
-File: Graphs/ejer2_4_acc.pdf Graphic file (type pdf)
-<use Graphs/ejer2_4_acc.pdf>
-Package pdftex.def Info: Graphs/ejer2_4_acc.pdf  used on input line 101.
-(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
-
-Overfull \hbox (9.0pt too wide) in paragraph at lines 101--102
+Overfull \hbox (9.0pt too wide) in paragraph at lines 97--98
  [] 
  []
 
@@ -642,32 +632,42 @@ Overfull \hbox (9.0pt too wide) in paragraph at lines 101--102
 
 pdfTeX warning: pdflatex (file ./Graphs/ejer2_3_loss.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 >]
-<Graphs/ejer2_4_loss.pdf, id=279, 867.24pt x 578.16pt>
+<Graphs/ejer2_4_acc.pdf, id=286, 867.24pt x 578.16pt>
+File: Graphs/ejer2_4_acc.pdf Graphic file (type pdf)
+<use Graphs/ejer2_4_acc.pdf>
+Package pdftex.def Info: Graphs/ejer2_4_acc.pdf  used on input line 117.
+(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 117--118
+ [] 
+ []
+
+<Graphs/ejer2_4_loss.pdf, id=287, 867.24pt x 578.16pt>
 File: Graphs/ejer2_4_loss.pdf Graphic file (type pdf)
 <use Graphs/ejer2_4_loss.pdf>
-Package pdftex.def Info: Graphs/ejer2_4_loss.pdf  used on input line 112.
+Package pdftex.def Info: Graphs/ejer2_4_loss.pdf  used on input line 127.
 (pdftex.def)             Requested size: 255.0pt x 169.99992pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 112--113
+Overfull \hbox (9.0pt too wide) in paragraph at lines 127--128
  [] 
  []
 
-<Graphs/ejer2_6_acc.pdf, id=280, 867.24pt x 578.16pt>
+<Graphs/ejer2_6_acc.pdf, id=288, 867.24pt x 578.16pt>
 File: Graphs/ejer2_6_acc.pdf Graphic file (type pdf)
 <use Graphs/ejer2_6_acc.pdf>
-Package pdftex.def Info: Graphs/ejer2_6_acc.pdf  used on input line 130.
+Package pdftex.def Info: Graphs/ejer2_6_acc.pdf  used on input line 137.
 (pdftex.def)             Requested size: 255.0pt x 169.99992pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 130--131
+Overfull \hbox (9.0pt too wide) in paragraph at lines 137--138
  [] 
  []
 
 File: Graphs/ejer2_6_acc.pdf Graphic file (type pdf)
 <use Graphs/ejer2_6_acc.pdf>
-Package pdftex.def Info: Graphs/ejer2_6_acc.pdf  used on input line 140.
+Package pdftex.def Info: Graphs/ejer2_6_acc.pdf  used on input line 147.
 (pdftex.def)             Requested size: 255.0pt x 169.99992pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 140--141
+Overfull \hbox (9.0pt too wide) in paragraph at lines 147--148
  [] 
  []
 
@@ -678,155 +678,505 @@ pdfTeX warning: pdflatex (file ./Graphs/ejer2_4_loss.pdf): PDF inclusion: multip
 
 pdfTeX warning: pdflatex (file ./Graphs/ejer2_6_acc.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 >]
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 184--184
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
 
-LaTeX Warning: Reference `ejer5' on page 4 undefined on input line 166.
 
-<Graphs/ejer5_los_gen.pdf, id=402, 867.24pt x 578.16pt>
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 184--184
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 184--184
+[]\OT1/cmtt/m/n/10 ===============================================[] 
+ []
+
+<Graphs/ejer3_acc.pdf, id=412, 867.24pt x 578.16pt>
+File: Graphs/ejer3_acc.pdf Graphic file (type pdf)
+<use Graphs/ejer3_acc.pdf>
+Package pdftex.def Info: Graphs/ejer3_acc.pdf  used on input line 190.
+(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 190--191
+ [] 
+ []
+
+<Graphs/ejer3_loss.pdf, id=413, 867.24pt x 578.16pt>
+File: Graphs/ejer3_loss.pdf Graphic file (type pdf)
+<use Graphs/ejer3_loss.pdf>
+Package pdftex.def Info: Graphs/ejer3_loss.pdf  used on input line 201.
+(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 201--202
+ [] 
+ []
+
+<Graphs/ejer3_acc_trails.pdf, id=416, 867.24pt x 578.16pt>
+File: Graphs/ejer3_acc_trails.pdf Graphic file (type pdf)
+<use Graphs/ejer3_acc_trails.pdf>
+Package pdftex.def Info: Graphs/ejer3_acc_trails.pdf  used on input line 213.
+(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 213--214
+ [] 
+ []
+
+<Graphs/ejer3_loss_trails.pdf, id=417, 867.24pt x 578.16pt>
+File: Graphs/ejer3_loss_trails.pdf Graphic file (type pdf)
+<use Graphs/ejer3_loss_trails.pdf>
+Package pdftex.def Info: Graphs/ejer3_loss_trails.pdf  used on input line 224.
+(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 224--225
+ [] 
+ []
+
+[4 <./Graphs/ejer3_acc.pdf> <./Graphs/ejer3_loss.pdf
+
+pdfTeX warning: pdflatex (file ./Graphs/ejer3_loss.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./Graphs/ejer3_acc_trails.pdf
+
+pdfTeX warning: pdflatex (file ./Graphs/ejer3_acc_trails.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./Graphs/ejer3_loss_trails.pdf
+
+pdfTeX warning: pdflatex (file ./Graphs/ejer3_loss_trails.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+Overfull \hbox (11.24776pt too wide) in paragraph at lines 264--264
+[]    \OT1/cmtt/m/n/10 _____________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 264--264
+[]    \OT1/cmtt/m/n/10 Layer (type)         Salida      Par^^Sametros[] 
+ []
+
+
+Overfull \hbox (5.9978pt too wide) in paragraph at lines 264--264
+[]    \OT1/cmtt/m/n/10 ============================================[] 
+ []
+
+
+Overfull \hbox (5.9978pt too wide) in paragraph at lines 264--264
+[]    \OT1/cmtt/m/n/10 ____________________________________________[] 
+ []
+
+
+Overfull \hbox (5.9978pt too wide) in paragraph at lines 264--264
+[]    \OT1/cmtt/m/n/10 ____________________________________________[] 
+ []
+
+
+Overfull \hbox (5.9978pt too wide) in paragraph at lines 264--264
+[]    \OT1/cmtt/m/n/10 ____________________________________________[] 
+ []
+
+
+Overfull \hbox (5.9978pt too wide) in paragraph at lines 264--264
+[]    \OT1/cmtt/m/n/10 ____________________________________________[] 
+ []
+
+
+Overfull \hbox (5.9978pt too wide) in paragraph at lines 264--264
+[]    \OT1/cmtt/m/n/10 ____________________________________________[] 
+ []
+
+
+Overfull \hbox (5.9978pt too wide) in paragraph at lines 264--264
+[]    \OT1/cmtt/m/n/10 ____________________________________________[] 
+ []
+
+
+Overfull \hbox (5.9978pt too wide) in paragraph at lines 264--264
+[]    \OT1/cmtt/m/n/10 ____________________________________________[] 
+ []
+
+
+Overfull \hbox (5.9978pt too wide) in paragraph at lines 264--264
+[]    \OT1/cmtt/m/n/10 ============================================[] 
+ []
+
+<Graphs/ejer4_acc.pdf, id=561, 867.24pt x 578.16pt>
+File: Graphs/ejer4_acc.pdf Graphic file (type pdf)
+<use Graphs/ejer4_acc.pdf>
+Package pdftex.def Info: Graphs/ejer4_acc.pdf  used on input line 271.
+(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 271--272
+ [] 
+ []
+
+<Graphs/ejer4_loss.pdf, id=562, 867.24pt x 578.16pt>
+File: Graphs/ejer4_loss.pdf Graphic file (type pdf)
+<use Graphs/ejer4_loss.pdf>
+Package pdftex.def Info: Graphs/ejer4_loss.pdf  used on input line 282.
+(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 282--283
+ [] 
+ []
+
+
+LaTeX Warning: Reference `ejer5' on page 5 undefined on input line 304.
+
+<Graphs/ejer5_los_gen.pdf, id=563, 867.24pt x 578.16pt>
 File: Graphs/ejer5_los_gen.pdf Graphic file (type pdf)
 <use Graphs/ejer5_los_gen.pdf>
-Package pdftex.def Info: Graphs/ejer5_los_gen.pdf  used on input line 171.
+Package pdftex.def Info: Graphs/ejer5_los_gen.pdf  used on input line 309.
 (pdftex.def)             Requested size: 255.0pt x 169.99992pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 171--172
+Overfull \hbox (9.0pt too wide) in paragraph at lines 309--310
  [] 
  []
 
-[4 <./Graphs/ejer5_los_gen.pdf>]
-<Graphs/ejer6_acc.pdf, id=464, 867.24pt x 578.16pt>
+[5 <./Graphs/ejer4_acc.pdf> <./Graphs/ejer4_loss.pdf
+
+pdfTeX warning: pdflatex (file ./Graphs/ejer4_loss.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+<Graphs/ejer6_acc.pdf, id=642, 867.24pt x 578.16pt>
 File: Graphs/ejer6_acc.pdf Graphic file (type pdf)
 <use Graphs/ejer6_acc.pdf>
-Package pdftex.def Info: Graphs/ejer6_acc.pdf  used on input line 210.
-(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
-
-Overfull \hbox (9.0pt too wide) in paragraph at lines 210--211
- [] 
- []
-
-<Graphs/ejer6_loss.pdf, id=465, 867.24pt x 578.16pt>
+Package pdftex.def Info: Graphs/ejer6_acc.pdf  used on input line 348.
+(pdftex.def)             Requested size: 234.60342pt x 156.39641pt.
+<Graphs/ejer6_loss.pdf, id=643, 867.24pt x 578.16pt>
 File: Graphs/ejer6_loss.pdf Graphic file (type pdf)
 <use Graphs/ejer6_loss.pdf>
-Package pdftex.def Info: Graphs/ejer6_loss.pdf  used on input line 221.
+Package pdftex.def Info: Graphs/ejer6_loss.pdf  used on input line 359.
 (pdftex.def)             Requested size: 255.0pt x 169.99992pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 221--222
+Overfull \hbox (9.0pt too wide) in paragraph at lines 359--360
  [] 
  []
 
-<Graphs/ejer7_acc.pdf, id=469, 722.7pt x 578.16pt>
+[6 <./Graphs/ejer5_los_gen.pdf> <./Graphs/ejer6_acc.pdf
+
+pdfTeX warning: pdflatex (file ./Graphs/ejer6_acc.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+<Graphs/ejer6_acc_raw.pdf, id=734, 867.24pt x 578.16pt>
+File: Graphs/ejer6_acc_raw.pdf Graphic file (type pdf)
+<use Graphs/ejer6_acc_raw.pdf>
+Package pdftex.def Info: Graphs/ejer6_acc_raw.pdf  used on input line 369.
+(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 369--370
+ [] 
+ []
+
+<Graphs/ejer6_loss_raw.pdf, id=735, 867.24pt x 578.16pt>
+File: Graphs/ejer6_loss_raw.pdf Graphic file (type pdf)
+<use Graphs/ejer6_loss_raw.pdf>
+Package pdftex.def Info: Graphs/ejer6_loss_raw.pdf  used on input line 386.
+(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 386--387
+ [] 
+ []
+
+<Graphs/ejer7_acc.pdf, id=739, 722.7pt x 578.16pt>
 File: Graphs/ejer7_acc.pdf Graphic file (type pdf)
 <use Graphs/ejer7_acc.pdf>
-Package pdftex.def Info: Graphs/ejer7_acc.pdf  used on input line 241.
+Package pdftex.def Info: Graphs/ejer7_acc.pdf  used on input line 401.
 (pdftex.def)             Requested size: 255.0pt x 203.99992pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 241--242
+Overfull \hbox (9.0pt too wide) in paragraph at lines 401--402
  [] 
  []
 
-<Graphs/ejer7_loss.pdf, id=470, 722.7pt x 578.16pt>
+<Graphs/ejer7_loss.pdf, id=740, 722.7pt x 578.16pt>
 File: Graphs/ejer7_loss.pdf Graphic file (type pdf)
 <use Graphs/ejer7_loss.pdf>
-Package pdftex.def Info: Graphs/ejer7_loss.pdf  used on input line 252.
-(pdftex.def)             Requested size: 255.0pt x 203.99992pt.
+Package pdftex.def Info: Graphs/ejer7_loss.pdf  used on input line 412.
+(pdftex.def)             Requested size: 229.49844pt x 183.59464pt.
+[7 <./Graphs/ejer6_loss.pdf> <./Graphs/ejer6_acc_raw.pdf
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 252--253
- [] 
- []
+pdfTeX warning: pdflatex (file ./Graphs/ejer6_acc_raw.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./Graphs/ejer6_loss_raw.pdf
 
-[5 <./Graphs/ejer6_acc.pdf> <./Graphs/ejer6_loss.pdf
-
-pdfTeX warning: pdflatex (file ./Graphs/ejer6_loss.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+pdfTeX warning: pdflatex (file ./Graphs/ejer6_loss_raw.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 > <./Graphs/ejer7_acc.pdf
 
 pdfTeX warning: pdflatex (file ./Graphs/ejer7_acc.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 >]
-<Graphs/ejer7.pdf, id=575, 722.7pt x 578.16pt>
+<Graphs/ejer7.pdf, id=876, 722.7pt x 578.16pt>
 File: Graphs/ejer7.pdf Graphic file (type pdf)
 <use Graphs/ejer7.pdf>
-Package pdftex.def Info: Graphs/ejer7.pdf  used on input line 263.
-(pdftex.def)             Requested size: 255.0pt x 203.99992pt.
-
-Overfull \hbox (9.0pt too wide) in paragraph at lines 263--264
- [] 
- []
-
-<Graphs/ejer8_acc.pdf, id=578, 867.24pt x 578.16pt>
+Package pdftex.def Info: Graphs/ejer7.pdf  used on input line 423.
+(pdftex.def)             Requested size: 229.49844pt x 183.59464pt.
+<Graphs/ejer8_acc.pdf, id=879, 867.24pt x 578.16pt>
 File: Graphs/ejer8_acc.pdf Graphic file (type pdf)
 <use Graphs/ejer8_acc.pdf>
-Package pdftex.def Info: Graphs/ejer8_acc.pdf  used on input line 313.
-(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
-
-Overfull \hbox (9.0pt too wide) in paragraph at lines 313--314
- [] 
- []
-
-[6 <./Graphs/ejer7_loss.pdf> <./Graphs/ejer7.pdf
+Package pdftex.def Info: Graphs/ejer8_acc.pdf  used on input line 469.
+(pdftex.def)             Requested size: 239.70062pt x 159.79288pt.
+ [8 <./Graphs/ejer7_loss.pdf> <./Graphs/ejer7.pdf
 
 pdfTeX warning: pdflatex (file ./Graphs/ejer7.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./Graphs/ejer8_acc.pdf
+
+pdfTeX warning: pdflatex (file ./Graphs/ejer8_acc.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 >]
-<Graphs/ejer8_loss.pdf, id=642, 867.24pt x 578.16pt>
+<Graphs/ejer8_loss.pdf, id=978, 867.24pt x 578.16pt>
 File: Graphs/ejer8_loss.pdf Graphic file (type pdf)
 <use Graphs/ejer8_loss.pdf>
-Package pdftex.def Info: Graphs/ejer8_loss.pdf  used on input line 324.
+Package pdftex.def Info: Graphs/ejer8_loss.pdf  used on input line 483.
 (pdftex.def)             Requested size: 255.0pt x 169.99992pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 324--325
+Overfull \hbox (9.0pt too wide) in paragraph at lines 483--484
  [] 
  []
 
-<Graphs/ejer9_acc.pdf, id=645, 867.24pt x 578.16pt>
+<Graphs/ejer9_acc.pdf, id=981, 867.24pt x 578.16pt>
 File: Graphs/ejer9_acc.pdf Graphic file (type pdf)
 <use Graphs/ejer9_acc.pdf>
-Package pdftex.def Info: Graphs/ejer9_acc.pdf  used on input line 342.
+Package pdftex.def Info: Graphs/ejer9_acc.pdf  used on input line 506.
 (pdftex.def)             Requested size: 255.0pt x 169.99992pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 342--343
+Overfull \hbox (9.0pt too wide) in paragraph at lines 506--507
  [] 
  []
 
-<Graphs/ejer9_loss.pdf, id=646, 867.24pt x 578.16pt>
+<Graphs/ejer9_loss.pdf, id=982, 867.24pt x 578.16pt>
 File: Graphs/ejer9_loss.pdf Graphic file (type pdf)
 <use Graphs/ejer9_loss.pdf>
-Package pdftex.def Info: Graphs/ejer9_loss.pdf  used on input line 353.
+Package pdftex.def Info: Graphs/ejer9_loss.pdf  used on input line 517.
 (pdftex.def)             Requested size: 255.0pt x 169.99992pt.
 
-Overfull \hbox (9.0pt too wide) in paragraph at lines 353--354
+Overfull \hbox (9.0pt too wide) in paragraph at lines 517--518
  [] 
  []
 
-[7 <./Graphs/ejer8_acc.pdf> <./Graphs/ejer8_loss.pdf
 
-pdfTeX warning: pdflatex (file ./Graphs/ejer8_loss.pdf): PDF inclusion: multiple pdfs with page group included in a single page
-> <./Graphs/ejer9_acc.pdf
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 569--569
+[]\OT1/cmtt/m/n/10 Capa                Salida           Par^^Sametros[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 569--569
+[]\OT1/cmtt/m/n/10 ===============================================[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 569--569
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 569--569
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 569--569
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 569--569
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 569--569
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 569--569
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 569--569
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+[9 <./Graphs/ejer8_loss.pdf> <./Graphs/ejer9_acc.pdf
 
 pdfTeX warning: pdflatex (file ./Graphs/ejer9_acc.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 > <./Graphs/ejer9_loss.pdf
 
 pdfTeX warning: pdflatex (file ./Graphs/ejer9_loss.pdf): PDF inclusion: multiple pdfs with page group included in a single page
->] (./practica_4_informe.bbl) [8]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 373.
+>]
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 569--569
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 569--569
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 569--569
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 569--569
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 569--569
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 569--569
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 569--569
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 569--569
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 569--569
+[]\OT1/cmtt/m/n/10 ===============================================[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 607--607
+[]\OT1/cmtt/m/n/10 Capa                Salida           Par^^Sametros[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 607--607
+[]\OT1/cmtt/m/n/10 ===============================================[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 607--607
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 607--607
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 607--607
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 607--607
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 607--607
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 607--607
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 607--607
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 607--607
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 607--607
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 607--607
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 607--607
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 607--607
+[]\OT1/cmtt/m/n/10 _______________________________________________[] 
+ []
+
+
+Overfull \hbox (0.74785pt too wide) in paragraph at lines 607--607
+[]\OT1/cmtt/m/n/10 ===============================================[] 
+ []
+
+<Graphs/ejer10_acc_cifar10.pdf, id=1102, 867.24pt x 578.16pt>
+File: Graphs/ejer10_acc_cifar10.pdf Graphic file (type pdf)
+<use Graphs/ejer10_acc_cifar10.pdf>
+Package pdftex.def Info: Graphs/ejer10_acc_cifar10.pdf  used on input line 617.
+(pdftex.def)             Requested size: 229.49844pt x 152.99112pt.
+<Graphs/ejer10_loss_cifar10.pdf, id=1103, 867.24pt x 578.16pt>
+File: Graphs/ejer10_loss_cifar10.pdf Graphic file (type pdf)
+<use Graphs/ejer10_loss_cifar10.pdf>
+Package pdftex.def Info: Graphs/ejer10_loss_cifar10.pdf  used on input line 628.
+(pdftex.def)             Requested size: 229.49844pt x 152.99112pt.
+<Graphs/ejer10_acc_cifar100.pdf, id=1106, 867.24pt x 578.16pt>
+File: Graphs/ejer10_acc_cifar100.pdf Graphic file (type pdf)
+<use Graphs/ejer10_acc_cifar100.pdf>
+Package pdftex.def Info: Graphs/ejer10_acc_cifar100.pdf  used on input line 641.
+(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 641--642
+ [] 
+ []
+
+[10 <./Graphs/ejer10_acc_cifar10.pdf> <./Graphs/ejer10_loss_cifar10.pdf
+
+pdfTeX warning: pdflatex (file ./Graphs/ejer10_loss_cifar10.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+<Graphs/ejer10_loss_cifar100.pdf, id=1190, 867.24pt x 578.16pt>
+File: Graphs/ejer10_loss_cifar100.pdf Graphic file (type pdf)
+<use Graphs/ejer10_loss_cifar100.pdf>
+Package pdftex.def Info: Graphs/ejer10_loss_cifar100.pdf  used on input line 651.
+(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 651--652
+ [] 
+ []
+
+(./practica_4_informe.bbl) [11 <./Graphs/ejer10_acc_cifar100.pdf> <./Graphs/ejer10_loss_cifar100.pdf
+
+pdfTeX warning: pdflatex (file ./Graphs/ejer10_loss_cifar100.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 666.
  (./practica_4_informe.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 373.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 373.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 666.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 666.
 Package rerunfilecheck Info: File `practica_4_informe.out' has not changed.
-(rerunfilecheck)             Checksum: 8A3FA8819923D771E1904B59697B20A6;1025.
+(rerunfilecheck)             Checksum: 22189FEF458258AC7F2D5FE979CBEE1F;1153.
 
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 14139 strings out of 483048
- 223252 string characters out of 5962772
- 641551 words of memory out of 5000000
- 28747 multiletter control sequences out of 15000+600000
- 541969 words of font info for 100 fonts, out of 8000000 for 9000
+ 14250 strings out of 483048
+ 226144 string characters out of 5962772
+ 640888 words of memory out of 5000000
+ 28831 multiletter control sequences out of 15000+600000
+ 541918 words of font info for 99 fonts, out of 8000000 for 9000
  85 hyphenation exceptions out of 8191
- 53i,5n,50p,851b,496s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on practica_4_informe.pdf (8 pages, 465994 bytes).
+ 53i,6n,50p,834b,511s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on practica_4_informe.pdf (11 pages, 671693 bytes).
 PDF statistics:
- 859 PDF objects out of 1000 (max. 8388607)
- 296 compressed objects within 3 object streams
- 50 named destinations out of 1000 (max. 500000)
- 14563 words of extra memory for PDF output out of 17280 (max. 10000000)
+ 1331 PDF objects out of 1440 (max. 8388607)
+ 406 compressed objects within 5 object streams
+ 67 named destinations out of 1000 (max. 500000)
+ 14639 words of extra memory for PDF output out of 17280 (max. 10000000)
 

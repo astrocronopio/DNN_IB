@@ -5,17 +5,6 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras import losses, activations, regularizers, optimizers, metrics
 import numpy as np
 
-# import matplotlib.pyplot as plt
-
-# import matplotlib as mpl
-# mpl.rcParams.update({
-# 	'font.size': 20,
-# 	'figure.figsize': [12, 8],
-# 	'figure.autolayout': True,
-# 	'font.family': 'serif',
-# 	'font.sans-serif': ['Palatino']})
-
-
 verbosity_mode = True
 validation_split = 0.20
 
@@ -81,7 +70,7 @@ def ejer4():
                         validation_data=(x_test,y_test))
     
     
-    #acc, val_acc, loss, val_loss =  plot_ejercicio(history)    
+    acc, val_acc, loss, val_loss =  plot_ejercicio(history)    
     
     np.savetxt("ejer4.txt", np.array([ 
                             acc, val_acc, loss, val_loss
@@ -103,16 +92,54 @@ def ejer4():
 
 #     plt.show()
     
-# def plot_ejercicio(history):   
+def plot_ejercicio(history):   
      
-#     acc_train = 100*np.array(history.history['binary_accuracy'])
-#     acc_test  = 100*np.array(history.history['val_binary_accuracy'])
+    acc_train = 100*np.array(history.history['binary_accuracy'])
+    acc_test  = 100*np.array(history.history['val_binary_accuracy'])
 
-#     loss = np.array(history.history['loss'])
-#     val_loss  = np.array(history.history['val_loss'])  
+    loss = np.array(history.history['loss'])
+    val_loss  = np.array(history.history['val_loss'])  
     
-#     return acc_train, acc_test, loss, val_loss
+    return acc_train, acc_test, loss, val_loss
 
+import matplotlib.pyplot as plt
+
+import matplotlib as mpl
+mpl.rcParams.update({
+	'font.size': 20,
+	'figure.figsize': [12, 8],
+	'figure.autolayout': True,
+	'font.family': 'serif',
+	'font.sans-serif': ['Palatino']})
+
+def  plot_output():
+    loss , acc , val_loss,  val_acc  = np.loadtxt("ejer4_saved.txt", unpack=True)
+    acc3, val_acc3, loss3, val_loss3 = np.loadtxt("ejer3_optimo.txt", unpack=True)                            
     
+    acc = 100*acc
+    val_acc = 100*val_acc
+    
+    plt.figure(1)
+    plt.ylabel("Precisión [%]")
+    plt.plot(acc3    , label="Train Densa", c='red', alpha=0.6, ls='--')
+    plt.plot(val_acc3, label="Test  Densa", c='blue', alpha=0.6)
+
+    plt.plot(acc[100:]    , label="Train Conv.", c='orange', alpha=0.6, ls='--')
+    plt.plot(val_acc[100:], label="Test  Conv.", c='green', alpha=0.6)
+    plt.legend(loc=0)
+    plt.savefig("../docs/Figs/ejer4_acc.pdf")
+    
+    plt.figure(2)
+    plt.ylabel("Pérdida")
+    plt.plot(loss3    , label="Train Conv.", c='red', alpha=0.6, ls='--')
+    plt.plot(val_loss3, label="Test  Conv.", c='blue', alpha=1)
+
+    plt.plot(loss    , label="Train Conv.", c='orange', alpha=0.6, ls='--')
+    plt.plot(val_loss, label="Test  Conv.", c='green', alpha=0.6)
+    plt.legend(loc=0)
+    plt.savefig("../docs/Figs/ejer4_loss.pdf")
+
+    plt.show()
 if __name__ == '__main__':
     ejer4()
+    #plot_output()

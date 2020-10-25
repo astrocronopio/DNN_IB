@@ -132,6 +132,67 @@ def ejer3():
 #     plt.savefig("../docs/Figs/ejer3_loss.pdf")
 
 #     plt.show()
- 
+
+import matplotlib.pyplot as plt
+
+import matplotlib as mpl
+mpl.rcParams.update({
+    'font.size': 20,
+    'figure.figsize': [12, 8],
+    'figure.autolayout': True,
+    'font.family': 'serif',
+    'font.sans-serif': ['Palatino']})  
+
+def plot_output():    
+    acc, val_acc, loss, val_loss = np.loadtxt("ejer3_optimo.txt", unpack=True)
+                            
+           
+    plt.figure(1)
+    plt.ylabel("Precisión [%]")
+    plt.plot(acc , label="Entrenamiento", c='red', alpha=0.6, ls='--')
+    plt.plot(val_acc, label="Validación", c='blue', alpha=0.6)
+    plt.legend(loc=0)
+    plt.savefig("../docs/Figs/ejer3_acc.pdf")
+    
+    plt.figure(2)
+    plt.ylabel("Pérdida")
+    plt.plot(loss    /np.max(loss    ), label="Entrenamiento", c='red', alpha=0.6, ls='--')
+    plt.plot(val_loss/np.max(val_loss), label="Validación", c='blue', alpha=0.6)
+    plt.legend(loc=0)
+    plt.savefig("../docs/Figs/ejer3_loss.pdf")
+    
+    
+    val_acc_bn, val_loss_bn = np.loadtxt("ejer3_bn.txt", unpack=True, usecols=(1,3))
+    val_acc_drp, val_loss_drp = np.loadtxt("ejer3_drp.txt", unpack=True, usecols=(1,3))
+    val_acc_pl, val_loss_pl = np.loadtxt("ejer3_plain.txt", unpack=True, usecols=(1,3))
+
+    
+    plt.figure(3)
+    plt.xlim(right=200)
+    plt.ylabel("Precisión [%]")
+    plt.plot(val_acc_pl , label="Simple", c='red', alpha=0.6)
+    plt.plot(val_acc_bn, label="Sin BN" , c='blue', alpha=0.6)
+    plt.plot(val_acc_drp, label="Sin Drop.", c='orange', alpha=0.6)
+    plt.plot(val_acc, label="Final", c='black')
+    
+    plt.legend(loc=0)
+    plt.savefig("../docs/Figs/ejer3_acc_trails.pdf")
+    
+    plt.figure(4)
+    plt.xlim(right=200)
+    plt.ylabel("Pérdida")
+    plt.plot(val_loss_pl/np.max(val_loss_pl) , label="Simple", c='red', alpha=0.6)
+    plt.plot(val_loss_bn/np.max(val_loss_bn), label="Sin BN" , c='blue', alpha=0.6)
+    plt.plot(val_loss_drp/np.max(val_loss_drp), label="Sin Drop.", c='orange', alpha=0.6)
+    plt.plot(val_loss/np.max(val_loss), label="Final", c='black')
+    plt.legend(loc=0)
+    plt.savefig("../docs/Figs/ejer3_loss_trails.pdf")
+
+
+
+
+    plt.show()
+    
 if __name__ == '__main__':
     ejer3()
+    #plot_output()

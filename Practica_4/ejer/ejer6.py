@@ -38,18 +38,18 @@ def data_loading():
       0.5 , #Diabetes
      33.2 ]) #Age
     
-    for paciente in x:
-        if paciente[1]==0: #Glucose Complete
-            paciente[1]= media_paper[1]
+    # for paciente in x:
+    #     if paciente[1]==0: #Glucose Complete
+    #         paciente[1]= media_paper[1]
 
-        if paciente[2]==0: #Blood Complete
-            paciente[2]= media_paper[2]
+    #     if paciente[2]==0: #Blood Complete
+    #         paciente[2]= media_paper[2]
 
-        if paciente[4]==0:#Insulin
-            paciente[4]= media_paper[4]
+    #     if paciente[4]==0:#Insulin
+    #         paciente[4]= media_paper[4]
 
-        if paciente[5]==0: #BMI
-            paciente[5]= media_paper[5]
+    #     if paciente[5]==0: #BMI
+    #         paciente[5]= media_paper[5]
 
     return x,y, 
 
@@ -142,19 +142,19 @@ def ejer6():
     plt.figure(1)
     plt.ylabel("Precisión [%]")
     plt.xlabel("Épocas")
-    plt.plot(epocas, np.mean(100*val_acc_kfold, axis=0), label="Validación", c='blue', alpha=0.6)
-    plt.fill_between(epocas, 100*max_acc, 100*min_acc, alpha=0.1)
+    plt.plot(epocas, np.mean(100*val_acc_kfold, axis=0), label="Validación", c='red', alpha=0.6)
+    plt.fill_between(epocas, 100*max_acc, 100*min_acc, alpha=0.1, color='red')
     
     plt.legend(loc=0)
-    plt.savefig("../docs/Figs/ejer6_acc.pdf")
+    plt.savefig("../docs/Figs/ejer6_acc_raw.pdf")
 
     plt.figure(2)
     plt.ylabel("Pérdida")
     plt.xlabel("Épocas")
-    plt.plot(epocas, np.mean(val_loss_kfold, axis=0), label="Validación", c='blue', alpha=0.6)
-    plt.fill_between(epocas, max_loss, min_loss, alpha=0.1)
+    plt.plot(epocas, np.mean(val_loss_kfold, axis=0), label="Validación", c='red', alpha=0.6)
+    plt.fill_between(epocas, max_loss, min_loss, alpha=0.1, color='red')
     plt.legend(loc=0)
-    plt.savefig("../docs/Figs/ejer6_loss.pdf")
+    plt.savefig("../docs/Figs/ejer6_loss_raw.pdf")
 
     plt.show()
     

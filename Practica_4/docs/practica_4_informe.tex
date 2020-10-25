@@ -67,6 +67,19 @@
     El modelo usa una función de pérdida MSE y el optimizador SGD con una tasa de aprendizaje 0.003. Las curvas de precisión y pérdida se muestran en las Figs.\ref{fig:ejer2_3_acc} y \ref{fig:ejer2_3_loss}, se observa que los resultados obtenidos con los mismos parámetros en \verb|Keras| superan a la implementación realizada en la práctica anterior.
 
 
+\subsection*{Ejercicio 2-4}
+
+    En este apartado resolvemos el ejercicio 4 de la práctica anterior con la librería \verb|Keras|, con la misma arquitectura que el apartado anterior. En uno de los puntos del ejercicio se pide usar la función de costo CCE, entonces al armar la red se utiliza la opción \verb|from_logits=True| para que internamente pase la salida por una sigmoidal para convertir los datos en probabilidades. El optimizador es SGD con una tasa de aprendizaje de 0.003 y regularizadores L2 en ambas capas con un factor de $0.0001$.
+
+    En las Fig.\,\ref{fig:ejer2_4_acc} y \ref{fig:ejer2_4_loss} se muestran las curvas de precisión y pérdida normalizada del conjunto de validación usando la implementación propia y \verb|Keras|. Se observa que la precisión con Keras es mayor que la implementación de la práctica anterior con los mismos parámetros, aunque se tiene overfitting usando la función de costo CCE. Se probó la CCE aumentando el factor del regularizador a $0.05$ y se observa que se evita el overfitting en las primeras 500 épocas de entrenamiento.
+
+
+
+    \subsection*{Ejercicio 2-6}
+
+    En este apartado del ejercicio se plantea resolver nuevamente el XOR de la práctica anterior. Para estos problemas se utilizaron una tasa de aprendizaje de 0.1 y un tamaño de batch de 1, la función de pérdida utilizada fue la función MSE en ambos casos, para utilizar la métrica \verb|BinaryAccuracy| en \verb|Keras|, los datos de entrenamiento son \verb|0| y \verb|1| en cambio en la implementación propia escrita para la práctica anterior se utilizaron   \verb|-1| y \verb|1| respectivamente, además de una métrica especializada para una salida binaria entre  \verb|-1| y \verb|1|.
+
+
     \begin{figure}[H]
         \begin{small}
             \begin{center}
@@ -88,41 +101,35 @@
         \end{small}
     \end{figure}
 
+    %En las Fig.\ref{fig:ejer2-6-acc} y \ref{fig:ejer2-6-los} se presentan las curva de precisión y pérdida de los modelos en función de las épocas. Utilizando los módulos de \verb|Keras| se pudo observar que la arquitectura 211 en lo general tiende a converger en más épocas que la arquitectura 221.
 
-\subsection*{Ejercicio 2-4}
 
-    En este apartado resolvemos el ejercicio 4 de la práctica anterior con la librería \verb|Keras|, con la misma arquitectura que el apartado anterior. En uno de los puntos del ejercicio se pide usar la función de costo CCE, entonces al armar la red se utiliza la opción \verb|from_logits=True| para que internamente pase la salida por una sigmoidal para convertir los datos en probabilidades. El optimizador es SGD con una tasa de aprendizaje de 0.003 y regularizadores L2 en ambas capas con un factor de $0.0001$.
 
-    En las Fig.\,\ref{fig:ejer2_4_acc} y \ref{fig:ejer2_4_loss} se muestran las curvas de precisión y pérdida normalizada del conjunto de validación usando la implementación propia y \verb|Keras|. Se observa que la precisión con Keras es mayor que la implementación de la práctica anterior con los mismos parámetros, aunque se tiene overfitting usando la función de costo CCE. Se probó la CCE aumentando el factor del regularizador a $0.05$ y se observa que se evita el overfitting en las primeras 500 épocas de entrenamiento.
+    \section*{Ejercicio 3}
+
+    En este ejercicio se implementa  una red densa para predecir la puntuación de una película dada la reseña. Este conjunto de datos consiste en 25000 reseñas de entrenamiento y validación, obtenidas de la página IMDB, que tiene dos posibles sentimientos: positivo o negativo, representados mediante 0 y 1.
+    
+    Las reseñas son listas de números que representan las palabras más usadas en inglés. El número indica cuan común es la palabra, por ejemplo la palabra representada por 1 es la palabra más común. En este ejercicio se tuvieron en cuenta las $10\,000$ palabras más usadas. El preprocesado de los datos consistió en vectorizar las reseñas de la siguiente manera: por cada reseña se tiene un vector con $10\,000$ componentes y se cuenta cuantas veces apareció un palabra en la reseña en cuestión. Por ejemplo, si la reseña contiene tres instancias de "3", la tercera componente del vector es igual a 3. Por lo tanto, tenemos un vector de $10\,000$ por cada una de las $50\,000$ reseñas.
 
     \begin{figure}[H]
         \begin{small}
             \begin{center}
                 \includegraphics[width=0.5\textwidth]{Graphs/ejer2_4_acc.pdf}
             \end{center}
-            \caption{Precisión de las curvas de validación para Keras y la implementación propia. Se cambió el valor de regularización en una ejecución para mejorar la precisión.}
+            \caption{Precisión de las curvas de validación para Keras y la implementación propia en el problema $2-4$. Se cambió el valor de regularización en una ejecución para mejorar la precisión.}
             \label{fig:ejer2_4_acc}
         \end{small}
     \end{figure}
-
 
     \begin{figure}[H]
         \begin{small}
             \begin{center}
                 \includegraphics[width=0.5\textwidth]{Graphs/ejer2_4_loss.pdf}
             \end{center}
-            \caption{Pérdida normalizada de las curvas de validación en función de las épocas.}
+            \caption{Pérdida normalizada de las curvas de validación en función de las épocas en el problema $2-4$.}
             \label{fig:ejer2_4_loss}
         \end{small}
     \end{figure}
-
-
-\subsection*{Ejercicio 2-6}
-
-    En este apartado del ejercicio se plantea resolver nuevamente el XOR de la práctica anterior. Para estos problemas se utilizaron una tasa de aprendizaje de 0.1 y un tamaño de batch de 1, la función de pérdida utilizada fue la función MSE en ambos casos, para utilizar la métrica \verb|BinaryAccuracy| en \verb|Keras|, los datos de entrenamiento son \verb|0| y \verb|1| en cambio en la implementación propia escrita para la práctica anterior se utilizaron   \verb|-1| y \verb|1| respectivamente, además de una métrica especializada para una salida binaria entre  \verb|-1| y \verb|1|.
-
-
-    %En las Fig.\ref{fig:ejer2-6-acc} y \ref{fig:ejer2-6-los} se presentan las curva de precisión y pérdida de los modelos en función de las épocas. Utilizando los módulos de \verb|Keras| se pudo observar que la arquitectura 211 en lo general tiende a converger en más épocas que la arquitectura 221.
 
     \begin{figure}[H]
         \begin{small}
@@ -146,66 +153,140 @@
 
 
 
-\section*{mmmEjercicio 3}
 
-En este ejercicio se implementa  una red densa para predecir la puntuación de una película dada la reseña. Este conjunto de datos consiste en 25000 reseñas de entrenamiento y validación, obtenidas de la página IMDB, que tiene dos posibles sentimientos: positivo o negativo.
 
-Para lograr esto se implementó la siguiente red densa:
+Se implementaron distintas redes densas, donde la siguiente arquitectura arrojó la mejor precisión:
 
 \begin{verbatim}
-_________________________________________________________________
-Layer (type)                 Output Shape              Param #   
-=================================================================
-dense (Dense)                (100)               1000100   
-___________________________________________________________
-dropout (Dropout)            (100)               0         
-___________________________________________________________
-batch_normalization (BatchNo (100)               400       
-___________________________________________________________
-dense_1 (Dense)              (30)                3030      
-___________________________________________________________
-dropout_1 (Dropout)          (30)                0         
-___________________________________________________________
-dense_2 (Dense)              (1)                 31        
-=================================================================
-Total params: 1,003,561
-Trainable params: 1,003,361
-Non-trainable params: 200
-
+______________________________________________
+Capa                     Salida     Parámetros 
+==============================================
+Densa:
+Activación: ReLU          (100)     1000100   
+Regularizador: L2 (0.01)
+______________________________________________
+Dropout (0.5)             (100)     0         
+______________________________________________
+Batch Normalization       (100)     400       
+______________________________________________
+Densa:
+Activación: ReLU          (30)      3030 
+Regularizador: L2 (0.01)
+_______________________________________________
+Dropout (0.5)             (30)      0         
+_______________________________________________
+Densa:
+Activación: Sigmoide      (1)       31        
+Regularizador: L2 (0.01) 
+===============================================
+Total parámetros: 1,003,561
+Parámetros fijos: 200
 \end{verbatim}
+Esta red utiliza el optimizador SGD con una tasa de aprendizaje de $0.001$, una función de pérdida CCE y métrica \verb|BinaryAccuracy|. Los resultados de la precisión se presentan en la Fig.\ref{fig:ejer3_acc} y la evolución de la pérdida normalizada se puede ver en la Fig.\ref{fig:ejer3_loss}. La red final alcanza una precisión del $84,8\%$
+
+\begin{figure}[H]
+    \begin{small}
+        \begin{center}
+            \includegraphics[width=0.5\textwidth]{Graphs/ejer3_acc.pdf}
+        \end{center}
+        \caption{Precisión de la red en función de las épocas}
+        \label{fig:ejer3_acc}
+    \end{small}
+\end{figure}
 
 
-La red convolucional para solucionar el problema tiene una capa de \emph{embedding}. Para utilizar esta capa definimos el tamaño máximo de reseña de 400 palabras y la cantidad de palabras consideradas $max_words=10\,000$. La capa embedding permite que en vez de tener 25000 vectores con 10000 entradas para identificar las palabras utilizadas como en el caso de la red densa, ahora tenemos 25000 vectores con 50  entradas. La red entrena para hacer la transformación óptima para bajar las dimensión del problema en la red convolucional.
+\begin{figure}[H]
+    \begin{small}
+        \begin{center}
+            \includegraphics[width=0.5\textwidth]{Graphs/ejer3_loss.pdf}
+        \end{center}
+        \caption{Pérdida normalizada con respecto al máximo en función de las épocas. }
+        \label{fig:ejer3_loss}
+    \end{small}
+\end{figure}
 
-\begin{verbatim}
-_________________________________________________________________
-Layer (type)                 Output Shape              Param #   
-=================================================================
-embedding (Embedding)        (None, 400, 50)           500000    
-_________________________________________________________________
-dropout (Dropout)            (None, 400, 50)           0         
-_________________________________________________________________
-conv1d (Conv1D)              (None, 400, 16)           3216      
-_________________________________________________________________
-max_pooling1d (MaxPooling1D) (None, 200, 16)           0         
-_________________________________________________________________
-dropout_1 (Dropout)          (None, 200, 16)           0         
-_________________________________________________________________
-flatten (Flatten)            (None, 3200)              0         
-_________________________________________________________________
-dense (Dense)                (None, 30)                96030     
-_________________________________________________________________
-dense_1 (Dense)              (None, 1)                 31        
-=================================================================
-Total params: 599,277
-Trainable params: 599,277
-Non-trainable params: 0
+Dado que la red tiene varios tipos de capas que fueron agregándose para mejorar la precisión y evitar el overfitting, en las Figs.\ref{fig:ejer3_acc_trails} y \ref{fig:ejer3_los_trails} se muestran la precisión y pérdida para los datos de validación para redes sin ciertas capas. La curva denominada como \emph{Simple} es la red densa sin ninguna capa especial. La precisión de la curva de la red final y sin Dropouts parecieran llegar a una precisión similar, pero si se observa la pérdida, la red sin Dropout presenta overfitting.
 
-\end{verbatim}
+\begin{figure}[H]
+    \begin{small}
+        \begin{center}
+            \includegraphics[width=0.5\textwidth]{Graphs/ejer3_acc_trails.pdf}
+        \end{center}
+        \caption{Precisión de las redes en función de las épocas. }
+        \label{fig:ejer3_acc_trails}
+    \end{small}
+\end{figure}
+
+
+\begin{figure}[H]
+    \begin{small}
+        \begin{center}
+            \includegraphics[width=0.5\textwidth]{Graphs/ejer3_loss_trails.pdf}
+        \end{center}
+        \caption{Pérdida normalizada con respecto al máximo en función de las épocas para distintas redes. Todas las redes, salvo la final, presentan overfitting. }
+        \label{fig:ejer3_los_trails}
+    \end{small}
+\end{figure}
+
+
+
 
 \section*{Ejercicio 4}
 
-En este ejercicio volvemos a
+    En este apartado usamos redes convolucionales para resolver el problema anterior, esta red  tiene una capa de \emph{embedding} usada en procesamiento de lenguaje natural. Para utilizar esta capa definimos el tamaño máximo de reseña de $400$ palabras y la cantidad de palabras consideradas $max_words=10\,000$. La capa embedding permite que en vez de tener $25\,000$ vectores con $10\,000$ entradas para identificar las palabras utilizadas como en el caso de la red densa, ahora tenemos $25\,000$ vectores con $50$  entradas. La red entrena para hacer la transformación óptima para bajar las dimensión del problema en la red convolucional.
+
+    A continuación se presenta con más detalles la red convolucional utilizada:
+    \begin{verbatim}
+    _____________________________________________
+    Layer (type)         Salida      Parámetros   
+    ============================================
+    Embedding           (400, 50)    500000    
+    ____________________________________________
+    Dropout(0.5)        (400, 50)    0         
+    ____________________________________________
+    Conv1D              (400, 16)    3216      
+    ____________________________________________
+    MaxPooling1D        (200, 16)    0         
+    ____________________________________________
+    Dropout (0.5)       (200, 16)    0         
+    ____________________________________________
+    Flatten             (3200)       0         
+    ____________________________________________
+    Dense               
+    Activación: relu    (30)         96030     
+    Regul.: L2(0.01)
+    ____________________________________________
+    Dense
+    Act.: Sigmoide      (1)          31    
+    Regul.: L2(0.01)    
+    ============================================
+    Total params: 599,277
+    \end{verbatim}
+
+    Esta red convolucional tiene menos parámetros que la red densa, además   usando capas convolucionales se obtiene una precisión del $89.1\%$ como se puede observar en  la Fig.\ref{fig:ejer4_acc}, obteniendo una mejor precisión que la red densa.
+
+    \begin{figure}[H]
+        \begin{small}
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{Graphs/ejer4_acc.pdf}
+            \end{center}
+            \caption{Precisión de la red en función de las épocas}
+            \label{fig:ejer4_acc}
+        \end{small}
+    \end{figure}
+
+
+    \begin{figure}[H]
+        \begin{small}
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{Graphs/ejer4_loss.pdf}
+            \end{center}
+            \caption{Pérdida normalizada con respecto al máximo en función de las épocas. }
+            \label{fig:ejer4_loss}
+        \end{small}
+    \end{figure}
+
+
 
 \section*{Ejercicio 5}
 
@@ -259,12 +340,12 @@ En este ejercicio volvemos a
 
     El preprocesado de los datos se realizó en cada entrenamiento, el mismo consistió en resta los datos por la media y dividir por la desviación estándar.
 
-    En las  Figs \ref{fig:ejer6_acc} y \ref{fig:ejer6_loss} de presentan la media de la precisión y pérdida para vez que se entrena la red. Para tener una referencia de como varían en cada entrenamiento en función de las épocas,  se muestra  la desviación estándar en cada época con el sombreado alrededor de la línea más oscura. Se observó que no se corrigen los datos nulos la red tiene una precisión menor, alcanzando una precisión media de $\sim 72\%$.
+    En las  Figs \ref{fig:ejer6_acc} y \ref{fig:ejer6_loss} de presentan la media de la precisión y pérdida para vez que se entrena la red. Para tener una referencia de como varían en cada entrenamiento en función de las épocas,  se muestra  la desviación estándar en cada época con el sombreado alrededor de la línea más oscura. Se observó que no se corrigen los datos nulos la red tiene una precisión similar a lo obtenido realizando la corrección, los resultados se muestran en las Figs. \ref{fig:ejer6_acc_raw} y \ref{fig:ejer6_loss_raw}. La diferencia principal es que la variación de la precisión media es menor con la corrección.
 
     \begin{figure}[H]
         \begin{small}
             \begin{center}
-                \includegraphics[width=0.5\textwidth]{Graphs/ejer6_acc.pdf}
+                \includegraphics[width=0.46\textwidth]{Graphs/ejer6_acc.pdf}
             \end{center}
             \caption{Precisión de la red en función de las épocas. Se muestra una estimación del error de la precisión por época. La precisión media alcanza un valor de $77.2\%$}
             \label{fig:ejer6_acc}
@@ -282,10 +363,32 @@ En este ejercicio volvemos a
         \end{small}
     \end{figure}
 
+    \begin{figure}[H]
+        \begin{small}
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{Graphs/ejer6_acc_raw.pdf}
+            \end{center}
+            \caption{Precisión de la red en función de las épocas con los datos sin corrección.}
+            \label{fig:ejer6_acc_raw}
+        \end{small}
+    \end{figure}
+
+
+
 
 \section*{Ejercicio 7}
 
     En este ejercicio se implementa una red con capas convolucionales  para eliminar el ruido de la imágenes de los dígitos del MNIST. Para esto se implementó un autoencoder que toma como entrada la imagen  con ruido y como salida se tiene la imagen sin el ruido. Para lograr esto la red tiene dos etapas: \emph{encoding} y \emph{decoding}. El \emph{encoding} toma la imagen de $28\times28\times1$ con un único canal de color y la lleva hasta una imagen de $7\times7\times32$. Mientras que en el \emph{decoding} se lleva la imagen de $7\times7\times32$ a una imagen de $28\times28\times1$.   Se modificó las dimensiones de la imagen del encoding a 8 y 16 para disminuir la cantidad de parámetros pero no obtuvo la mejor resolución con 32.
+
+    \begin{figure}[H]
+        \begin{small}
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{Graphs/ejer6_loss_raw.pdf}
+            \end{center}
+            \caption{Pérdida de la red en función de las épocas con los datos sin corrección. }
+            \label{fig:ejer6_loss_raw}
+        \end{small}
+    \end{figure}
 
     El optimizador utilizado fue el \emph{adam} con una tasa de aprendizaje de 0.001, se probó con SGD pero se obtuvo mejores resultados con la primera. La función de pérdida utilizada fue \verb|CCE| por lo que la capa de salida fue una sigmoidal. La capas ocultas tiene funciones de activación ReLU porque las imágenes tienen un valor entre 0 y 1.
 
@@ -306,7 +409,7 @@ En este ejercicio volvemos a
     \begin{figure}[H]
         \begin{small}
             \begin{center}
-                \includegraphics[width=0.5\textwidth]{Graphs/ejer7_loss.pdf}
+                \includegraphics[width=0.45\textwidth]{Graphs/ejer7_loss.pdf}
             \end{center}
             \caption{Pérdida de la red en función de las épocas. }
             \label{fig:ejer7_loss}
@@ -317,7 +420,7 @@ En este ejercicio volvemos a
     \begin{figure}[H]
         \begin{small}
             \begin{center}
-                \includegraphics[width=0.5\textwidth]{Graphs/ejer7.pdf}
+                \includegraphics[width=0.45\textwidth]{Graphs/ejer7.pdf}
             \end{center}
             \caption{Ejemplo de entrada y salida de la red posterior al entrenamiento. Se observa que el ruido se reduce y se obtiene una imagen clara del dígito en cuestión.}
             \label{fig:ejer7}
@@ -330,17 +433,14 @@ En este ejercicio volvemos a
     En este ejercicio se busca clasificar la base de datos de las imágenes de dígitos del MNIST. Se implementaron dos tipos de redes: densa y convolucional. La red dense tiene una arquitectura similar a la utilizada para clasificar las imágenes de CIFAR-10. Como se muestra a continuación:
 
     \begin{verbatim}
-    _________________________________________
     Layer           Salida        Parámetros   
     =========================================
     Dense (ReLU)    (100)         78500     
     _________________________________________
     Dense (Softmax) (10)          1010      
-    =========================================
     \end{verbatim}
     que tiene un total de  $79\,510$ parámetros. Para la red convolucional se usaron capas convolucionales y  de Max Pooling, además de capa Dropout donde ignoramos un $20\%$ de la entrada a esa capa. Esta capa es utilizada para aumentar la generalización de la red evitando el overfitting. La lista a continuación tiene más detalles de la red:
     \begin{verbatim}
-    _________________________________________
     Layer           Salida         Parámetros
     =========================================
     Conv2D          (24, 24, 30)   780     
@@ -363,16 +463,18 @@ En este ejercicio volvemos a
     Se utilizó el optimizador SGD con una tasa de aprendizaje de 0.001, también se probó utilizando el optimizador  adam pero la red tenía a tener overfitting en la red densa, incluso con una función de regularizador con parámetro de $0.1$. La función de pérdida es CCE y la última capa en ambas redes en densa con una activación softmax.
 
     En las Figs. \ref{fig:ejer8_acc} y \ref{fig:ejer8_loss} se muestran las curvas de precisión y pérdida normalizada para los datos de entrenamiento y validación para las redes mencionadas. La red convolucional tiene una mejor precisión final de $97.9\%$ en el conjunto de validación con respecto a la densa que alcanza un $93.67\%$. Otra diferencia importante es la cantidad de parámetros de las redes, la red densa utiliza  13 veces más parámetros de la red convolucional.
-
     \begin{figure}[H]
         \begin{small}
             \begin{center}
-                \includegraphics[width=0.5\textwidth]{Graphs/ejer8_acc.pdf}
+                \includegraphics[width=0.47\textwidth]{Graphs/ejer8_acc.pdf}
             \end{center}
             \caption{Precisión de la red en función de las épocas}
             \label{fig:ejer8_acc}
         \end{small}
     \end{figure}
+
+    Otro aspecto interesante de la red convolucionales es que también tienen en cuenta  la correlación espacial de los puntos en la imagen. En el caso de la red densa, donde perdemos información sobre los píxeles vecinos al hacer que las imágenes sean unidimensionales. Tenemos información en una dirección pero no podemos sacar información de las curvas que puede tener un dígito por ejemplo.
+
 
 
     \begin{figure}[H]
@@ -385,13 +487,18 @@ En este ejercicio volvemos a
         \end{small}
     \end{figure}
 
-    Otro aspecto interesante de la red convolucionales es que también tienen en cuenta  la correlación espacial de los puntos en la imagen. En el caso de la red densa, donde perdemos información sobre los píxeles vecinos al hacer que las imágenes sean unidimensionales. Tenemos información en una dirección pero no podemos sacar información de las curvas que puede tener un dígito por ejemplo.
 
 \section*{Ejercicio 9}
 
     Utilizando la red convolucional anterior, volvemos a clasificar las imágenes de los dígitos del MNIST, salvo que ahora hacemos una permutación de los valores de intensidad de los píxeles. 
 
     En las Figs. \ref{fig:ejer9_acc} y \ref{fig:ejer9_loss} se muestran las curvas de precisión y pérdida normalizada para la red con los datos originales y permutados. La red entrenada los datos permutados alcanza una precisión  de $93.8\%$, que es menor con respecto a la red entrenada con los datos originales. Esto se debe a que se pierde información de la correlación especial de los píxeles de un dígito, como el borde, curva y forma. A pesar de esto, la red puede encontrar correlaciones entres los puntos permutados  y aprender a identificar los dígitos modificados.
+
+
+
+\section*{Ejercicio 10}
+
+En este ejercicio se implementan redes similares a las redes AlexNet y VGG16 para clasificar las imágenes de CIFAR-10 y CIFAR-100. Estas redes convolucionales se estructuraron como se muestra a continuación:
 
     \begin{figure}[H]
         \begin{small}
@@ -416,8 +523,137 @@ En este ejercicio volvemos a
 
 
 
-\section*{mmmEjercicio 10}
+\subsection*{Red basada en VGG16}
+\begin{verbatim}
+Capa                Salida           Parámetros
+===============================================
+Conv2D              (32, 32, 64)      1792     
+_______________________________________________
+Conv2D              (32, 32, 64)      36928    
+_______________________________________________
+MaxPooling2D        (16, 16, 64)      0        
+_______________________________________________
+Conv2D)             (16, 16, 128)     73856    
+_______________________________________________
+MaxPooling2D        (8, 8, 128)       0        
+_______________________________________________
+Conv2D              (8, 8, 256)       295168   
+_______________________________________________
+Conv2D              (8, 8, 256)       590080   
+_______________________________________________
+MaxPooling2D        (4, 4, 256)       0        
+_______________________________________________
+Conv2D              (4, 4, 512)       1180160  
+_______________________________________________
+MaxPooling2D        (2, 2, 512)       0        
+_______________________________________________
+Conv2D              (2, 2, 512)       2359808  
+_______________________________________________
+MaxPooling2D        (1, 1, 512)       0        
+_______________________________________________
+Flatten             (512)             0        
+_______________________________________________
+Dense                                          
+Activación: ReLU    (1000)            513000   
+Regul.: L2(0.001)
+_______________________________________________
+Dense                                          
+Activación: ReLU    (1000)            1001000  
+Regul.: L2(0.001)
+_______________________________________________
+Dense                                          
+Activación: Lineal  (100)             100100   
+Regul.: L2(0.001)
+===============================================
+Total parámetros: 6,151,892
+\end{verbatim}
 
+\subsection*{Capa basada en AlexNet}
+
+\begin{verbatim}
+Capa                Salida           Parámetros
+===============================================
+Conv2D              (16, 16, 96)     34944  
+_______________________________________________
+MaxPooling2D        (8, 8, 96)       0      
+_______________________________________________
+Conv2D              (8, 8, 256)      614656 
+_______________________________________________
+MaxPooling2D        (4, 4, 256)      0      
+_______________________________________________
+Conv2D              (4, 4, 256)      590080 
+_______________________________________________
+Conv2D              (4, 4, 192)      442560 
+_______________________________________________
+MaxPooling2D        (2, 2, 192)      0      
+_______________________________________________
+Flatten             (768)            0      
+_______________________________________________
+Batch Normalization (768)            3072   
+_______________________________________________
+Dense                                          
+Activación: ReLU    (2048)           1574912
+_______________________________________________
+Dense                                          
+Activación: ReLU    (500)            1024500
+_______________________________________________
+Dropout (0.4)       (500)            0      
+_______________________________________________
+Dense                                          
+Activación: Lineal  (100)            50100  
+===============================================
+Total parámetros: 4,334,824
+Parámetros fijos: 1,536
+\end{verbatim}
+
+
+Para estas redes se utilizó el optimizador Adam con una tasa de aprendizaje de 0.001, la función CCE como función de pérdida y la función \verb|CategoricalAccuracy| como métrica.
+
+Las curvas obtenidas con estas redes se muestran en las Figs. \ref{fig:ejer10_acc_cifar10} y \ref{fig:ejer10_loss_cifar10}. En este trabajo, la red basada en la red VGG 16 obtuvo la mejor precisión en clasificar el CIFAR-10
+
+\begin{figure}[H]
+    \begin{small}
+        \begin{center}
+            \includegraphics[width=0.45\textwidth]{Graphs/ejer10_acc_cifar10.pdf}
+        \end{center}
+        \caption{Precisión para el CIFAR-10 con distintas redes en función de las épocas}
+        \label{fig:ejer10_acc_cifar10}
+    \end{small}
+\end{figure}
+
+
+\begin{figure}[H]
+    \begin{small}
+        \begin{center}
+            \includegraphics[width=0.45\textwidth]{Graphs/ejer10_loss_cifar10.pdf}
+        \end{center}
+        \caption{Pérdida para el CIFAR-10 con distintas redes en función de las épocas}
+        \label{fig:ejer10_loss_cifar10}
+    \end{small}
+\end{figure}
+
+Las Figs. \ref{fig:ejer10_acc_cifar100} y \ref{fig:ejer10_loss_cifar100} muestran la precisión y pérdida de las redes implementadas. En este caso También la red basada en la red VGG 16 obtuvo la mejor precisión en clasificar el CIFAR-100, aunque la red presenta un overfitting y es muy ruidosa. En este trabajo no se encontró parámetros que resulten en mejores curvas.
+
+
+\begin{figure}[H]
+    \begin{small}
+        \begin{center}
+            \includegraphics[width=0.5\textwidth]{Graphs/ejer10_acc_cifar100.pdf}
+        \end{center}
+        \caption{Precisión para el CIFAR-100 con distintas redes en función de las épocas}
+        \label{fig:ejer10_acc_cifar100}
+    \end{small}
+\end{figure}
+\vfill\eject
+\begin{figure}[H]
+    \begin{small}
+        \begin{center}
+            \includegraphics[width=0.5\textwidth]{Graphs/ejer10_loss_cifar100.pdf}
+        \end{center}
+        \caption{Pérdida para el CIFAR-100 con distintas redes en función de las épocas}
+        \label{fig:ejer10_loss_cifar100}
+    \end{small}
+\end{figure}
 
 \begin{thebibliography}{99}
 
