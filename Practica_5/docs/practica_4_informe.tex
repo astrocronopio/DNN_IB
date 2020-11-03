@@ -12,10 +12,12 @@
 \maketitle
 
 \section*{Ejercicio 3}
+\emph{Proponga un ejemplo para aplicar los conceptos de transferencia de aprendizaje y discuta si los resultados obtenidos eran los esperados.  ¿Cuándo se puede esperar que este tipo de técnicas funciones bien, y cuándo no?}
 
-En este ejercicio se utilizó la red \verbMobileNet
 
-\begin{figure}
+En este ejercicio se utilizó la red \verb|MobileNet|
+
+\begin{figure}[H]
     \begin{small}
         \begin{center}
             \includegraphics[width=0.5\textwidth]{Figs/ejer3_acc.pdf}
@@ -27,7 +29,7 @@ En este ejercicio se utilizó la red \verbMobileNet
 
 
 
-\begin{figure}
+\begin{figure}[H]
     \begin{small}
         \begin{center}
             \includegraphics[width=0.5\textwidth]{Figs/ejer3_loss.pdf}
@@ -36,6 +38,75 @@ En este ejercicio se utilizó la red \verbMobileNet
         \label{fig:ejer3_acc}
     \end{small}
 \end{figure}
+
+
+\section*{Ejercicio 4}
+\emph{Utilizando los datos y la arquitectura que considere oportuna describir los distintos procesos para observar lo que la red neuronal ha aprendido.1}
+
+\begin{figure}[H]
+    \begin{small}
+        \begin{center}
+            \includegraphics[width=0.25\textwidth]{Figs/random_init_img_epochs_50.pdf}
+        \end{center}
+        \caption{}
+        \label{fig:random_init}
+    \end{small}
+\end{figure}
+
+
+\begin{figure}[H]
+    \begin{small}
+        \begin{center}
+            \includegraphics[width=0.5\textwidth]{Figs/random_filters_epochs_50.pdf}
+        \end{center}
+        \caption{}
+        \label{fig:random_filters}
+    \end{small}
+\end{figure}
+
+\begin{figure}[H]
+    \begin{small}
+        \begin{center}
+            \includegraphics[width=0.25\textwidth]{Figs/sin_init_img_epochs_50.pdf}
+        \end{center}
+        \caption{}
+        \label{fig:sin_init}
+    \end{small}
+\end{figure}
+
+
+
+\begin{figure}[H]
+    \begin{small}
+        \begin{center}
+            \includegraphics[width=0.5\textwidth]{Figs/sin_filters_epochs_50.pdf}
+        \end{center}
+        \caption{}
+        \label{fig:sin_filters}
+    \end{small}
+\end{figure}
+
+\begin{figure}[H]
+    \begin{small}
+        \begin{center}
+            \includegraphics[width=0.25\textwidth]{Figs/perr2_init_img_epochs_50.pdf}
+        \end{center}
+        \caption{}
+        \label{fig:perro_init}
+    \end{small}
+\end{figure}
+
+
+\begin{figure}[H]
+    \begin{small}
+        \begin{center}
+            \includegraphics[width=0.5\textwidth]{Figs/perr2_filters_epochs_50.pdf}
+        \end{center}
+        \caption{}
+        \label{fig:perro_filters}
+    \end{small}
+\end{figure}
+
 
 
 

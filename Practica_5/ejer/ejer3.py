@@ -23,13 +23,13 @@ import tensorflow as tf
 
 def plot_ejercicio(history):   
      
-    acc_E = 100*np.array(history.history['acc'])
-    acc_V  = 100*np.array(history.history['val_acc'])
+    acc_train = 100*np.array(history.history['acc'])
+    acc_test  = 100*np.array(history.history['val_acc'])
 
     loss = np.array(history.history['loss'])
     val_loss  = np.array(history.history['val_loss'])  
     
-    return acc_E, acc_V, loss, val_loss
+    return acc_train, acc_test, loss, val_loss
 
 def preprocessing(X, Y):
     X = mobilenet.preprocess_input(X)
@@ -39,14 +39,14 @@ def preprocessing(X, Y):
 
 def ejer3_fine_tuning(n_epochs):
     input_image = Input(shape=(32, 32, 3))
-    (x_E, y_E), (x_V, y_V) = cifar10.load_data()
-    x_E, y_E = preprocessing(x_E, y_E)
-    x_V, y_V = preprocessing(x_V, y_V)
+    (x_train, y_train), (x_test, y_test) = cifar10.load_data()
+    x_train, y_train = preprocessing(x_train, y_train)
+    x_test, y_test = preprocessing(x_test, y_test)
     
     model_keras = MobileNet( include_top=False,
                             weights="imagenet",
                             input_tensor=input_image)
-    model_keras.Eable = False
+    model_keras.trainable = False
 
     model = Sequential()
     model.add(model_keras)
@@ -62,8 +62,8 @@ def ejer3_fine_tuning(n_epochs):
     model.summary()
     
     history = model.fit(
-                        x_E, y_E,
-                        validation_data=(x_V, y_V),
+                        x_train, y_train,
+                        validation_data=(x_test, y_test),
                         batch_size=50,
                         epochs=20,
                         verbose=1
@@ -83,7 +83,7 @@ def ejer3_fine_tuning(n_epochs):
     VAL_LOSS = np.append(VAL_LOSS, val_loss)
     
     
-    model_keras.Eable = True
+    model_keras.trainable = True
     
     model.compile(loss=losses.CategoricalCrossentropy(), 
                   optimizer=optimizers.Adam(learning_rate=0.00001), 
@@ -92,8 +92,8 @@ def ejer3_fine_tuning(n_epochs):
     model.summary()
     
     history = model.fit(
-                        x_E, y_E,
-                        validation_data=(x_V, y_V),
+                        x_train, y_train,
+                        validation_data=(x_test, y_test),
                         batch_size=50,
                         epochs=n_epochs,
                         verbose=1
@@ -114,14 +114,14 @@ def ejer3_fine_tuning(n_epochs):
     
 def ejer3_none(n_epochs):
     input_image = Input(shape=(32, 32, 3))
-    (x_E, y_E), (x_V, y_V) = cifar10.load_data()
-    x_E, y_E = preprocessing(x_E, y_E)
-    x_V, y_V = preprocessing(x_V, y_V)
+    (x_train, y_train), (x_test, y_test) = cifar10.load_data()
+    x_train, y_train = preprocessing(x_train, y_train)
+    x_test, y_test = preprocessing(x_test, y_test)
     
     model_keras = MobileNet( include_top=False,
                             weights=None,
                             input_tensor=input_image)
-    #model_keras.Eable = False
+    #model_keras.trainable = False
 
     model = Sequential()
     model.add(model_keras)
@@ -137,8 +137,8 @@ def ejer3_none(n_epochs):
     model.summary()
     
     history = model.fit(
-                        x_E, y_E,
-                        validation_data=(x_V, y_V),
+                        x_train, y_train,
+                        validation_data=(x_test, y_test),
                         batch_size=50,
                         epochs=n_epochs,
                         verbose=1
@@ -152,14 +152,14 @@ def ejer3_none(n_epochs):
     
 def ejer3_imagenet(n_epochs):
     input_image = Input(shape=(32, 32, 3))
-    (x_E, y_E), (x_V, y_V) = cifar10.load_data()
-    x_E, y_E = preprocessing(x_E, y_E)
-    x_V, y_V = preprocessing(x_V, y_V)
+    (x_train, y_train), (x_test, y_test) = cifar10.load_data()
+    x_train, y_train = preprocessing(x_train, y_train)
+    x_test, y_test = preprocessing(x_test, y_test)
     
     model_keras = MobileNet( include_top=False,
                             weights="imagenet",
                             input_tensor=input_image)
-    #model_keras.Eable = False
+    #model_keras.trainable = False
 
     model = Sequential()
     model.add(model_keras)
@@ -175,8 +175,8 @@ def ejer3_imagenet(n_epochs):
     model.summary()
     
     history = model.fit(
-                        x_E, y_E,
-                        validation_data=(x_V, y_V),
+                        x_train, y_train,
+                        validation_data=(x_test, y_test),
                         batch_size=50,
                         epochs=n_epochs,
                         verbose=1
