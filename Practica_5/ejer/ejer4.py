@@ -12,6 +12,8 @@ import tensorflow as tf
 img_w = 300
 img_h = 300
 crop_img = 5
+
+#instanciamos el modelo
 model = MobileNet(weights="imagenet", 
                   include_top=False)
 
@@ -24,8 +26,8 @@ La siguiente función se la copié a Chollet sin asco,
 es la única cosa que no terminé de entender
 """
 def compute_loss(input_image, layer_filter):
-    activation = feature_extractor(input_image) #
-    filter_activation = activation[:, 2:-2, 2:-2, layer_filter]
+    activation = feature_extractor(input_image) # Esta es la imagen de salida, usando al model como función
+    filter_activation = activation[:, 2:-2, 2:-2, layer_filter] # los 2 son por los bordes
     return tf.reduce_mean(filter_activation)
 """
 """
@@ -53,8 +55,8 @@ def init_image():
     """
     Imagenes del perro y del triceratops
     """
-    #image = load_img("dog.10003.jpg",  target_size=(img_w, img_h, 3))
-    #image = load_img("socutteeee.png", target_size=(img_w, img_h, 3))
+    #image = load_img("./Data_files/dog.10003.jpg",  target_size=(img_w, img_h, 3))
+    #image = load_img("./Data_files/socutteeee.png", target_size=(img_w, img_h, 3))
     
     # input_arr = img_to_array(image) 
     

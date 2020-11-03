@@ -149,6 +149,44 @@ def ejer3_none(n_epochs):
     np.savetxt("ejer3{}epochs{}_mobilenet.txt".format("_none_", n_epochs),
                 np.array([ acc, val_acc, loss, val_loss ]).T)
     
+def ejer3_imagenet_fixed(n_epochs):
+    input_image = Input(shape=(32, 32, 3))
+    (x_train, y_train), (x_test, y_test) = cifar10.load_data()
+    x_train, y_train = preprocessing(x_train, y_train)
+    x_test, y_test = preprocessing(x_test, y_test)
+    
+    model_keras = MobileNet( include_top=False,
+                            weights="imagenet",
+                            input_tensor=input_image)
+    model_keras.trainable = False
+
+    model = Sequential()
+    model.add(model_keras)
+    model.add(Flatten())
+    model.add(Dropout(0.1))
+    model.add(BatchNormalization())
+    model.add(Dense(10, activation='softmax'))
+    
+    model.compile(loss=losses.CategoricalCrossentropy(), 
+                  optimizer=optimizers.Adam(learning_rate=0.00001), 
+                  metrics=[metrics.CategoricalAccuracy('acc')]) 
+    
+    model.summary()
+    
+    history = model.fit(
+                        x_train, y_train,
+                        validation_data=(x_test, y_test),
+                        batch_size=50,
+                        epochs=n_epochs,
+                        verbose=1
+                        )
+    
+    acc, val_acc, loss, val_loss =  plot_ejercicio(history)    
+    
+    np.savetxt("ejer3{}epochs{}_mobilenet_fixed.txt".format("_imagenet_", n_epochs),
+                np.array([ acc, val_acc, loss, val_loss ]).T)
+        
+
     
 def ejer3_imagenet(n_epochs):
     input_image = Input(shape=(32, 32, 3))
@@ -189,20 +227,20 @@ def ejer3_imagenet(n_epochs):
         
     
 
-import matplotlib.pyplot as plt
-import matplotlib as mpl
-mpl.rcParams.update({
-	'font.size': 20,
-	'figure.figsize': [12, 8],
-	'figure.autolayout': True,
-	'font.family': 'serif',
-	'font.sans-serif': ['Palatino']})
-cmap = plt.get_cmap('viridis_r',9)
+# import matplotlib.pyplot as plt
+# import matplotlib as mpl
+# mpl.rcParams.update({
+# 	'font.size': 20,
+# 	'figure.figsize': [12, 8],
+# 	'figure.autolayout': True,
+# 	'font.family': 'serif',
+# 	'font.sans-serif': ['Palatino']})
+# cmap = plt.get_cmap('viridis_r',9)
     
 def plot_ejer(n_epochs):
-    acc_1, val_acc_1, loss_1, val_loss_1 = np.loadtxt("./ejer3_none_epochs100_mobilenet.txt", unpack=True)
-    acc_2, val_acc_2, loss_2, val_loss_2 = np.loadtxt("ejer3_imagenet_epochs100_mobilenet.txt", unpack=True)
-    acc_3, val_acc_3, loss_3, val_loss_3 = np.loadtxt("./ejer3_fine_tuning_epochs80_mobilenet.txt", unpack=True)
+    acc_1, val_acc_1, loss_1, val_loss_1 = np.loadtxt("./Data_files/ejer3_none_epochs100_mobilenet.txt", unpack=True)
+    acc_2, val_acc_2, loss_2, val_loss_2 = np.loadtxt("./Data_files/ejer3_imagenet_epochs100_mobilenet.txt", unpack=True)
+    acc_3, val_acc_3, loss_3, val_loss_3 = np.loadtxt("./Data_files/ejer3_fine_tuning_epochs80_mobilenet.txt", unpack=True)
     
     
     plt.figure(1)
