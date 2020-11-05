@@ -16,6 +16,8 @@ mpl.rcParams.update({
 'font.family': 'serif',
 'font.sans-serif': ['Palatino']})
 
+cmap = plt.get_cmap('viridis',5)
+
 class arbol_decision(object):
     def __init__(self, type_tree):
         self.tree = type_tree
@@ -25,6 +27,11 @@ class arbol_decision(object):
         
     def test_tree(self, X_test):
         return self.tree.predict(X_test)
+    
+    def error(self, x, y):
+        y_pred = self.tree.predict(x)
+        error=np.sum((y-y_pred)**2)/len(y)**2
+        return error
     
     def acc_error(self, y_pred,train_x, train_y, val_x, val_y ):
         self.acc= self.tree.score(train_x, train_y)
@@ -56,6 +63,19 @@ class arbol_decision(object):
         fig1.savefig("fit_"+plot_path)
         plt.show()
 
+class bosque_decision(arbol_decision):
+    """
+    un bosque xD
+    """
+    pass
+
+    def feat_import(self):
+        self.feature_importances = np.mean(
+        [tree.feature_importances_ for tree in self.tree.estimators_ ]
+        , axis=0)
+        return self.feature_importances
+    
+
 def data_loading():
     df = pandas.read_csv("./Carseats.csv", header='infer')
     df.replace(('Yes', 'No'), (1, 0), inplace=True)
@@ -80,7 +100,6 @@ def split_data(train, val, df):
 def separate_data(data):
     return  data[:,1:-2], data[:,0], data[:,-1]
 
-
 def item_B(train_x, train_y, val_x, val_y, plot_option=False):
     B_tree = arbol_decision(DecisionTreeClassifier(max_depth=2))
     B_tree.train_tree(train_x, train_y)
@@ -100,45 +119,47 @@ def item_C(train_x, train_y, val_x, val_y, plot_option=False):
         C_tree.plot_save_tree(val_y, y_pred, "C_tree.pdf")
 
     C_tree.acc_error(y_pred,train_x, train_y, val_x, val_y ) 
+
+def item_E_CV(train_x, train_y, val_x, val_y, plot_option=False):
+    parameters = {'max_depth':range(1,20), 'ccp_alpha':np.arange(0,1,0.02)}
+    E_tree = GridSearchCV(DecisionTreeRegressor(), parameters)
+    E_tree.fit(X=train_x, y=train_y)
+    tree_model = E_tree.best_estimator_
+    print("Profundidad óptima / Ccp óptimo\n")
+    print (E_tree.best_score_, E_tree.best_params_)    
     
-    parameters = {'max_depth':range(2,20)}
-    clf = GridSearchCV(DecisionTreeRegressor(), parameters)
-    clf.fit(X=train_x, y=train_y)
-    tree_model = clf.best_estimator_
-    print("Profundidad óptima\n")
-    print (clf.best_score_, clf.best_params_) 
-    
-def item_E(train_x, train_y, val_x, val_y, plot_option=False):
+def item_E_prunning(train_x, train_y, val_x, val_y, plot_option=False):
     E_tree = DecisionTreeRegressor(random_state=0)
     parameters = E_tree.cost_complexity_pruning_path(train_x, train_y)
     ccp_alphas, impurities = parameters.ccp_alphas, parameters.impurities
 
     regressor_forest = []
     for ccp_alpha in ccp_alphas:
-        regressor_tree = DecisionTreeRegressor(random_state=0, ccp_alpha=ccp_alpha)
-        regressor_tree.fit(train_x, train_y)
+        regressor_tree = arbol_decision(DecisionTreeRegressor(random_state=0, ccp_alpha=ccp_alpha))
+        regressor_tree.train_tree(train_x, train_y)
         regressor_forest.append(regressor_tree)
     
-    nodo_per_tree= [arbol.tree_.node_count for arbol in regressor_forest]
-    max_depth = [arbol.tree_.max_depth for arbol in regressor_forest]
+    nodo_per_tree= [arbol.tree.tree_.node_count for arbol in regressor_forest]
+    max_depth    = [arbol.tree.tree_.max_depth for arbol in regressor_forest]
     
-    train_scores = [arbol.score(train_x, train_y) for arbol in regressor_forest]
-    test_scores = [arbol.score(val_x, val_y) for arbol in regressor_forest]
+    train_scores = [arbol.error(train_x, train_y) for arbol in regressor_forest]
+    test_scores = [arbol.error(val_x, val_y) for arbol in regressor_forest]
     
     
     fig,ax = plt.subplots()
-    ax.set_ylabel("accuracy")
+    ax.set_ylabel("error")
     ax.set_xlabel("ccp $\\alpha$")
-    ax.plot(ccp_alphas[:-2], train_scores[:-2], marker='o', label="train",drawstyle="steps-post", color="blue", alpha=0.7)
-    ax.plot(ccp_alphas[:-2], test_scores[:-2], marker='s', label="val",drawstyle="steps-post", color="red", alpha=0.7)
-    ax.legend(loc=0)
+    ax.plot(ccp_alphas[:-2], train_scores[:-2], marker='o', label="train",drawstyle="steps-post", color=cmap(1), alpha=0.7)
+    ax.plot(ccp_alphas[:-2], test_scores[:-2], marker='s', label="val",drawstyle="steps-post", color=cmap(2), alpha=0.7)
+    ax.legend(loc='center')
+    
     ax2=ax.twinx()
-    ax2.plot(ccp_alphas[:-2], max_depth[:-2], marker='^', label="profundidad",drawstyle="steps-post", color="green", alpha=0.7)
+    ax2.plot(ccp_alphas[:-2], max_depth[:-2], marker='^', label="profundidad",drawstyle="steps-post", color=cmap(3), alpha=0.7)
     ax2.set_ylabel("Profundidad")
     ax2.legend(loc='center right')
     
     
-    E_tree_optimo = arbol_decision(DecisionTreeRegressor(max_depth=5, ccp_alpha=0.25))
+    E_tree_optimo = arbol_decision(DecisionTreeRegressor(max_depth=5, ccp_alpha=0.2))
     E_tree_optimo.train_tree(train_x, train_y)
     y_pred = E_tree_optimo.test_tree(val_x)
 
@@ -150,76 +171,65 @@ def item_E(train_x, train_y, val_x, val_y, plot_option=False):
     E_tree_optimo.acc_error(y_pred,train_x, train_y, val_x, val_y )
 
 def item_F(train_x, train_y, val_x, val_y, plot_option=False):
-    F_tree = arbol_decision(BaggingRegressor(base_estimator_= None,  n_estimators=8, random_state=0))
+    F_tree = DecisionTreeRegressor()
+    F_tree.fit(train_x, train_y)
+    feature_simple =F_tree.feature_importances_
+    error_simple = F_tree.error(val_x, val_y)
     
-    FF_tree = arbol_decision(DecisionTreeRegressor(max_depth=1, random_state=0))
-    F_tree.train_tree(train_x, train_y)
-    y_pred = F_tree.test_tree(val_x)
-
-    FF_tree.train_tree(train_x, train_y)
-    yFF_pred = FF_tree.test_tree(val_x)
-
-    plt.figure(5)
-    plt.xlabel("Dato")
-    plt.ylabel("Predicho")
-    plt.scatter(val_y, y_pred, alpha=0.6)
-    plt.scatter(val_y, yFF_pred, c='red', alpha=0.6)
+    F_bosque = bosque_decision(BaggingRegressor(DecisionTreeRegressor(), n_estimators=25))
+    F_bosque.fit(train_x, train_y)
+    feature_importances = F_bosque.feat_import()
+    error = F_bosque.error(val_x, val_y)
     
-    plt.plot(val_y, val_y, color='black', alpha=0.6)
-    plt.savefig("F_tree.pdf")
-    plt.show()
-                 
-    print("Error <F_tree>: {} errores de {}. {}%, acc:{}, val_acc:{}".format(                                                                  
-            np.sum(val_y-y_pred), len(val_y), 
-            100*np.sum(val_y-y_pred)/len(val_y),
-            F_tree.tree.score(train_x, train_y),
-            F_tree.tree.score(val_x, val_y)))
-    
-    print("Error <FF_tree>: {} errores de {}. {}%, acc:{}, val_acc:{}".format(                                                                  
-        np.sum(val_y-yFF_pred), len(val_y), 
-        100*np.sum(val_y-yFF_pred)/len(val_y),
-        FF_tree.tree.score(train_x, train_y),
-        FF_tree.tree.score(val_x, val_y)))
+    print("Simple Tree: ", feature_simple)
+    print("Simple Error: ", error_simple)
+    print("\n=======\nBagging: ",feature_importances)
+    print("Bagging Error: ",error)
   
-def item_G(train_x, train_y, val_x, val_y, plot_option=False):
-    E_tree = RandomForestRegressor(random_state=0)
-    parameters = E_tree.cost_complexity_pruning_path(train_x, train_y)
-    ccp_alphas, impurities = parameters.ccp_alphas, parameters.impurities
-
-    regressor_forest = []
-    for ccp_alpha in ccp_alphas:
-        regressor_tree = DecisionTreeRegressor(random_state=0, ccp_alpha=ccp_alpha)
-        regressor_tree.fit(train_x, train_y)
-        regressor_forest.append(regressor_tree)
+def item_G_H(train_x, train_y, val_x, val_y, bosque_type):
+    G_bosque = bosque_decision(RandomForestRegressor(n_estimators=25))
+    i=0
+    if bosque_type=="AdaBoost":
+        G_bosque = bosque_decision(RandomForestRegressor(n_estimators=25))
+        print(bosque_type)
+        i=2
+        
+    G_bosque.train_tree(train_x, train_y)
     
-    nodo_per_tree= [arbol.tree_.node_count for arbol in regressor_forest]
-    max_depth = [arbol.tree_.max_depth for arbol in regressor_forest]
+    feature_importances = G_bosque.feat_import()
+    error = G_bosque.error(val_x, val_y)
     
-    train_scores = [arbol.score(train_x, train_y) for arbol in regressor_forest]
-    test_scores = [arbol.score(val_x, val_y) for arbol in regressor_forest]
+    print(bosque_type+": ",feature_importances)
+    print(bosque_type+" Error: ",error)
     
+    max_feat = np.arange(1,10,1)
+    max_de= np.arange(1,20,1)
     
-    fig,ax = plt.subplots()
-    ax.set_ylabel("accuracy")
-    ax.set_xlabel("ccp $\\alpha$")
-    ax.plot(ccp_alphas[:-2], train_scores[:-2], marker='o', label="train",drawstyle="steps-post", color="blue", alpha=0.7)
-    ax.plot(ccp_alphas[:-2], test_scores[:-2], marker='s', label="val",drawstyle="steps-post", color="red", alpha=0.7)
-    ax.legend(loc=0)
-    ax2=ax.twinx()
-    ax2.plot(ccp_alphas[:-2], max_depth[:-2], marker='^', label="profundidad",drawstyle="steps-post", color="green", alpha=0.7)
-    ax2.set_ylabel("Profundidad")
-    ax2.legend(loc='center right')
-
-    G_tree =  arbol_decision(RandomForestRegressor())
-    G_tree.train_tree(train_x, train_y)
-    y_pred = G_tree.test_tree(val_x)
+    regressor_forest_de = []
+    error_de=np.array([])
     
-    if plot_option==True:
-        G_tree.plot_save_tree(val_y, y_pred, "G_tree.pdf")
+    regressor_forest_feat = []
+    error_feat=np.array([])
     
-    G_tree.acc_error(y_pred,train_x, train_y, val_x, val_y )  
+    for max_f in max_feat:
+        regressor_tree = bosque_decision(RandomForestRegressor(max_features=max_f))
+        regressor_tree.train_tree(train_x, train_y)
+        regressor_forest_feat.append(regressor_tree)
+        error_feat = np.append(error_feat, regressor_tree.error(val_x, val_y))
+        
+    for max_d in max_de:
+        regressor_tree = bosque_decision(RandomForestRegressor(max_depth=max_d))
+        regressor_tree.train_tree(train_x, train_y)
+        regressor_forest_de.append(regressor_tree)
+        error_de = np.append(error_de, regressor_tree.error(val_x, val_y))
     
-    pass
+    plt.figure(3)
+    plt.plot(max_feat, error_feat, c=cmap(0+i),label="Features: "+bosque_type)
+    plt.legend(loc=0)
+    
+    plt.figure(4)   
+    plt.plot(max_de, error_de, c=cmap(2+i),label="Profundidad: "+bosque_type)
+    plt.legend(loc=0)
           
 def main():    
     data = data_loading()        
@@ -235,14 +245,20 @@ def main():
     # item_C(train_split, train_sales, val_split, val_sales )
     
     print("Tree E")
-    # item_E(train_split, train_sales, val_split, val_sales)
+    # item_E_CV(train_split, train_sales, val_split, val_sales)
+    # item_E_prunning(train_split, train_sales, val_split, val_sales)
     
     print("Tree F")
     # item_F(train_split, train_sales, val_split, val_sales)
     
     print("Tree G")
-    #item_G(train_split, train_sales, val_split, val_sales, True)
+    # item_G_H(train_split, train_sales, val_split, val_sales, "Random")
     
+    print("Tree H")
+    # item_G_H(train_split, train_sales, val_split, val_sales, "AdaBoost")
+    
+    plt.show()
+
 
 if __name__ == '__main__':
     main()
