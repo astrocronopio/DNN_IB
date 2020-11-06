@@ -36,21 +36,25 @@ class arbol_decision(object):
     def acc_error(self, y_pred,train_x, train_y, val_x, val_y ):
         self.acc= self.tree.score(train_x, train_y)
         self.val_acc= self.tree.score(val_x, val_y)
-        self.error=np.sum((val_y-y_pred)**2)/len(val_y)**2
-        print("Error <tree>: {} de error de {} ejemplos. {}%, acc:{}, val_acc:{}".format(                                                                  
-                self.error, len(val_y), 100*np.sum(val_y-y_pred)/len(val_y),
-                self.acc, self.val_acc))        
+        error=self.error(train_x, train_y)
+        val_error=self.error(val_x, val_y)
+        
+        print("Error <tree>: error:{}/val_error:{}  de {} ejemplos. {}%, acc:{}, val_acc:{}".format(                                                                  
+                error, val_error, len(val_y), 100*np.sum(val_y-y_pred)/len(val_y),
+                self.acc, self.val_acc))    
+        print( "Profundidad: {} \t Leaves: {}".format(self.tree.get_depth(), self.tree.get_n_leaves()))
     
     def plot_save_tree(self, val_y, y_pred, plot_path):
         names= ["CompPrice","Income","Advertising",
         "Population","Precio","Posición en vitrina","Edad",
         "Education","Urban","US"]
         plt.figure(12)
-        plot_tree(self.tree, filled=True, feature_names=names, rounded=True, fontsize=16,
-        class_names=["Por encima  de 8", "Por debajo de 8"])
+        plot_tree(self.tree, filled=True, feature_names=names, rounded=True, fontsize=21,
+        class_names=["Por encima  de 8", "Por debajo de 8"], max_depth=2)
+        
         
         fig = mpl.pyplot.gcf()
-        fig.set_size_inches(14, 12)
+        fig.set_size_inches(13, 11.5)
         fig.savefig("tree_"+plot_path)
         
         plt.figure(5)
@@ -101,7 +105,7 @@ def separate_data(data):
     return  data[:,1:-2], data[:,0], data[:,-1]
 
 def item_B(train_x, train_y, val_x, val_y, plot_option=False):
-    B_tree = arbol_decision(DecisionTreeClassifier(max_depth=2))
+    B_tree = arbol_decision(DecisionTreeClassifier())
     B_tree.train_tree(train_x, train_y)
     y_pred = B_tree.test_tree(val_x)
     
@@ -111,7 +115,7 @@ def item_B(train_x, train_y, val_x, val_y, plot_option=False):
     B_tree.acc_error(y_pred,train_x, train_y, val_x, val_y )        
     
 def item_C(train_x, train_y, val_x, val_y, plot_option=False):
-    C_tree = arbol_decision(DecisionTreeRegressor(max_depth=2))
+    C_tree = arbol_decision(DecisionTreeRegressor())
     C_tree.train_tree(train_x, train_y)
     y_pred = C_tree.test_tree(val_x)
 
@@ -239,10 +243,10 @@ def main():
     val_split, val_sales, val_high = separate_data(val)
     
     print("Tree B")
-    item_B(train_split, train_high, val_split, val_high)
+    # item_B(train_split, train_high, val_split, val_high, True)
     
     print("Tree C")
-    # item_C(train_split, train_sales, val_split, val_sales )
+    item_C(train_split, train_sales, val_split, val_sales)
     
     print("Tree E")
     # item_E_CV(train_split, train_sales, val_split, val_sales)
