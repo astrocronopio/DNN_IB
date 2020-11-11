@@ -8,15 +8,15 @@ from tensorflow.keras.optimizers import Adam
 import numpy as np
 import pandas 
 
-import matplotlib.pyplot as plt
-import matplotlib as mpl
-mpl.rcParams.update({
-	'font.size': 20,
-	'figure.figsize': [12, 8],
-	'figure.autolayout': True,
-	'font.family': 'serif',
-	'font.sans-serif': ['Palatino']})
-cmap = plt.get_cmap('viridis',8)
+# import matplotlib.pyplot as plt
+# import matplotlib as mpl
+# mpl.rcParams.update({
+# 	'font.size': 20,
+# 	'figure.figsize': [12, 8],
+# 	'figure.autolayout': True,
+# 	'font.family': 'serif',
+# 	'font.sans-serif': ['Palatino']})
+# cmap = plt.get_cmap('viridis',8)
     
 
 #por que es necesario? Porque el scaler usa la
@@ -122,15 +122,15 @@ def ejer(l = 1, split=0.5, plot_pass=False):
     train_predict, mse_train = predict_data(x_train, y_train, model, normalizar)    
     test_predict, mse_test = predict_data(x_test, y_test, model, normalizar)    
 
-    if plot_pass==True:
-        plt.figure(l)
-        plt.plot(loss/np.max(loss), c=cmap(2), label="Train")
-        plt.plot(val_loss/np.max(val_loss), c=cmap(1), label="Test")
-        plt.legend(loc=0)
+    # if plot_pass==True:
+    #     plt.figure(l)
+    #     plt.plot(loss/np.max(loss), c=cmap(2), label="Train")
+    #     plt.plot(val_loss/np.max(val_loss), c=cmap(1), label="Test")
+    #     plt.legend(loc=0)
         
-        plot_predict(l, normalizar.inverse_transform(X_original), 
-                        normalizar.inverse_transform(x_t), 
-                        train_predict, test_predict)    
+    #     plot_predict(l, normalizar.inverse_transform(X_original), 
+    #                     normalizar.inverse_transform(x_t), 
+    #                     train_predict, test_predict)    
                 
     return loss[-1], val_loss[-1]
 
@@ -161,25 +161,29 @@ if __name__ == '__main__':
     # plt.show()
     
     # exit()
-    ls= np.arange(1,25)
+    ls= np.arange(1,26)
     mse_train, mse_test = [] , []
     MSE_test, MSE_train = [] , []
     
-    for _ in range(1):
+    for _ in range(20):
         for l in ls: 
+            print("______________________",l,"________________________")
             m_train, m_test = ejer(l, 0.7)
             mse_test.append(m_test)
             mse_train.append(m_train)
             print(mse_test)
             print(mse_train)        
-        MSE_test = MSE_test.append(mse_test)    
-        MSE_train = MSE_train.append(mse_train)
+        MSE_test.append(mse_test)    
+        MSE_train.append(mse_train)
     
-    plt.figure(33)
-    plt.plot(ls, mse_test, label="Test")
-    plt.plot(ls, mse_train, label="Train")
+    print(MSE_test)
+    print(MSE_train)    
+    
+    # plt.figure(33)
+    # plt.plot(ls, mse_test, label="Test")
+    # plt.plot(ls, mse_train, label="Train")
 
-    plt.show()
+    # plt.show()
     
     
 

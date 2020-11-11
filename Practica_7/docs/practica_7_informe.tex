@@ -1,0 +1,91 @@
+\input{Preamblev2.sty} 
+\usepackage{multirow}
+\usepackage{paralist}
+\begin{document}
+
+\title{Práctica 7: Redes Neuronales Recurrentes }
+\author{Evelyn G. Coronel}
+
+\affiliation{Redes Neuronales y Aprendizaje Profundo para Visión Artificial\\ Instituto Balseiro\\}
+
+\date[]{\lowercase{\today}} 
+
+\maketitle
+
+\section*{Ejercicio 1}
+\subsection*{Item 1}
+
+Los datos representan la cantidad de pasajeros de aviones por mes desde Enero del 1949 hasta el mes de Diciembre del 1960. Estos datos tienen una oscilación anual y crecimiento en función del tiempo como se ven en la Fig.\,
+
+\subsection*{Item 2}
+
+Para utilizar estos datos para predecir la cantidad de pasajeros en función del tiempo, en el preprocesado se normalizaron los datos de tal forma que varíen entre $0-1$. 
+
+Tomando el set de datos como $x(t)$ donde x representa la cantidad de pasajeros y $t$ representa el mes, se organiza los datos según el desfase $l$ que representa la cantidad de meses y se formatean según el siguiente algoritmo:
+
+
+	 Si  $l=1$:
+
+	\begin{align*}
+		X = x(t) \qquad Y = x(t+1)
+	\end{align*}
+	
+	 Si $l=2$:
+	Por ejemplo si queremos obtener $Y$ para el primer  elemento $x(0)$, obtenemos los siguientes vectores:
+	\begin{align*}
+		X = \big ( x(0), x(1) \big ) \qquad Y = x(2)
+	\end{align*}
+	Generalizando para cualquier $t$:
+	\begin{align*}
+		X = \big ( x(t), x(t+1) \big ) \qquad Y = x(t+2)
+	\end{align*}
+	 Para $l$ arbitrario:
+	Generalizando para cualquier $\tilde{t}$:
+	\begin{align*}
+		X = \big ( x(t), x(t+1),\cdots, x(t+l-1) \big ) \qquad Y = x(t+l)
+	\end{align*}
+
+Los datos se formatean de esta forma para hacer que la red aprenda a predecir la cantidad de pasajeros el mes $A$, utilizando la información considerando los $l$ meses anteriores
+
+\subsection*{Items 3, 4 y 5}
+
+Se agrega el ruido gaussiano para probar si la red es capaz de aprender el patrón de la cantidad de pasajeros a pesar del ruido. 
+
+Para entrenar la red recurrente, se separaron los datos de entrenamiento y test en $70\%$ y $30\%$ respectivamente. 
+
+Dado que nuestros conjunto de datos solo contiene la cantidad de pasajeros, por que al redimensionar los datos para la entrada del LSTM, se considera que cantidad de atributos  (\emph{features}) es 1 y el rango de tiempo utilizado para hacer el entrenamiento de $l$ meses.
+
+\subsection*{Item 6 y 7}
+
+La arquitectura de la red utilizada para predecir la cantidad de pasajeros es la siguiente:
+
+\begin{verbatim}
+	____________________________________________
+	Layer (type)      Output Shape      Param # 
+	============================================
+	lstm (LSTM)       (None, 1, 100)    40800   
+	____________________________________________
+	lstm_1 (LSTM)     (None, 1, 100)    80400   
+	____________________________________________
+	lstm_2 (LSTM)     (None, 1, 80)     57920   
+	____________________________________________
+	lstm_3 (LSTM)     (None, 80)        51520   
+	____________________________________________
+	dense (Dense)     (None, 1)         81      
+	============================================
+	Total params: 230,721
+	Trainable params: 230,721
+	Non-trainable params: 0
+\end{verbatim}
+
+Se utilizó el optimizador Adam con una tasa de aprendizaje de $5\times10^{-5}$ y MSE como función de pérdida.
+
+
+\subsection*{Item 8}
+
+\subsection*{Item 9}
+
+\subsection*{Item 10}
+
+
+\end{document}
