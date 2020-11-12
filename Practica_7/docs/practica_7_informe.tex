@@ -1,6 +1,4 @@
 \input{Preamblev2.sty} 
-\usepackage{multirow}
-\usepackage{paralist}
 \begin{document}
 
 \title{Práctica 7: Redes Neuronales Recurrentes }
@@ -15,7 +13,18 @@
 \section*{Ejercicio 1}
 \subsection*{Item 1}
 
-Los datos representan la cantidad de pasajeros de aviones por mes desde Enero del 1949 hasta el mes de Diciembre del 1960. Estos datos tienen una oscilación anual y crecimiento en función del tiempo como se ven en la Fig.\,
+Los datos representan la cantidad de pasajeros de aviones por mes desde Enero del 1949 hasta el mes de Diciembre del 1960. Estos datos tienen una oscilación anual y crecimiento en función del tiempo como se ven en la Fig.\,\ref{fig:datos}.
+
+\begin{figure}[H]
+	\begin{small}
+		\begin{center}
+			\includegraphics[width=0.45\textwidth]{datos.pdf}
+		\end{center}
+		\caption{Cantidad de pasajeros en función de los meses a partir de Enero del 1949}
+		\label{fig:datos}
+	\end{small}
+\end{figure}
+
 
 \subsection*{Item 2}
 
@@ -23,14 +32,12 @@ Para utilizar estos datos para predecir la cantidad de pasajeros en función del
 
 Tomando el set de datos como $x(t)$ donde x representa la cantidad de pasajeros y $t$ representa el mes, se organiza los datos según el desfase $l$ que representa la cantidad de meses y se formatean según el siguiente algoritmo:
 
-
-	 Si  $l=1$:
-
+\begin{itemize}
+\item Si  $l=1$:
 	\begin{align*}
 		X = x(t) \qquad Y = x(t+1)
 	\end{align*}
-	
-	 Si $l=2$:
+\item 	 Si $l=2$:
 	Por ejemplo si queremos obtener $Y$ para el primer  elemento $x(0)$, obtenemos los siguientes vectores:
 	\begin{align*}
 		X = \big ( x(0), x(1) \big ) \qquad Y = x(2)
@@ -39,11 +46,13 @@ Tomando el set de datos como $x(t)$ donde x representa la cantidad de pasajeros 
 	\begin{align*}
 		X = \big ( x(t), x(t+1) \big ) \qquad Y = x(t+2)
 	\end{align*}
-	 Para $l$ arbitrario:
+\item 	 Para $l$ arbitrario:
 	Generalizando para cualquier $\tilde{t}$:
 	\begin{align*}
 		X = \big ( x(t), x(t+1),\cdots, x(t+l-1) \big ) \qquad Y = x(t+l)
 	\end{align*}
+
+\end{itemize}
 
 Los datos se formatean de esta forma para hacer que la red aprenda a predecir la cantidad de pasajeros el mes $A$, utilizando la información considerando los $l$ meses anteriores
 
@@ -57,35 +66,81 @@ Dado que nuestros conjunto de datos solo contiene la cantidad de pasajeros, por 
 
 \subsection*{Item 6 y 7}
 
-La arquitectura de la red utilizada para predecir la cantidad de pasajeros es la siguiente:
+Las arquitectura de la red utilizada para predecir la cantidad de pasajeros son:  una capa LSTM con 4 entradas y una salida de 1, y otra red con una capa densa de 4 neuronas con una salida de 1.
 
-\begin{verbatim}
-	____________________________________________
-	Layer (type)      Output Shape      Param # 
-	============================================
-	lstm (LSTM)       (None, 1, 100)    40800   
-	____________________________________________
-	lstm_1 (LSTM)     (None, 1, 100)    80400   
-	____________________________________________
-	lstm_2 (LSTM)     (None, 1, 80)     57920   
-	____________________________________________
-	lstm_3 (LSTM)     (None, 80)        51520   
-	____________________________________________
-	dense (Dense)     (None, 1)         81      
-	============================================
-	Total params: 230,721
-	Trainable params: 230,721
-	Non-trainable params: 0
-\end{verbatim}
+Se utilizó el optimizador Adam con una tasa de aprendizaje de $2\times10^{-3}$ y MSE como función de pérdida para ambas redes, las mismas fueron entrenadas durante 100 épocas.
 
-Se utilizó el optimizador Adam con una tasa de aprendizaje de $5\times10^{-5}$ y MSE como función de pérdida.
+\subsection*{Item 8 y 10}
+
+Entrenando la red con $l=1$ se obtiene las predicciones (V) usando la capa LSTM mostrado en la Fig.\,\ref{fig:l-1-LSTM} junto a los datos de entrenamiento (E), en caso de la red con la capa densa estas curvas se muestran en la Fig.\,\ref{fig:l-1-Densa}. La pérdidas normalizadas de estas redes se muestran en las Figs.\, respectivamente, los datos de entrenamiento llegan a un valor de $MSE=0.0023$ mientras que la test $MSE=0.012$ con la capa de entrada del tipo LSTM, cuando pasamos a la otra red el valor de $MSE$ para el  entrenamiento es $0.0024$ y para la test $0.010$. En este trabajo para $l=1$, la red con capas densas da una mejor predicción que la red LSTM.
+
+\begin{figure}[H]
+	\begin{small}
+		\begin{center}
+			\includegraphics[width=0.5\textwidth]{prediccion_l-1.pdf}
+		\end{center}
+		\caption{Predicción de la cantidad de pasajeros usando un desfase de 1 mes para el entrenamiento usando una capa LSTM}
+		\label{fig:l-1-LSTM}
+	\end{small}
+\end{figure}
 
 
-\subsection*{Item 8}
+\begin{figure}[H]
+	\begin{small}
+		\begin{center}
+			\includegraphics[width=0.5\textwidth]{prediccion_l-1_dense.pdf}
+		\end{center}
+		\caption{Predicción de la cantidad de pasajeros usando un desfase de 1 mes para el entrenamiento usando una capa densa}
+		\label{fig:l-1-Densa}
+	\end{small}
+\end{figure}
+
+Considerando que las variaciones de la cantidad de pasajeros tiene una modulación de 12 meses, este trabajo utilizó $l=13$ para ver como funciona con red prediciendo las cantidad de pasajeros con los 13 meses anteriores. La predicción se muestra en la Fig.\ref{fig:l-13-LSTM} , donde se muestra que la red predice  mejor  los picos el caso de $l=1$.
+
+
+\begin{figure}[H]
+	\begin{small}
+		\begin{center}
+			\includegraphics[width=0.5\textwidth]{prediccion_l-1_loss.pdf}
+		\end{center}
+		\caption{Pérdida en función de las épocas usando un desfase de 1 mes para el entrenamiento usando una capa LSTM}
+		\label{fig:l-1-LSTM}
+	\end{small}
+\end{figure}
+
+
+\begin{figure}[H]
+	\begin{small}
+		\begin{center}
+			\includegraphics[width=0.5\textwidth]{prediccion_l-1_dense_loss.pdf}
+		\end{center}
+		\caption{Pérdida en función de las épocas usando un desfase de 1 mes para el entrenamiento usando una capa densa}
+		\label{fig:l-1-Densa}
+	\end{small}
+\end{figure}
+
 
 \subsection*{Item 9}
 
-\subsection*{Item 10}
+Por lo observado en los items anteriores, la predicción de la red depende de cuanto fue el desfase de tiempo dado para el entrenamiento. En la Fig.\,\ref{fig:barrido_en_l} se muestra el valor de MSE del test en función del parámetros $l$. Se observa un mínimo del valor del MSE en los desfases corridos en un año, esto se debe a la periodicidad del conjunto de datos.
 
-
+\begin{figure}
+	\begin{small}
+		\begin{center}
+			\includegraphics[width=0.5\textwidth]{prediccion_l-12.pdf}
+		\end{center}
+		\caption{Predicción de la cantidad de pasajeros usando un desfase de 13 meses para el entrenamiento usando una capa LSTM}
+		\label{fig:l-13-LSTM}
+	\end{small}
+\end{figure}
+\vfill \null 
+\begin{figure}[H]
+	\begin{small}
+		\begin{center}
+			\includegraphics[width=0.5\textwidth]{barrido_en_l.pdf}
+		\end{center}
+		\caption{Valores de MSE en función del desfase usando una capa LSTM}
+		\label{fig:barrido_en_l}
+	\end{small}
+\end{figure}
 \end{document}

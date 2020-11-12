@@ -8,15 +8,15 @@ from tensorflow.keras.optimizers import Adam
 import numpy as np
 import pandas 
 
-# import matplotlib.pyplot as plt
-# import matplotlib as mpl
-# mpl.rcParams.update({
-# 	'font.size': 20,
-# 	'figure.figsize': [12, 8],
-# 	'figure.autolayout': True,
-# 	'font.family': 'serif',
-# 	'font.sans-serif': ['Palatino']})
-# cmap = plt.get_cmap('viridis',8)
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+mpl.rcParams.update({
+	'font.size': 20,
+	'figure.figsize': [12, 8],
+	'figure.autolayout': True,
+	'font.family': 'serif',
+	'font.sans-serif': ['Palatino']})
+cmap = plt.get_cmap('viridis',8)
     
 
 #por que es necesario? Porque el scaler usa la
@@ -59,15 +59,15 @@ def add_noise(x_t):
 
 def LSTM_model(l):
     model = Sequential()
-    model.add(LSTM(100,return_sequences=True,input_shape=(l,1)))
-    model.add(LSTM(100,return_sequences=True))  
-    model.add(LSTM(80,return_sequences=True)) 
-    model.add(LSTM(80))
+    model.add(LSTM(4,input_shape=(l,1)))
+    # model.add(LSTM(100,return_sequences=True))  
+    # model.add(LSTM(80,return_sequences=True)) 
+    # model.add(LSTM(80))
     #model.add(BatchNormalization())
     #model.add(Dropout(0.15))
     model.add(Dense(1))
     
-    model.compile(optimizer=Adam(learning_rate=0.00005), 
+    model.compile(optimizer=Adam(learning_rate=0.002), 
                   loss='mse')
     #model.summary()
     
@@ -75,26 +75,29 @@ def LSTM_model(l):
 
 def Dense_model(l):
     model = Sequential()
-    model.add(Dense(100,input_shape=(l,1)))
-    model.add(Dense(75))  
-    model.add(Dense(50)) 
-    model.add(Dense(25))
-    #model.add(BatchNormalization())
-    model.add(Dropout(0.15))
+    model.add(Dense(4,input_shape=(l,1)))
+    # model.add(Dense(75))  
+    # model.add(Dense(50)) 
+    # model.add(Dense(25))
+    # #model.add(BatchNormalization())
+    # model.add(Dropout(0.15))
     model.add(Dense(1))
     
-    model.compile(optimizer=Adam(learning_rate=0.00002), 
+    model.compile(optimizer=Adam(learning_rate=0.002), 
                   loss='mse')
     #model.summary()
     
     return model
 
 def predict_data(x, y, model, normalizar):
-    predict=normalizar.inverse_transform(model.predict(x))
+    y_pred = model.predict(x)
+    y_pred=y_pred.reshape((y_pred.shape[0], 1))
+    print(y_pred.shape)
+    predict=normalizar.inverse_transform(y_pred)
     mse_=np.sqrt(np.mean((y-predict)**2))  
     return predict, mse_  
 
-def ejer(l = 1, split=0.5, plot_pass=False):
+def ejer(l = 1, split=0.5, plot_pass=False, custom_model=LSTM_model):
     x_t = item_1()
 
     #item 2
@@ -102,8 +105,8 @@ def ejer(l = 1, split=0.5, plot_pass=False):
     X_original, x_t, y_t = format_data(x_t,l)
     
     #item 3
-    x_t = add_noise(x_t)               
-    
+    x_t = add_noise(x_t)     
+
     #item 4
     x_train, y_train, x_test, y_test= split_data(x_t, y_t, split)  
     
@@ -112,9 +115,9 @@ def ejer(l = 1, split=0.5, plot_pass=False):
     x_test=x_test.reshape(x_test.shape[0], l, 1)
 
     #item 6 e item 7
-    model   = LSTM_model(l)
+    model   = custom_model(l)
     history = model.fit(    x_train,y_train,  validation_data=(x_test,y_test),
-                            epochs=100,       batch_size=1,   verbose=1)
+                            epochs=100,       batch_size=1,   verbose=0)
     
     loss        = np.array(history.history['loss'])
     val_loss    = np.array(history.history['val_loss'])    
@@ -122,15 +125,17 @@ def ejer(l = 1, split=0.5, plot_pass=False):
     train_predict, mse_train = predict_data(x_train, y_train, model, normalizar)    
     test_predict, mse_test = predict_data(x_test, y_test, model, normalizar)    
 
-    # if plot_pass==True:
-    #     plt.figure(l)
-    #     plt.plot(loss/np.max(loss), c=cmap(2), label="Train")
-    #     plt.plot(val_loss/np.max(val_loss), c=cmap(1), label="Test")
-    #     plt.legend(loc=0)
+    if plot_pass==True:
+        plt.figure(l)
+        plt.xlabel("Épocas")
+        plt.ylabel("Pérdida Normalizada")
+        plt.plot(loss/np.max(loss), c=cmap(2), label="Train")
+        plt.plot(val_loss/np.max(val_loss), c='red', label="Test")
+        plt.legend(loc=0)
         
-    #     plot_predict(l, normalizar.inverse_transform(X_original), 
-    #                     normalizar.inverse_transform(x_t), 
-    #                     train_predict, test_predict)    
+        plot_predict(l, normalizar.inverse_transform(X_original), 
+                        normalizar.inverse_transform(x_t), 
+                        train_predict, test_predict)    
                 
     return loss[-1], val_loss[-1]
 
@@ -148,44 +153,57 @@ def plot_predict(l,X_original ,x_t, train_predict, test_predict):
              c=cmap(2), alpha=0.4, ls='--')
     
     plt.plot(meses[:len(train_predict)],train_predict, 
-             label="E.", c=cmap(1))
+             label="E.", c='red', alpha=0.6)
     
     plt.plot(meses[len(train_predict):],test_predict, 
-             label="V", c=cmap(0))
+             label="V", c=cmap(0), alpha=0.6)
     
     plt.legend(loc=0)
      
 if __name__ == '__main__':
     
-    # ejer(2, 0.6, True)
-    # plt.show()
+    print(ejer(1, 0.7, True))
+    plt.show()
     
-    # exit()
-    ls= np.arange(1,26)
-    mse_train, mse_test = [] , []
-    MSE_test, MSE_train = [] , []
+    exit()
     
-    for _ in range(20):
+    ls= np.arange(1,15)
+    mse_train= [] 
+    mse_test = [] 
+
+    MSE_test =  []
+    MSE_train = []
+    
+
+    for _ in range(1):
+        MSE_test =  []
+        MSE_train = []
         for l in ls: 
-            print("______________________",l,"________________________")
-            m_train, m_test = ejer(l, 0.7)
+            print("______________",l,"_________________")
+            m_train, m_test = ejer(l, 0.5)
             mse_test.append(m_test)
             mse_train.append(m_train)
-            print(mse_test)
-            print(mse_train)        
+                    
         MSE_test.append(mse_test)    
         MSE_train.append(mse_train)
     
     print(MSE_test)
-    print(MSE_train)    
-    
-    # plt.figure(33)
-    # plt.plot(ls, mse_test, label="Test")
-    # plt.plot(ls, mse_train, label="Train")
+    print(MSE_train)   
 
-    # plt.show()
+    # with open('./drive/My Drive/file.txt', 'w') as f:
+    #     print(MSE_test, file=f)
+    #     print(MSE_train, file=f)   
     
+    MSE_test= np.array(MSE_test)
+    MSE_train= np.array(MSE_train)
     
+    A = np.mean(MSE_test, axis=0)
+    B = np.mean(MSE_train, axis=0)
+    
+    plt.figure(33)
+    plt.ylabel("MSE")
+    plt.xlabel("l")
+    plt.plot(ls, A, c='red' , alpha=0.6,  label="Test")
+    #plt.plot(ls, B, c='blue', alpha=0.6,  label="Train")
 
-#[0.017683742567896843, 0.02132992073893547, 0.03018692508339882, 0.03784571588039398, 0.03718337416648865, 0.03761923313140869, 0.038386061787605286, 0.038473546504974365, 0.03537442162632942, 0.025778289884328842, 0.02434356138110161, 0.011999127455055714, 0.004787727724760771, 0.011426250450313091, 0.010823684744536877, 0.010565511882305145, 0.015495380386710167, 0.043530914932489395, 0.048162270337343216, 0.019722526893019676, 0.008757991716265678, 0.017771106213331223, 0.015204469673335552, 0.013922506012022495]
-#[0.002478489186614752, 0.004578573163598776, 0.005851453170180321, 0.006586034782230854, 0.006912372540682554, 0.007209631614387035, 0.007507964037358761, 0.007678286638110876, 0.0068200696259737015, 0.006755164824426174, 0.005261139012873173, 0.002677563112229109, 0.0015345329884439707, 0.0020936299115419388, 0.002594822319224477, 0.0032060309313237667, 0.0029302032198756933, 0.0026571208145469427, 0.002395574003458023, 0.0024344264529645443, 0.0027713384479284286, 0.0027857155073434114, 0.002639304380863905, 0.0053787692449986935]
+    plt.show()

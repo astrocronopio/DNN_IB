@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Debian) (preloaded format=pdflatex 2020.11.2)  11 NOV 2020 00:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Debian) (preloaded format=pdflatex 2020.11.2)  11 NOV 2020 23:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -458,60 +458,54 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 286.
 )
 \Hy@SectionHShift=\skip71
-)) (/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
-Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
-\multirow@colwidth=\skip72
-\multirow@cntb=\count305
-\multirow@dima=\skip73
-\bigstrutjot=\dimen177
-) (/usr/share/texlive/texmf-dist/tex/latex/paralist/paralist.sty
-Package: paralist 2017/01/22 v2.7 Extended list environments
-\pltopsep=\skip74
-\plpartopsep=\skip75
-\plitemsep=\skip76
-\plparsep=\skip77
-\pl@lab=\toks33
-)
-Class revtex4-1 Info: Unrecognized array package. Please update this document class! (Proceeding with fingers crossed.) on input line 4.
+))
+Class revtex4-1 Info: Unrecognized array package. Please update this document class! (Proceeding with fingers crossed.) on input line 2.
 
 
 Class revtex4-1 Warning: Repair the float package.
 
-Class revtex4-1 Info: cite was not loaded (OK!) on input line 4.
-Class revtex4-1 Info: mcite was not loaded (OK!) on input line 4.
-Class revtex4-1 Info: multicol was not loaded (OK!) on input line 4.
-(./practica_7_informe.aux)
+Class revtex4-1 Info: cite was not loaded (OK!) on input line 2.
+Class revtex4-1 Info: mcite was not loaded (OK!) on input line 2.
+Class revtex4-1 Info: multicol was not loaded (OK!) on input line 2.
+(./practica_7_informe.aux
+
+LaTeX Warning: Label `fig:l-1-LSTM' multiply defined.
+
+
+LaTeX Warning: Label `fig:l-1-Densa' multiply defined.
+
+)
 \openout1 = `practica_7_informe.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
-LaTeX Font Info:    ... okay on input line 4.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 4.
-LaTeX Font Info:    ... okay on input line 4.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 4.
-LaTeX Font Info:    ... okay on input line 4.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 4.
-LaTeX Font Info:    ... okay on input line 4.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 4.
-LaTeX Font Info:    ... okay on input line 4.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 4.
-LaTeX Font Info:    ... okay on input line 4.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 4.
-LaTeX Font Info:    ... okay on input line 4.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 4.
-LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
  (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count306
-\scratchdimen=\dimen178
+\scratchcounter=\count305
+\scratchdimen=\dimen177
 \scratchbox=\box70
-\nofMPsegments=\count307
-\nofMParguments=\count308
-\everyMPshowfont=\toks34
-\MPscratchCnt=\count309
-\MPscratchDim=\dimen179
-\MPnumerator=\count310
-\makeMPintoPDFobject=\count311
-\everyMPtoPDFconversion=\toks35
+\nofMPsegments=\count306
+\nofMParguments=\count307
+\everyMPshowfont=\toks33
+\MPscratchCnt=\count308
+\MPscratchDim=\dimen178
+\MPnumerator=\count309
+\makeMPintoPDFobject=\count310
+\everyMPtoPDFconversion=\toks34
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -523,16 +517,16 @@ Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Info: Redefining \. on input line 4.
-LaTeX Info: Redefining \% on input line 4.
-LaTeX Info: Redefining \microtypecontext on input line 4.
+LaTeX Info: Redefining \. on input line 2.
+LaTeX Info: Redefining \% on input line 2.
+LaTeX Info: Redefining \microtypecontext on input line 2.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `basictext'.
-LaTeX Info: Redefining \showhyphens on input line 4.
+LaTeX Info: Redefining \showhyphens on input line 2.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -540,7 +534,7 @@ Package microtype Info: No adjustment of character kerning.
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
 )
 \AtBeginShipoutBox=\box71
-Package hyperref Info: Link coloring OFF on input line 4.
+Package hyperref Info: Link coloring OFF on input line 2.
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
  (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
@@ -548,58 +542,139 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count312
+\c@section@level=\count311
 )
-LaTeX Info: Redefining \ref on input line 4.
-LaTeX Info: Redefining \pageref on input line 4.
-LaTeX Info: Redefining \nameref on input line 4.
+LaTeX Info: Redefining \ref on input line 2.
+LaTeX Info: Redefining \pageref on input line 2.
+LaTeX Info: Redefining \nameref on input line 2.
  (./practica_7_informe.out) (./practica_7_informe.out)
 \@outlinefile=\write5
 \openout5 = `practica_7_informe.out'.
 
-Class revtex4-1 Info: Taking \maketitle back from hyperref on input line 4.
-Class revtex4-1 Info: Overriding lineo.sty, restoring output routine, on input line 4.
-Class revtex4-1 Info: Line numbering not turned on yet on input line 4.
+Class revtex4-1 Info: Taking \maketitle back from hyperref on input line 2.
+Class revtex4-1 Info: Overriding lineo.sty, restoring output routine, on input line 2.
+Class revtex4-1 Info: Line numbering not turned on yet on input line 2.
 \openout3 = `practica_7_informeNotes.bib'.
 
-Class revtex4-1 Info: Overriding \@LN@LLerror on input line 4.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 22.
+Class revtex4-1 Info: Overriding \@LN@LLerror on input line 2.
+<datos.pdf, id=37, 867.24pt x 578.16pt>
+File: datos.pdf Graphic file (type pdf)
+<use datos.pdf>
+Package pdftex.def Info: datos.pdf  used on input line 21.
+(pdftex.def)             Requested size: 229.49844pt x 152.99112pt.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 31.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 22.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 31.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-)
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `cmtt' (encoding: OT1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
- (./practica_7_informe.bbl) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 93.
+) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./datos.pdf>]
+<prediccion_l-1.pdf, id=80, 867.24pt x 578.16pt>
+File: prediccion_l-1.pdf Graphic file (type pdf)
+<use prediccion_l-1.pdf>
+Package pdftex.def Info: prediccion_l-1.pdf  used on input line 80.
+(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 80--81
+ [] 
+ []
+
+<prediccion_l-1_dense.pdf, id=81, 867.24pt x 578.16pt>
+File: prediccion_l-1_dense.pdf Graphic file (type pdf)
+<use prediccion_l-1_dense.pdf>
+Package pdftex.def Info: prediccion_l-1_dense.pdf  used on input line 91.
+(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 91--92
+ [] 
+ []
+
+<prediccion_l-1_loss.pdf, id=83, 867.24pt x 578.16pt>
+File: prediccion_l-1_loss.pdf Graphic file (type pdf)
+<use prediccion_l-1_loss.pdf>
+Package pdftex.def Info: prediccion_l-1_loss.pdf  used on input line 104.
+(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 104--105
+ [] 
+ []
+
+<prediccion_l-1_dense_loss.pdf, id=84, 867.24pt x 578.16pt>
+File: prediccion_l-1_dense_loss.pdf Graphic file (type pdf)
+<use prediccion_l-1_dense_loss.pdf>
+Package pdftex.def Info: prediccion_l-1_dense_loss.pdf  used on input line 115.
+(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 115--116
+ [] 
+ []
+
+<prediccion_l-12.pdf, id=86, 867.24pt x 578.16pt>
+File: prediccion_l-12.pdf Graphic file (type pdf)
+<use prediccion_l-12.pdf>
+Package pdftex.def Info: prediccion_l-12.pdf  used on input line 130.
+(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 130--131
+ [] 
+ []
+
+<barrido_en_l.pdf, id=87, 867.24pt x 578.16pt>
+File: barrido_en_l.pdf Graphic file (type pdf)
+<use barrido_en_l.pdf>
+Package pdftex.def Info: barrido_en_l.pdf  used on input line 140.
+(pdftex.def)             Requested size: 255.0pt x 169.99992pt.
+
+Overfull \hbox (9.0pt too wide) in paragraph at lines 140--141
+ [] 
+ []
+
+(./practica_7_informe.bbl) [2 <./prediccion_l-1.pdf> <./prediccion_l-1_dense.pdf
+
+pdfTeX warning: pdflatex (file ./prediccion_l-1_dense.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./prediccion_l-1_loss.pdf
+
+pdfTeX warning: pdflatex (file ./prediccion_l-1_loss.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./prediccion_l-1_dense_loss.pdf
+
+pdfTeX warning: pdflatex (file ./prediccion_l-1_dense_loss.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+
+LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix] on input line 146.
+
+[3 <./prediccion_l-12.pdf> <./barrido_en_l.pdf
+
+pdfTeX warning: pdflatex (file ./barrido_en_l.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 146.
  (./practica_7_informe.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 93.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 93.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 146.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 146.
 Package rerunfilecheck Info: File `practica_7_informe.out' has not changed.
-(rerunfilecheck)             Checksum: FFE2B4E79970019356BB2E624854029F;514.
+(rerunfilecheck)             Checksum: 708E93D340B8CDA3D86D3BA099A9FD25;467.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 14185 strings out of 482719
- 223959 string characters out of 5953361
- 664803 words of memory out of 5000000
- 29244 multiletter control sequences out of 15000+600000
- 542757 words of font info for 71 fonts, out of 8000000 for 9000
+ 14082 strings out of 482719
+ 222859 string characters out of 5953361
+ 647723 words of memory out of 5000000
+ 29118 multiletter control sequences out of 15000+600000
+ 543048 words of font info for 79 fonts, out of 8000000 for 9000
  85 hyphenation exceptions out of 8191
- 50i,12n,51p,378b,435s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on practica_7_informe.pdf (1 page, 130151 bytes).
+ 50i,12n,51p,753b,435s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
+Output written on practica_7_informe.pdf (3 pages, 194354 bytes).
 PDF statistics:
- 99 PDF objects out of 1000 (max. 8388607)
- 83 compressed objects within 1 object stream
- 10 named destinations out of 1000 (max. 500000)
- 14409 words of extra memory for PDF output out of 17280 (max. 10000000)
+ 320 PDF objects out of 1000 (max. 8388607)
+ 133 compressed objects within 2 object streams
+ 18 named destinations out of 1000 (max. 500000)
+ 13924 words of extra memory for PDF output out of 14400 (max. 10000000)
 
