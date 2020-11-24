@@ -122,7 +122,7 @@ Considerando que las variaciones de la cantidad de pasajeros tiene una modulaci�
 
 \subsection*{Item 9}
 
-Por lo observado en los items anteriores, la predicción de la red depende de cuanto fue el desfase de tiempo dado para el entrenamiento. En la Fig.\,\ref{fig:barrido_en_l} se muestra el valor de MSE del test en función del parámetros $l$. Se observa un mínimo del valor del MSE en los desfases corridos en un año, esto se debe a la periodicidad del conjunto de datos.
+Por lo observado en los items anteriores, la predicción de la red depende de cuanto fue el desfase de tiempo dado para el entrenamiento. En la Fig.\,\ref{fig:barrido_en_l} se muestra el valor de MSE del test en función del parámetros $l$. Se observa un mínimo del valor del MSE en cerca de un 15  meses de desfase, se esperaba que este mínimo estuviera en 13 por lo mencionado anteriormente. 
 
 \begin{figure}
 	\begin{small}
@@ -137,7 +137,7 @@ Por lo observado en los items anteriores, la predicción de la red depende de cu
 \begin{figure}[H]
 	\begin{small}
 		\begin{center}
-			\includegraphics[width=0.5\textwidth]{barrido_en_l.pdf}
+			\includegraphics[width=0.5\textwidth]{plot.pdf}
 		\end{center}
 		\caption{Valores de MSE en función del desfase usando una capa LSTM}
 		\label{fig:barrido_en_l}
