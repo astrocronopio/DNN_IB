@@ -8,6 +8,19 @@ Solo hay item que no hice porque no entendí como hacerlo bien, es un caso  part
 Pagina Materia: https://inst.eecs.berkeley.edu/~cs188/fa18/
 Pagina Practico: https://inst.eecs.berkeley.edu/~cs188/fa18/project3.html 
 
+
+Los ejemplos que están buenos:
+
+* Pacman vs Fantasmita (en un pequeño mundo):  
+    python pacman.py -p PacmanQAgent -x 2000 -n 2010 -l smallGrid 
+
+* Robot aprendiendo a caminar: 
+    python crawler.py
+
+* Máquina explorando un laberinto (muy sencillo):
+    python gridworld.py -a q -k 100 
+
+
 #################################################################################################
 #################################################################################################
 
